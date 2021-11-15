@@ -1,9 +1,10 @@
 // Create a generic structure for a user, convert it into SQL syntax, and insert.
 
+
 const db = require('../connect');
 
-let user = (name, email, password) => {
-    db.query(`INSERT INTO user VALUES (${name}, ${email}, ${password});`, (err, result) => {
+let user = (u) => {
+    db.query(`INSERT INTO user VALUES (${u.first_name}, ${u.last_name}, ${u.username}, ${u.email});`, (err, result) => {
         if (err) {
             throw err;
         }

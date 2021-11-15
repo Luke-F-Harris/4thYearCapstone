@@ -9,14 +9,14 @@ const users = {
     name: 'users',
     features: [
         'id INT AUTO_INCREMENT PRIMARY KEY',
-        'created DATETIME',
+        'created DATETIME DEFAULT CURRENT_DATETIME()',
         'first_name VARCHAR(255)',
         'last_name VARCHAR(225)',
         'username VARCHAR(255)',
         'email VARCHAR(255)',
         'password VARCHAR(255)',
-        'score INT',
-        'ranking INT',
+        'score INT DEFAULT 1000',
+        'ranking INT DEFAULT -1',
     ].join(', ')
 }
 
@@ -24,7 +24,7 @@ const codes = {
     name: 'codes',
     features: [
         'code_id INT AUTO_INCREMENT PRIMARY KEY',
-        'submitted DATETIME',
+        'submitted DATETIME DEFAULT CURRENT_DATETIME()',
         'creator INT references users.id',
         'code TEXT(131071)',
         'ranking INT'
@@ -35,7 +35,7 @@ const games = {
     name: 'games',
     features: [
         'game_id INT AUTO_INCREMENT PRIMARY KEY',
-        'initialized DATETIME',
+        'initialized DATETIME DEFAULT CURRENT_DATETIME()',
         'winner_code INT references codes.code_id',
         'loser_code INT references codes.code_id',
         'winner_score INT',
