@@ -1,0 +1,2 @@
+1. Create a schema in mysql called 'capstone'
+2. run this command: ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
