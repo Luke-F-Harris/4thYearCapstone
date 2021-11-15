@@ -17,6 +17,9 @@ This section handles the game mechanics
     - How do we enforce the rules and constraints?
     - How do we combine or compare two competing codes?
     - Do we need to make any changes to the rating system?
+    - How do we apply the rating system?
+        - How is it applied to multiple games on the same code?
+        - How is it applied to different tiers
 
 &nbsp;
 

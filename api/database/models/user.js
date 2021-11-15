@@ -13,4 +13,4 @@ let user = (name, email, password) => {
 
 }
 
-
+module.exports = user;
