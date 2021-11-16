@@ -1,10 +1,12 @@
 // Handle all of the user routing.
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 const users = require('../database/models/users');
 const db = require('../database/connect');
-let jwt = require('jsonwebtoken');
+const { normal_sanitizer, email_verifier } = require('../services/sanitize');
 
-require('dotenv').config();
 
 let generateToken = (user) => {
     return jwt.sign({ user }, process.env.JWT_SECRET, {
@@ -15,7 +17,7 @@ let generateToken = (user) => {
 module.exports = function (app) {
     app.post('/login', (req, res) => {
         console.log(req.body);
-        let username = req.body.username;
+        let username = normal_sanitizer(req.body.username);
         let password = req.body.password;
         db.query(users.search_users(username), (err, result) => {
             if (err) {
@@ -55,84 +57,91 @@ module.exports = function (app) {
 
     // Do we want them to sign in after successful registration?
     app.post('/register', (req, res) => {
-        let first_name = req.body.first_name;
-        let last_name = req.body.last_name;
-        let username = req.body.username;
-        let email = req.body.email;
+        let first_name = normal_sanitizer(req.body.first_name);
+        let last_name = normal_sanitizer(req.body.last_name);
+        let username = normal_sanitizer(req.body.username);
+        let email = normal_sanitizer(req.body.email);
         let password = req.body.password;
         let password_confirm = req.body.password_confirm;
 
-        if (password === password_confirm) {
-            db.query(users.search_user_usernames(username), (err, result) => {
-                if (err) {
-                    res.status(400);
-                    res.json({
-                        message: 'Error'
-                    });
-                    console.log(err);
-                    throw err;
-                }
-                if (result.length === 0) {
-                    db.query(users.search_user_emails(email), (err, result) => {
-                        if (err) {
-                            res.status(400);
-                            res.json({
-                                message: 'Error'
-                            });
-                            console.log(err);
-                            throw err;
-                        }
-                        if (result.length === 0) {
-                            bcrypt.hash(password, 10, (err, hash) => {
-                                if (err) {
-                                    res.status(400);
-                                    res.json({
-                                        message: 'Error'
-                                    });
-                                    console.log(err);
-                                    throw err;
-                                }
-                                else {
-                                    db.query(users.insert_user(first_name, last_name, username, email, hash), (err, result) => {
-                                        if (err) {
-                                            res.status(400);
-                                            res.json({
-                                                message: 'Error'
-                                            });
-                                            console.log(err);
-                                            throw err;
-                                        }
-                                        else {
-                                            res.status(200);
-                                            res.json({
-                                                message: 'Successfully registered',
-                                                user: result
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                        else {
-                            res.status(400);
-                            res.json({
-                                message: 'Email already in use'
-                            });
-                        }
-                    });
-                }
-                else {
-                    res.status(400);
-                    res.json({
-                        message: 'Username already in use'
-                    });
-                }
-            });
-        }
-        else {
+        if (email_verifier(email)) {
+            if (password === password_confirm) {
+                db.query(users.search_user_usernames(username), (err, result) => {
+                    if (err) {
+                        res.status(400);
+                        res.json({
+                            message: 'Error'
+                        });
+                        console.log(err);
+                        throw err;
+                    }
+                    if (result.length === 0) {
+                        db.query(users.search_user_emails(email), (err, result) => {
+                            if (err) {
+                                res.status(400);
+                                res.json({
+                                    message: 'Error'
+                                });
+                                console.log(err);
+                                throw err;
+                            }
+                            if (result.length === 0) {
+                                bcrypt.hash(password, 10, (err, hash) => {
+                                    if (err) {
+                                        res.status(400);
+                                        res.json({
+                                            message: 'Error'
+                                        });
+                                        console.log(err);
+                                        throw err;
+                                    }
+                                    else {
+                                        db.query(users.insert_user(first_name, last_name, username, email, hash), (err, result) => {
+                                            if (err) {
+                                                res.status(400);
+                                                res.json({
+                                                    message: 'Error'
+                                                });
+                                                console.log(err);
+                                                throw err;
+                                            }
+                                            else {
+                                                res.status(200);
+                                                res.json({
+                                                    message: 'Successfully registered',
+                                                    user: result
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            else {
+                                res.status(400);
+                                res.json({
+                                    message: 'Email already in use'
+                                });
+                            }
+                        });
+                    }
+                    else {
+                        res.status(400);
+                        res.json({
+                            message: 'Username already in use'
+                        });
+                    }
+                });
+            }
+            else {
+                res.status(400);
+                res.json({
+                    message: 'Passwords do not match'
+                });
+            }
+        } else {
             res.status(400);
             res.json({
-                message: 'Passwords do not match'
+                message: 'Invalid email'
             });
         }
     });

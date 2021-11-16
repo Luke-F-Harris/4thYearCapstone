@@ -9,14 +9,14 @@ const users = {
     name: 'users',
     features: [
         'id INT AUTO_INCREMENT PRIMARY KEY',
-        'created DATETIME DEFAULT CURRENT_DATETIME()',
+        'created DATETIME NOT NULL DEFAULT NOW()',
         'first_name VARCHAR(255)',
         'last_name VARCHAR(225)',
         'username VARCHAR(255)',
         'email VARCHAR(255)',
         'password VARCHAR(255)',
-        'score INT DEFAULT 1000',
-        'ranking INT DEFAULT -1',
+        'score INT NOT NULL DEFAULT 1000',
+        'ranking INT NOT NULL DEFAULT -1',
     ].join(', ')
 }
 
@@ -24,7 +24,7 @@ const codes = {
     name: 'codes',
     features: [
         'code_id INT AUTO_INCREMENT PRIMARY KEY',
-        'submitted DATETIME DEFAULT CURRENT_DATETIME()',
+        'submitted DATETIME NOT NULL DEFAULT NOW()',
         'creator INT references users.id',
         'code TEXT(131071)',
         'ranking INT'
@@ -35,7 +35,7 @@ const games = {
     name: 'games',
     features: [
         'game_id INT AUTO_INCREMENT PRIMARY KEY',
-        'initialized DATETIME DEFAULT CURRENT_DATETIME()',
+        'initialized DATETIME NOT NULL DEFAULT NOW()',
         'winner_code INT references codes.code_id',
         'loser_code INT references codes.code_id',
         'winner_score INT',
@@ -45,7 +45,7 @@ const games = {
 }
 
 const tables = [users, codes, games];
-// RESET WILL DELETE ALL DATA IN THE DATABASE. Probably never going to use reset_only
+// RESET WILL DELETE ALL DATA IN THE DATABASE. 
 function setup(reset = false, reset_only = false) {
 
     // Reset procedure
@@ -74,4 +74,4 @@ function setup(reset = false, reset_only = false) {
     db.end();
 }
 
-setup();
+setup(true);
