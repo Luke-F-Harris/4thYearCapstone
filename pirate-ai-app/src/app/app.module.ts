@@ -7,6 +7,7 @@ import { HomePageComponent } from './HomePage/home-page/home-page.component';
 import { GamePageComponent } from './GamePage/game-page/game-page.component';
 import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.component';
 import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/leader-board-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/le
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
