@@ -1,1 +1,19 @@
 <p>leader-board-page works!</p>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Ranking</th>
+        <th>Last Submission</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let player of topPlayers">
+            <td>{{player.name}}</td>
+            <td>{{player.rank}}</td>
+            <td>{{player.lastSubmission}}</td>
+        </tr>
+    </tbody>
+</table>
+  
+<mat-table [dataSource]="topPlayers" >
+    ...
+</mat-table>
