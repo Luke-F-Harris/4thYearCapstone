@@ -25,6 +25,8 @@ let search_user_emails = (u) => `SELECT id FROM users WHERE email = "${u}"`;
 
 let search_user_usernames = (u) => `SELECT id FROM users WHERE username = "${u}"`;
 
-module.exports = { insert_user, get_users, search_users, search_user_emails, search_user_usernames };
+let search_users_soft = (u) => `SELECT username, email, role FROM users WHERE username = "${u}" OR email = "${u}"`;
+
+module.exports = { insert_user, get_users, search_users, search_user_emails, search_user_usernames, search_users_soft };
 
 // Test insert: INSERT INTO users (first_name, last_name, username, email, password) values ('Andrew', 'Harrop', 'andrewharrop', 'andrew@gmail.com', '$2b$10$e9F4Xx3ARPqgBKXN85tWLe4y7YzPuCSIvFdoruJ6Fl1JTJXEzDpl6');
