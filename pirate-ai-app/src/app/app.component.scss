@@ -21,6 +21,7 @@
 .logo:hover {
   cursor: pointer;
   font-size: 41px;
+  transform: translateX(-2px);
   transition: 0.3s ease-in;
 }
 .nav-item:hover {
