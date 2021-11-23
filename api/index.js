@@ -9,8 +9,8 @@ app.use(express.json());
 
 
 // External routes
+require('./routing/cred')(app);
 require('./routing/user')(app);
-
 
 
 app.get('/', (req, res) => {
