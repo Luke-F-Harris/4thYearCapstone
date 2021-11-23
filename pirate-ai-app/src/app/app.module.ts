@@ -8,8 +8,11 @@ import { GamePageComponent } from './GamePage/game-page/game-page.component';
 import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.component';
 import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/leader-board-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSliderModule} from "@angular/material/slider"
+import {MatSliderModule} from "@angular/material/slider";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import{MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],
