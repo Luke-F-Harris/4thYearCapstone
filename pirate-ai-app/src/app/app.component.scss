@@ -1,2 +1,36 @@
 .nav-item {
+  list-style: none;
+  display: flex;
+  padding-right: 1.5em;
+  padding-bottom: 3px;
+}
+.logo {
+  transition: 0.3s ease-in;
+  font-size: 40px;
+}
+
+.nav-items {
+  float: right;
+  display: flex;
+}
+
+.nav-items-wrapper {
+  width: 100%;
+}
+
+.logo:hover {
+  cursor: pointer;
+  font-size: 41px;
+  transition: 0.3s ease-in;
+}
+.nav-item:hover {
+  cursor: pointer;
+}
+.nav-item-font {
+  padding-top: 1em;
+  border-bottom: 3px solid transparent;
+}
+.nav-item-font:hover {
+  border-bottom: 3px solid black;
+  transition: 0.3s ease-in;
 }
