@@ -1,25 +1,48 @@
-// Dep?
 
 const jsonwebtoken = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const express = require('express');
 
 require('dotenv').config()
 
-const saltRounds = 10;
+// This is the middlewares for the authenticated routes.
 
-// let passgen = (password) => {
-//     const salt = awaitbcrypt.genSalt(saltRounds)
-//     const hash = bcrypt.hash(password, salt)
-//     return hash
-// };
-
-
-
-let generateToken = (user) => {
-    return jsonwebtoken.sign(user, process.env.SECRET_KEY, {
-        expiresIn: '1h'
-    });
+let userAuth = (req, res, next) => {
+    const token = req.headers.authorization
+    const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+    if (decoded.user.role === "user") {
+        req.login_state = {
+            message: 'Successfully logged in',
+            user: decoded.user,
+            status: 200
+        }
+        next();
+    } else {
+        req.login_state = {
+            message: 'Invalid token',
+            user: false,
+            status: 400
+        }
+        next();
+    }
 }
 
-module.exports = { generateToken };
+let adminAuth = (req, res) => {
+    const token = req.headers.authorization
+    const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+    if (decoded.user.role === "admin") {
+        res.status(200);
+        res.json({
+            message: 'Successfully logged in',
+            user: decoded.user
+        });
+    } else {
+        res.status(400);
+        res.json({
+            message: 'Invalid token'
+        });
+    }
+}
+
+module.exports = {
+    userAuth,
+    adminAuth
+}
