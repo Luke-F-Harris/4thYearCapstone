@@ -1,1 +1,48 @@
 <p>leader-board-page works!</p>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Ranking</th>
+        <th>Last Submission</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let player of topPlayers">
+            <td>{{player.name}}  <img class="scaled"src={{player.picLink}} alt='image'></td>
+            <td>{{player.rank}}</td>
+            <td>{{player.lastSubmission}}</td>
+        </tr>
+    </tbody>
+</table>
+  
+<!-- doesnt show up for some reason -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name. </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Rank Column -->
+    <ng-container matColumnDef="Rank">
+      <th mat-header-cell *matHeaderCellDef> Rank </th>
+      <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+    </ng-container>
+  
+    <!-- Picture Column -->
+    <ng-container matColumnDef="pic">
+      <th mat-header-cell *matHeaderCellDef> pic </th>
+      <td mat-cell *matCellDef="let element"> {{element.picLink}} </td>
+    </ng-container>
+  
+    <!-- lastSubmission Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> lastSubmission </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastSubmission}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
