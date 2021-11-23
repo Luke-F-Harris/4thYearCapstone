@@ -4,10 +4,11 @@ import { Route, IndexRoute } from 'react-router';
 /**
  * Import all page components here
  */
-import App from './components/App';
-import MainPage from './components/MainPage';
-import SomePage from './components/SomePage';
-import SomeOtherPage from './components/SomeOtherPage';
+import App from "./components/App";
+import HomePage from './components/HomePage';
+import ProfilePage from './components/ProfilePage';
+import GamePage from './components/GamePage';
+import LeaderBoard from './components/LeaderBoard';
 
 /**
  * All routes go here.
@@ -15,8 +16,8 @@ import SomeOtherPage from './components/SomeOtherPage';
  */
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={MainPage} />
-    <Route path="/some/where" component={SomePage} />
-    <Route path="/some/otherpage" component={SomeOtherPage} />
+    <IndexRoute component={HomePage} />
+    <Route path="/some/where" component={ProfilePage} />
+    <Route path="/some/otherpage" component={LeaderBoard} />
   </Route>
 );
