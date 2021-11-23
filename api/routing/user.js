@@ -10,60 +10,62 @@ const { normal_sanitizer, email_verifier } = require('../services/sanitize');
 
 let generateToken = (user) => {
     return jwt.sign({ user }, process.env.JWT_SECRET, {
-        expiresIn: '1h'
+        expiresIn: '6h'
     });
 }
 
 module.exports = function (app) {
-    app.post('/login', (req, res) => {
-        console.log(req.body);
-        let username = normal_sanitizer(req.body.username);
+    app.post('/u/login', (req, res) => {
+        let username = req.body.username;
         let password = req.body.password;
-        db.query(users.search_users(username), (err, result) => {
-            if (err) {
-                res.status(400);
-                res.json({
-                    message: 'Error'
-                });
-                throw err;
-            }
-            if (result.length === 0) {
-                res.status(400)
-                res.json({
-                    message: 'Invalid login attempt'
-                });
-            }
-            else {
-                bcrypt.compare(password, result[0].password, (err, result) => {
-                    if (result) {
-                        res.status(200);
-                        res.json({
-                            message: 'Successfully logged in',
-                            user: result,
-                            token: generateToken(result)
-                        });
-                    }
-                    else {
-                        res.status(400)
-                        res.json({
-                            message: 'Invalid login attempt'
-                        });
-                    }
-                });
-            }
-        });
+        if (username && password) {
+            username = normal_sanitizer(username);
+            db.query(users.search_users(username), (err, result) => {
+                if (err) {
+                    res.status(400);
+                    res.json({
+                        message: 'Error'
+                    });
+                    throw err;
+                }
+                if (result.length === 0) {
+                    res.status(400)
+                    res.json({
+                        message: 'Invalid login attempt'
+                    });
+                }
+                else {
+                    bcrypt.compare(password, result[0].password, (err, result) => {
+                        if (result) {
+                            res.status(200);
+                            res.json({
+                                message: 'Successfully logged in',
+                                user: result,
+                                token: generateToken(result)
+                            });
+                        }
+                        else {
+                            res.status(400)
+                            res.json({
+                                message: 'Invalid login attempt'
+                            });
+                        }
+                    });
+                }
+            });
+        }
     });
 
 
     // Do we want them to sign in after successful registration?
-    app.post('/register', (req, res) => {
+    app.post('/u/register', (req, res) => {
         let first_name = normal_sanitizer(req.body.first_name);
         let last_name = normal_sanitizer(req.body.last_name);
         let username = normal_sanitizer(req.body.username);
         let email = normal_sanitizer(req.body.email);
         let password = req.body.password;
         let password_confirm = req.body.password_confirm;
-
+        let role = "user";
         if (email_verifier(email)) {
             if (password === password_confirm) {
                 db.query(users.search_user_usernames(username), (err, result) => {
@@ -96,7 +98,7 @@ module.exports = function (app) {
                                         throw err;
                                     }
                                     else {
-                                        db.query(users.insert_user(first_name, last_name, username, email, hash), (err, result) => {
+                                        db.query(users.insert_user(first_name, last_name, username, email, role, hash), (err, result) => {
                                             if (err) {
                                                 res.status(400);
                                                 res.json({
@@ -145,5 +147,32 @@ module.exports = function (app) {
             });
         }
     });
-}
 
+    // Authentication test
+    app.get('/u/user', (req, res) => {
+        let token = req.headers.authorization;
+        if (token) {
+            jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+                if (err) {
+                    res.status(400);
+                    res.json({
+                        message: 'Invalid token'
+                    });
+                }
+                else {
+                    res.status(200);
+                    res.json({
+                        message: 'Successfully logged in',
+                        user: decoded.user
+                    });
+                }
+            });
+        }
+        else {
+            res.status(400);
+            res.json({
+                message: 'Invalid token'
+            });
+        }
+    });
+}

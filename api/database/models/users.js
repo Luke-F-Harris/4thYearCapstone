@@ -11,8 +11,8 @@ const query = (q, data) => {
 
 
 // Add check
-let insert_user = (first_name, last_name, username, email, hash) => {
-    return `INSERT INTO users (first_name, last_name, username, email, password) VALUES ("${first_name}", "${last_name}", "${username}", "${email}", "${hash}")`;
+let insert_user = (first_name, last_name, username, email, role, hash) => {
+    return `INSERT INTO users (first_name, last_name, username, email, role, password) VALUES ("${first_name}", "${last_name}", "${username}", "${email}", "${role}","${hash}")`;
 }
 
 let get_users = () => {

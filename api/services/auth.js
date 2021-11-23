@@ -8,11 +8,11 @@ require('dotenv').config()
 
 const saltRounds = 10;
 
-let passgen = (password) => {
-    const salt = awaitbcrypt.genSalt(saltRounds)
-    const hash = bcrypt.hash(password, salt)
-    return hash
-};
+// let passgen = (password) => {
+//     const salt = awaitbcrypt.genSalt(saltRounds)
+//     const hash = bcrypt.hash(password, salt)
+//     return hash
+// };
 
 
 

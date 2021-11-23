@@ -14,6 +14,7 @@ const users = {
         'last_name VARCHAR(225)',
         'username VARCHAR(255)',
         'email VARCHAR(255)',
+        'role ENUM("user", "admin")',
         'password VARCHAR(255)',
         'score INT NOT NULL DEFAULT 1000',
         'ranking INT NOT NULL DEFAULT -1',
@@ -74,4 +75,5 @@ function setup(reset = false, reset_only = false) {
     db.end();
 }
 
-setup(true);
+// Reset only
+//setup(true);
