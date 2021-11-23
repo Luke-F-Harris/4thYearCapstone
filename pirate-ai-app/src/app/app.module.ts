@@ -9,14 +9,15 @@ import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.co
 import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/leader-board-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider"
-import {MatToolbarModule} from "@angular/material/toolbar"
+import {MatToolbarModule} from "@angular/material/toolbar";
+
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     GamePageComponent,
     ProfilePageComponent,
-    LeaderBoardPageComponent
+    LeaderBoardPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ import {MatToolbarModule} from "@angular/material/toolbar"
     MatToolbarModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [AppRoutingModule, HomePageComponent]
 })
 export class AppModule { }
