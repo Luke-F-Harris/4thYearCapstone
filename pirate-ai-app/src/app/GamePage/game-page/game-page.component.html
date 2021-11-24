@@ -35,6 +35,13 @@
             </div>
             <div class="play">
                 <span class=play-btn>
+                    
+                    <mat-button-toggle-group>
+                        <mat-button-toggle (click)="changePause()">
+                            <mat-icon *ngIf="play">pause</mat-icon>
+                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
                     <span>(place holder for play)</span>
                 </span>
             </div>
