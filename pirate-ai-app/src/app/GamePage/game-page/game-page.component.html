@@ -10,63 +10,53 @@
     <p class="game-date">Nov 23rd, 22 - 16:56:17</p>
     <div class="game-players">
         <div class="long">
-            <span class="player1">PLAYER 1</span>
+            <span class="player1" style="color:rgb(15, 255, 15)">PLAYER 1</span>
             <span class="defeat">DEFEATS</span>
-            <span class="player2">PLAYER 2</span>
+            <span class="player2" style="color:red">PLAYER 2</span>
 
         </div>
     </div>
 </div>
+
 <div class="game-replay">
+    <hr>
     <div class="game-replay-viewer">
         <canvas width="690" height="460" style="touch-action: none; zoom: normal; cursor: inherit;"></canvas>
     </div>
+    <hr>
     <div class="game-replay-controller">
         <div class="buttons">
-            <div class="bttn-cell">
-                <span class="speed">
-                    <span>3x</span>
-                </span>
-            </div>
-            <div class="reverse">
-                <span class=reverse-btn>
-                    <span>(place holder for reverse)</span>
-                </span>
-            </div>
-            <div class="play">
-                <span class=play-btn>
-
-                    <mat-button-toggle-group>
-                        <mat-button-toggle (click)="changePause()">
-                            <mat-icon *ngIf="play">pause</mat-icon>
-                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
-                    <span>(place holder for play)</span>
-                </span>
-            </div>
-            <div class="forward">
-                <span class=forward-btn>
-                    <span>(place holder for forward)</span>
-                </span>
-            </div>
-            <div class="save">
-                <span class=save-btn>
-                    <span>(place holder for save)</span>
-                </span>
-            </div>
-            <div class="progress-cell">
-                <div class="progress-inner">
-                    <div>0</div>
-                    <div class="progress-bar">
-                        <mat-slider></mat-slider>
-                    </div>
-                    <div>69</div>
-                </div>
-            </div>
-            <div class="share-cell">
-                <div>share button</div>
-            </div>
+            <span class="speed">
+                <span>3x</span>
+            </span>
+            <span class=reverse-btn>
+                <mat-icon>skip_previous</mat-icon>
+            </span>
+            <span class=play-btn>
+                <mat-button-toggle-group>
+                    <mat-button-toggle (click)="changePause()">
+                        <mat-icon *ngIf="play">pause</mat-icon>
+                        <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>    
+            </span>
+            
+            
+            <span class=forward-btn>
+                <mat-icon>skip_next</mat-icon>
+            </span>
+            
+            
+            <span class=save-btn>
+                <mat-icon>save_alt</mat-icon>
+            </span>
+            <span>0</span>
+            <span class="progress-bar">
+                <mat-slider></mat-slider>
+            </span>
+            <span>69</span>
+            <mat-icon>share</mat-icon>
+            
 
         </div>
     </div>
