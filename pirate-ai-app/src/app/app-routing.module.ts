@@ -7,7 +7,6 @@ import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/le
 import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.component';
 
 const routes: Routes = [
-  {path:"", component: AppComponent},
   {path:"home", component: HomePageComponent},
   {path:"profile", component: ProfilePageComponent},
   {path:"leaderboard", component: LeaderBoardPageComponent},
