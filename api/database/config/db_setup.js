@@ -76,4 +76,4 @@ function setup(reset = false, reset_only = false) {
 }
 
 // Reset only
-//setup(true);
+setup(true);

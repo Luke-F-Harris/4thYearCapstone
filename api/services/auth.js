@@ -8,7 +8,7 @@ require('dotenv').config()
 let userAuth = (req, res, next) => {
     const token = req.headers.authorization
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    if (decoded.user.role === "user") {
+    if (decoded.user.role === "user" || decoded.user.role === "admin") {
         req.login_state = {
             message: 'Successfully logged in',
             user: decoded.user,

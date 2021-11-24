@@ -11,7 +11,7 @@ app.use(express.json());
 // External routes
 require('./routing/cred')(app);
 require('./routing/user')(app);
-
+require('./routing/game')(app);
 
 app.get('/', (req, res) => {
     res.json("Hello world")
