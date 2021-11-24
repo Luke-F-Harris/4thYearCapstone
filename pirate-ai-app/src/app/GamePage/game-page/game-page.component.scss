@@ -1,0 +1,23 @@
+.game-replay .game-replay-controller .game-replay-btn-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+}
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background-color: transparent;
+    color: #ECFFFB;
+    font-size: 1.6rem;
+}
+.game-replay .game-replay-controller .game-replay-btn-table .game-replay-btn-cell {
+    position: relative;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center; 
+}
+    

@@ -2,10 +2,10 @@
 
 <div class="game-heading">
     <i class="xline-top">
-        
+
     </i>
     <i class="xline-bottom">
-        
+
     </i>
     <p class="game-date">Nov 23rd, 22 - 16:56:17</p>
     <div class="game-players">
@@ -35,6 +35,13 @@
             </div>
             <div class="play">
                 <span class=play-btn>
+
+                    <mat-button-toggle-group>
+                        <mat-button-toggle (click)="changePause()">
+                            <mat-icon *ngIf="play">pause</mat-icon>
+                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
                     <span>(place holder for play)</span>
                 </span>
             </div>
