@@ -1,2 +1,4 @@
 1. Create a schema in mysql called 'capstone'
 2. run this command: ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+3. Run config/db_setup.js
+4. Run config/db_populate.js
