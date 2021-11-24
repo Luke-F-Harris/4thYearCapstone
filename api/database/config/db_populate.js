@@ -3,7 +3,7 @@ const fs = require('fs');
 const db = require('../connect');
 
 ['users.sql', 'codes.sql', 'games.sql'].forEach(file => {
-    fs.readFile(`sql/${file}`, 'utf8', (err, data) => {
+    fs.readFile(`config/sql/${file}`, 'utf8', (err, data) => {
         if (err) throw err;
         data = data.split('\n');
         data.forEach(line => {

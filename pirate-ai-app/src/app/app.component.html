@@ -1,16 +1,1 @@
-<mat-toolbar color="primary">
-
-  <span class="logo" routerLink="home">PIRATEAI</span>
-  <div class="nav-items-wrapper">
-  <ul class="nav-items">
-    <li class ="nav-item" *ngIf="loggedIn" routerLink="login"><p class="nav-item-font">LOGIN</p></li>
-    <li class="nav-item" *ngIf="!loggedIn" routerLink="profile"><p class="nav-item-font">PROFILE</p></li>
-    <li class="nav-item" *ngIf="!loggedIn" routerLink="game"><p class="nav-item-font">GAME</p></li>
-    <li class="nav-item" routerLink="leaderboard"><p class="nav-item-font">LEADER BOARD</p></li>
-  </ul>
-</div>
-</mat-toolbar>
-
-
-
- <router-outlet></router-outlet>
+<router-outlet></router-outlet>
