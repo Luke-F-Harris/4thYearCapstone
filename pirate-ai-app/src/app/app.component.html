@@ -1,6 +1,6 @@
-<mat-toolbar *ngIf="router.url !== '/home'" color="primary">
+<mat-toolbar class= "toolbar">
 
-  <span class="logo" routerLink="home">PIRATEAI</span>
+  <span class="logo" routerLink="home"><b>PIRATEAI</b></span>
   <div class="nav-items-wrapper">
   <ul class="nav-items">
     <li class ="nav-item" *ngIf="loggedIn" routerLink="login"><p class="nav-item-font">LOGIN</p></li>
@@ -10,5 +10,13 @@
   </ul>
 </div>
 </mat-toolbar>
+
+<div class="toolbar-seperator">
+<p class="toolbar-seperator-text">
+  Ready to test your AI's skills? <span *ngIf="loggedIn"> <a routerLink="profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="register">Register Here</a></span>
+</p>
+
+
+</div>
 
  <router-outlet></router-outlet>

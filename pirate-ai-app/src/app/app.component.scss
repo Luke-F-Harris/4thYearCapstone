@@ -14,6 +14,34 @@
   float: right;
   display: flex;
 }
+.toolbar-seperator {
+  height: 3.5em;
+  background: black;
+}
+.toolbar-seperator-text {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 1;
+  text-align: center;
+  padding-top: 0.7em;
+}
+
+a {
+  color: white;
+  font-style: none;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+}
+
+a:link {
+  color: rgb(255, 117, 117);
+}
+.toolbar {
+  padding: 3em;
+  background: white;
+}
 
 .nav-items-wrapper {
   width: 100%;

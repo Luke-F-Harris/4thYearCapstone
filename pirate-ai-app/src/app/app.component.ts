@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'pirate-ai-app';
 
   constructor(public router: Router) {
-
+    console.log(router.url === '/')
   }
 
 
