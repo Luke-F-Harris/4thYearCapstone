@@ -12,8 +12,8 @@ const users = {
         'created DATETIME NOT NULL DEFAULT NOW()',
         'first_name VARCHAR(255)',
         'last_name VARCHAR(225)',
-        'username VARCHAR(255)',
-        'email VARCHAR(255)',
+        'username VARCHAR(255) UNIQUE',
+        'email VARCHAR(255) UNIQUE',
         'role ENUM("user", "admin")',
         'password VARCHAR(255)',
         'score INT NOT NULL DEFAULT 1000',
@@ -72,8 +72,6 @@ function setup(reset = false, reset_only = false) {
     }
 
     // Close connection
-    db.end();
 }
 
-// Reset only
-setup(true);
+module.exports = setup;

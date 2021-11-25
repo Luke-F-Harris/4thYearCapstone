@@ -26,6 +26,7 @@ class UserData:
             self.data.append({
                 'first_name': '"'+self.random_string(10)+'"',
                 'last_name': '"'+self.random_string(10)+'"',
+                'username': '"' + self.random_string(10) + '"',
                 'email': '"'+self.random_string(10) + '@' + self.random_string(5) + '.com'+'"',
                 'role': '"'+'user'+'"',
                 'password': '"'+'$2b$10$bPGq9olnsoAbpMOXHfXnI.HNSrx0IYQNVBTd5g/yrIpAkw99T7gqa'+'"',
@@ -36,7 +37,7 @@ class UserData:
         return ''.join(choice('abcdefghijklmnopqrstuvwxyz') for i in range(length))
 
     def sql(self):
-        return '\n'.join(['INSERT INTO users (first_name, last_name, email, role, password, score) VALUES ({first_name}, {last_name}, {email}, {role}, {password}, {score});'.format(**user) for user in self.data])
+        return '\n'.join(['INSERT IGNORE INTO users (first_name, last_name, username, email, role, password, score) VALUES ({first_name}, {last_name}, {username},{email}, {role}, {password}, {score});'.format(**user) for user in self.data])
 
 
 class CodeData:
@@ -85,20 +86,22 @@ class GameData:
         return '\n'.join(['INSERT INTO games (winner_code, loser_code, winner_score, loser_score, log) VALUES ({winner_code}, {loser_code}, {winner_score}, {loser_score}, {log});'.format(**game) for game in self.data])
 
 
-# if __name__ == '__main__':
-#     ndata = UserData(100)
-#     usql = (ndata.sql())
-#     with open(os.path.join(__location__, '../database/config/sql/users.sql'), 'w') as f:
-#         f.write(usql)
-#     ndata_entry = len(ndata.data)
+this_is_dangerous = False  # You better know what you are doing
 
-#     ndata = CodeData(150, ndata_entry)
-#     csql = ndata.sql()
-#     with open(os.path.join(__location__, '../database/config/sql/codes.sql'), 'w') as f:
-#         f.write(csql)
-#     ndata_entry = len(ndata.data)
+if __name__ == '__main__' and not this_is_dangerous:
+    ndata = UserData(100)
+    usql = (ndata.sql())
+    with open(os.path.join(__location__, '../database/config/sql/users.sql'), 'w') as f:
+        f.write(usql)
+    ndata_entry = len(ndata.data)
 
-#     ndata = GameData(100, ndata_entry)
-#     gsql = ndata.sql()
-#     with open(os.path.join(__location__, '../database/config/sql/games.sql'), 'w') as f:
-#         f.write(gsql)
+    ndata = CodeData(150, ndata_entry)
+    csql = ndata.sql()
+    with open(os.path.join(__location__, '../database/config/sql/codes.sql'), 'w') as f:
+        f.write(csql)
+    ndata_entry = len(ndata.data)
+
+    ndata = GameData(100, ndata_entry)
+    gsql = ndata.sql()
+    with open(os.path.join(__location__, '../database/config/sql/games.sql'), 'w') as f:
+        f.write(gsql)

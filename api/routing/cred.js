@@ -9,14 +9,15 @@ const { normal_sanitizer, email_verifier } = require('../services/sanitize');
 
 
 let generateToken = (user) => {
-
     return jwt.sign({ user }, process.env.JWT_SECRET, {
         expiresIn: '6h'
     });
 }
 
+
+
 module.exports = function (app) {
-    app.post('/cred/login', (req, res) => {
+    app.post('/api/cred/login', (req, res) => {
         let username = req.body.username;
         let password = req.body.password;
 
@@ -69,7 +70,7 @@ module.exports = function (app) {
 
 
     // Do we want them to sign in after successful registration?
-    app.post('/cred/register', (req, res) => {
+    app.post('/api/cred/register', (req, res) => {
         let first_name = normal_sanitizer(req.body.first_name);
         let last_name = normal_sanitizer(req.body.last_name);
         let username = normal_sanitizer(req.body.username);
