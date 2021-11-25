@@ -1,4 +1,4 @@
-.logo-text {
+.compete-text {
   font-family: "Montserrat-Light-Alt1", "sans-sarif";
   font-size: 100px;
   padding: 0.3em;
@@ -6,21 +6,15 @@
   color: black;
   margin: auto;
 }
+.belowcompete-text {
+  padding-top: 2.4rem;
+  font-size: 40px;
+}
+.compete-last-text {
+  padding-top: 0.4rem;
+  font-size: 30px;
+}
 
-.logo-text-background1 {
-  height: 100px;
-  right: 50%;
-  position: absolute;
-  width: 33%;
-  z-index: 1;
-}
-.logo-text-background2 {
-  height: 100px;
-  left: 50%;
-  z-index: 1;
-  position: absolute;
-  width: 33%;
-}
 .main-container {
   height: 100%;
   background: white;
@@ -29,15 +23,17 @@
 .logo-container {
   padding-top: 5em;
   text-align: center;
-  display: flex;
 }
 
 .front-page-text {
-  margin-top: 5em;
-  margin-bottom: 2em;
-  margin-left: 6em;
-  margin-right: 6em;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  margin-left: 6rem;
+  margin-right: 6rem;
   background: white;
-  padding: 2em;
-  border-radius: 2em;
+  padding: 2rem;
+  border-radius: 2rem;
+  color: black;
+  font-size: 20px;
+  letter-spacing: 0.4px;
 }
