@@ -1,39 +1,128 @@
 .compete-text {
-  font-family: "Montserrat-Light-Alt1", "sans-sarif";
-  font-size: 100px;
-  padding: 0.3em;
-  z-index: 5;
-  color: black;
-  margin: auto;
+    font-family: "Montserrat-Light-Alt1", "sans-sarif";
+    font-size: 100px;
+    padding: 0.3em;
+    z-index: 5;
+    color: black;
+    margin: auto;
 }
+
+.ai {
+    color: blue;
+}
+
+.pirateai-text {
+    font-family: Montserrat-Light-Alt1, sans-serif;
+    font-weight: bold;
+}
+
 .belowcompete-text {
-  padding-top: 2.4rem;
-  font-size: 40px;
+    padding-top: 2.4rem;
+    padding-bottom: 0.4rem;
+    font-size: 40px;
 }
+
+.compete-before-last-text {
+    font-size: 30px;
+}
+
 .compete-last-text {
-  padding-top: 0.4rem;
-  font-size: 30px;
+    font-size: 30px;
+    padding-bottom: 7.6rem;
 }
 
 .main-container {
-  height: 100%;
-  background: white;
+    height: 100%;
+    background: white;
 }
 
 .logo-container {
-  padding-top: 5em;
-  text-align: center;
+    padding-top: 5em;
+    text-align: center;
+}
+
+.content-divider {
+    height: 2rem;
+    background: black;
+}
+
+.left {
+    width: 50%;
+    float: left;
+}
+
+.right {
+    width: 50%;
+    float: right;
 }
 
 .front-page-text {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-  margin-left: 6rem;
-  margin-right: 6rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 2rem;
-  color: black;
-  font-size: 20px;
-  letter-spacing: 0.4px;
+    transform: translateY(-100px);
+    transition: 5.3s ease-in;
+    margin-top: 4rem;
+    line-height: 1.6rem;
+    margin-bottom: 2rem;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    background: white;
+    padding: 1rem;
+    color: black;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+}
+
+.front-page-text-right {
+    width: 60%;
+    float: right;
+}
+
+.get-going-content-container {
+    height: 10rem;
+}
+
+.what-is-header {
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+.what-is-text {
+    text-align: justify;
+}
+
+.line-container {
+    height: 1rem;
+    width: 100%;
+}
+
+.left-image {
+    src: url(../../../assets/images/left-image.png);
+    width: 500px;
+    height: 500px;
+}
+
+hr {
+    overflow: visible;
+}
+
+.center-diamond {
+    border-top: 2px solid black;
+    border-bottom: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+}
+
+.center-diamond:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: blue;
+    display: inline-block;
+    border: 2px solid black;
+    position: relative;
+    top: -16px;
+    left: 50%;
+    margin: 0 0 0 -3px;
+    transform: rotate( 45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate( 45deg);
 }

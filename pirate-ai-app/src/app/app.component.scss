@@ -1,66 +1,79 @@
 .nav-item {
-  list-style: none;
-  display: flex;
-  padding-right: 1.5em;
-  padding-bottom: 3px;
+    list-style: none;
+    display: flex;
+    padding-right: 1.5em;
+    padding-bottom: 3px;
 }
+
+.ai {
+    color: blue;
+}
+
 .logo {
-  transition: 0.3s ease-in;
-  font-size: 40px;
-  font-family: "Montserrat-Light-Alt1", "arial";
+    transition: 0.3s ease-in;
+    font-size: 40px;
+    font-family: "Montserrat-Light-Alt1", "arial";
 }
 
 .nav-items {
-  float: right;
-  display: flex;
+    float: right;
+    display: flex;
 }
+
 .toolbar-seperator {
-  height: 3.5em;
-  background: black;
+    height: 3.8em;
+    background: rgb(24, 26, 27);
 }
+
 .toolbar-seperator-text {
-  color: white;
-  font-size: 1.5em;
-  font-weight: 1;
-  text-align: center;
-  padding-top: 0.7em;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 1;
+    text-align: center;
+    padding-top: 0.8em;
 }
 
 a {
-  color: white;
-  font-style: none;
-  text-decoration: none;
+    color: white;
+    font-style: none;
+    text-decoration: none;
 }
+
 a:visited {
-  color: white;
+    color: white;
 }
 
 a:link {
-  color: rgb(255, 117, 117);
+    color: rgb(0, 0, 255);
 }
+
 .toolbar {
-  padding: 3em;
-  background: white;
+    padding: 3em;
+    background: white;
 }
 
 .nav-items-wrapper {
-  width: 100%;
+    width: 100%;
 }
 
 .logo:hover {
-  cursor: pointer;
-  font-size: 41px;
-  transform: translateX(-2px);
-  transition: 0.3s ease-in;
+    cursor: pointer;
+    font-size: 41px;
+    transform: scale(1.03, 1.03);
+    transition: 0.2s ease-out;
 }
+
 .nav-item:hover {
-  cursor: pointer;
+    cursor: pointer;
+    color: blue;
 }
+
 .nav-item-font {
-  padding-top: 1em;
-  border-bottom: 3px solid transparent;
+    padding-top: 1em;
+    border-bottom: 3px solid transparent;
 }
+
 .nav-item-font:hover {
-  border-bottom: 3px solid black;
-  transition: 0.3s ease-in;
+    border-bottom: 3px solid blue;
+    transition: 0.3s ease-in;
 }
