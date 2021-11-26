@@ -6,6 +6,7 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'pirate-ai-app';
 
@@ -13,9 +14,11 @@ export class AppComponent {
 
   }
 
+  ngOnInit() {
+
+  }
 
   // implement logging in feature
   loggedIn = false;
-
   // implement register feature and guard and such
 }
