@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {trigger, state, style, animate, transition} from "@angular/animations";
+import { BackEndRoutesService } from 'src/app/back-end-routes.service';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -38,12 +40,21 @@ export class LoginComponent implements OnInit {
 
   // animation code
   isLeft='left';
+  user:object = {};
+  username = new FormControl('');
+  password = new FormControl('');
 
-  constructor() { }
+  constructor(private backendService: BackEndRoutesService) { }
+  ngOnInit() {}
 
-  ngOnInit(): void {
-this.isLeft='center';
-
+  login () {
+    this.user = {
+        "username":this.username.value,
+        "password":this.password.value
+    }
+    this.backendService.postMethod('login', this.user).subscribe((res) => {
+      console.log(res);
+    });
   }
 
 }

@@ -21,6 +21,7 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { LoginComponent } from './Auth/register/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatInputModule} from '@angular/material/input';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,

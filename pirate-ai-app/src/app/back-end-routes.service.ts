@@ -9,7 +9,7 @@ import {catchError, retry} from "rxjs/operators";
 export class BackEndRoutesService {
 
 
-  baseUrl: string = "http://localhost:3000/";
+  baseUrl: string = "http://localhost:3000/api/";
   constructor(private http: HttpClient) { }
 
   getMethod(url: string){
