@@ -1,4 +1,3 @@
-<html>
 <mat-toolbar class="toolbar">
 
     <span class="logo" routerLink="home"><b>PIRATE<span class="ai">AI</span></b>
@@ -25,10 +24,6 @@
     <p class="toolbar-seperator-text">
         Ready to test your AI's skills? <span *ngIf="loggedIn"> <a routerLink="/profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
     </p>
-
-
 </div>
 
 <router-outlet></router-outlet>
-
-</html>
