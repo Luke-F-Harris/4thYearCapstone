@@ -3,7 +3,7 @@
     font-size: 100px;
     padding: 0.3em;
     z-index: 5;
-    color: black;
+    color: rgb(24, 26, 27);
     margin: auto;
 }
 
@@ -28,12 +28,11 @@
 
 .compete-last-text {
     font-size: 30px;
-    padding-bottom: 7.6rem;
+    padding-bottom: 12rem;
 }
 
 .main-container {
     height: 100%;
-    background: white;
 }
 
 .logo-container {
@@ -43,41 +42,70 @@
 
 .content-divider {
     height: 2rem;
-    background: black;
+    background: rgb(24, 26, 27);
 }
 
 .left {
     width: 50%;
-    float: left;
 }
 
 .right {
     width: 50%;
-    float: right;
+}
+
+.first-left {
+    width: 50%;
+}
+
+.first-right {
+    width: 50%;
 }
 
 .front-page-text {
-    transform: translateY(-100px);
-    transition: 5.3s ease-in;
-    margin-top: 4rem;
     line-height: 1.6rem;
     margin-bottom: 2rem;
     margin-left: 6rem;
     margin-right: 6rem;
-    background: white;
     padding: 1rem;
-    color: black;
+    color: rgb(24, 26, 27);
     font-size: 20px;
     letter-spacing: 0.4px;
+    opacity: 0;
+}
+
+.get-started-button {
+    margin-top: 1.3rem;
+    background: #3F51B5;
+    color: white;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.front-page-text.show {
+    transform: translateY(-100px);
+    transition: 1.6s ease;
+    opacity: 1;
 }
 
 .front-page-text-right {
-    width: 60%;
+    width: 70%;
     float: right;
+    padding-right: 5rem;
 }
 
-.get-going-content-container {
-    height: 10rem;
+.front-page-text-left {
+    width: 70%;
+    float: left;
+    padding-left: 5rem;
+}
+
+img {
+    src: url(../../../assets/images/left-image.png);
+}
+
+.image-container {
+    height: auto;
+    width: auto;
 }
 
 .what-is-header {
@@ -87,6 +115,9 @@
 
 .what-is-text {
     text-align: justify;
+    font-weight: normal;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .line-container {
@@ -94,18 +125,12 @@
     width: 100%;
 }
 
-.left-image {
-    src: url(../../../assets/images/left-image.png);
-    width: 500px;
-    height: 500px;
-}
-
 hr {
     overflow: visible;
 }
 
 .center-diamond {
-    border-top: 2px solid black;
+    border-top: 2px solid rgb(24, 26, 27);
     border-bottom: 0px solid transparent;
     border-right: 0px solid transparent;
     border-left: 0px solid transparent;
@@ -117,10 +142,9 @@ hr {
     height: 6px;
     background: blue;
     display: inline-block;
-    border: 2px solid black;
+    border: 2px solid rgb(24, 26, 27);
     position: relative;
-    top: -16px;
-    left: 50%;
+    top: -15.1px;
     margin: 0 0 0 -3px;
     transform: rotate( 45deg);
     -ms-transform: rotate(45deg);

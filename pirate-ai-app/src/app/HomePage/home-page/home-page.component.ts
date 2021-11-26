@@ -10,15 +10,20 @@ export class HomePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
+  ngAfterViewInit (): void {
+    window.scrollTo(0,0);
+  }
+
+
+  // using this for main page text appear effect
   @HostListener("window:scroll", ["$event"])
   onWindowScroll() {
-  //In chrome and some browser scroll is given to body tag
   let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-  let max = document.documentElement.scrollHeight;
-  // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-   if(pos == max )   {
-   //Do your action here
+  let min =0;
+   if(pos != min )   {
+    (document.querySelector('.front-page-text') as HTMLElement).classList.add("show");
    }
   }
 

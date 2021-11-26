@@ -59,7 +59,7 @@ a:link {
 .logo:hover {
     cursor: pointer;
     font-size: 41px;
-    transform: scale(1.03, 1.03);
+    transform: scale(1.03, 1.03) translateY(-1.8px);
     transition: 0.2s ease-out;
 }
 
