@@ -6,12 +6,13 @@ export interface playerInfo {
   rank: number;
   picLink: string;
   lastSubmission: string;
+  userId: number;
 }
 
 
 const ELEMENT_DATA: playerInfo[] = [
-  {name:"Bob",rank:1,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"},
-  {name:"Alice",rank:2,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"}
+  {name:"AIrules192",rank:1,picLink:"https://cloudfront-us-east-2.images.arcpublishing.com/reuters/7GBCHQUCEROJDPEVYQW7XG7VAE.jpg",lastSubmission:"1 day ago", userId:1000},
+  {name:"xXguidedpirateshipsXx",rank:2,picLink:"https://cloudfront-us-east-2.images.arcpublishing.com/reuters/43YAWLITTZJLZIQTCP2JSS4KSM.jpg",lastSubmission:"1 day ago", userId:12012}
 ];
 
 @Component({
@@ -21,24 +22,24 @@ const ELEMENT_DATA: playerInfo[] = [
 })
 export class LeaderBoardPageComponent implements OnInit {
 
-  
-  
+
+
   //array holding top players
   public topPlayers:playerInfo[]=[];
   displayedColumns: string[] = ['name','rank', 'lastSubmission'];
   dataSource = ELEMENT_DATA;
 
-  constructor() { 
+  constructor() {
 
   }
 
   ngOnInit(): void {
 
-    
+
 
     //replace code here with db fetching top players
 
-   
+
   }
 
 }

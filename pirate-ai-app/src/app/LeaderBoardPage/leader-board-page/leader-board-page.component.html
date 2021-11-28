@@ -1,31 +1,53 @@
-  
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="main-container">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+    <div class="table-container">
+        <table class="leader-board-table">
+            <tr class="header-row">
+                <th class="columns">
+                    Name
+                </th>
+                <th class="columns">
+                    Rank
+                </th>
+                <th class="columns">
+                    Last Submission
+                </th>
+            </tr>
+            <tr class="content-rows" *ngFor="let element of dataSource">
+                <td class="content-name">
+                    <a routerLink="profile/{{element.userId}}"><img src="{{element.picLink}}" class="profile-image"> <span class="content-name-text">{{element.name}}</span></a>
+                </td>
+                <td class="content-rank">
+                    {{element.rank}}
+                </td>
+                <td class="content-lastsub">
+                    {{element.lastSubmission}}
+                </td>
+            </tr>
+        </table>
+        <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> <img class=scaled src={{element.picLink}}>      {{element.name}} </td>
-  </ng-container>
-
-    <!-- Rank Column -->
-  <ng-container matColumnDef="rank">
-    <th mat-header-cell *matHeaderCellDef> Rank </th>
-    <td mat-cell *matCellDef="let element"> {{element.rank}}</td>
-  </ng-container>
-
-    <!-- Last Submission Column -->
-  <ng-container matColumnDef="lastSubmission">
-      <th mat-header-cell *matHeaderCellDef> Last Submission </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastSubmission}}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
 
 
-  
-  
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="name-text"> Name </th>
+                <td mat-cell *matCellDef="let element" class="name-user-text"> <img class="scaled picture" src={{element.picLink}}> {{element.name}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="rank">
+                <th mat-header-cell *matHeaderCellDef class="rank-text"> Rank </th>
+                <td mat-cell *matCellDef="let element" class="rank-user-text"> {{element.rank}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastSubmission">
+                <th mat-header-cell *matHeaderCellDef class="sub-text"> Last Submission </th>
+                <td mat-cell *matCellDef="let element" class="sub-user-text"> {{element.lastSubmission}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table> -->
+    </div>
+
+</div>

@@ -1,24 +1,103 @@
-.game-replay .game-replay-controller .game-replay-btn-table {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+// .game-replay .game-replay-controller .game-replay-btn-table {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     height: 100%;
+//     width: 100%;
+//     flex-wrap: wrap;
+// }
+// body {
+//     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+//     background-color: transparent;
+//     color: #ECFFFB;
+//     font-size: 1.6rem;
+// }
+// .game-replay .game-replay-controller .game-replay-btn-table .game-replay-btn-cell {
+//     position: relative;
+//     width: 100%;
+//     width: 500px;
+//     padding-top: 10px;
+//     padding-bottom: 10px;
+//     display: flex;
+//     align-items: center;
+// }
+.main-container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     width: 100%;
-    flex-wrap: wrap;
 }
-body {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    background-color: transparent;
-    color: #ECFFFB;
-    font-size: 1.6rem;
+
+.title-container {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 1rem;
 }
-.game-replay .game-replay-controller .game-replay-btn-table .game-replay-btn-cell {
+
+.game-container {
+    margin-top: 1.4rem;
+    height: 460px;
+    width: 100%;
+}
+
+.game-replay {
+    height: inherit;
+    width: 890px;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.replay-options-container {
+    background: red;
+    height: 50px;
+    width: 100%;
+}
+
+.temp-game {
+    width: inherit;
+    height: inherit;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.line-container {
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    overflow: visible;
+}
+
+.center-diamond {
+    border-top: 2px solid rgb(24, 26, 27);
+    border-bottom: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+}
+
+.center-diamond:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: blue;
+    display: inline-block;
+    border: 2px solid rgb(24, 26, 27);
     position: relative;
-    width: 100%;
-    width: 500px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center; 
+    top: -12px;
+    margin: 0 0 0 -3px;
+    transform: rotate( 45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate( 45deg);
 }
-    

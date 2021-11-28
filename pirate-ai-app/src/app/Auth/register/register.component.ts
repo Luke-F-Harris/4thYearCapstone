@@ -52,7 +52,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
   registerUser(user_details : object) {
-    this.backendservice.postMethod('register', user_details).subscribe((res:any) => {
+
+    let headers = {};
+    this.backendservice.postMethod('register', user_details, headers).subscribe((res:any) => {
       this.response = res;
     })
   }

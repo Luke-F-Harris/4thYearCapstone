@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {trigger, state, style, animate, transition} from "@angular/animations";
 import { BackEndRoutesService } from 'src/app/back-end-routes.service';
 import { FormControl } from '@angular/forms';
+import { HttpHeaders } from '@angular/common/http';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,12 +49,23 @@ export class LoginComponent implements OnInit {
   constructor(private backendService: BackEndRoutesService) { }
   ngOnInit() {}
 
+
   login () {
+
+    let header = new HttpHeaders({
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    });
+    let options = {headers: header};
+
+    console.log(header)
     this.user = {
         "username":this.username.value,
         "password":this.password.value
     }
-    this.backendService.postMethod('login', this.user).subscribe((res) => {
+    this.backendService.postMethod('cred/login', this.user, options).subscribe((res) => {
       console.log(res);
     });
   }

@@ -16,7 +16,7 @@ export class BackEndRoutesService {
     return this.http.get(this.baseUrl + url);
   }
 
-  postMethod(url:string, body:object){
-    return this.http.post(this.baseUrl + url, body);
+  postMethod(url:string, body:object, headers:object){
+    return this.http.post(this.baseUrl + url, body, headers);
   }
 }

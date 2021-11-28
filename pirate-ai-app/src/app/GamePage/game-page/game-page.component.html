@@ -1,6 +1,4 @@
-
-
-<div class="game-heading">
+<!-- <div class="game-heading">
     <i class="xline-top">
 
     </i>
@@ -21,7 +19,7 @@
 <div class="game-replay">
     <hr>
     <div class="game-replay-viewer">
-        <canvas width="690" height="460" style="touch-action: none; zoom: normal; cursor: inherit;"></canvas>
+        <canvas width="100%" height="100%" style="touch-action: none; zoom: normal; cursor: inherit;"></canvas>
     </div>
     <hr>
     <div class="game-replay-controller">
@@ -38,15 +36,15 @@
                         <mat-icon *ngIf="play">pause</mat-icon>
                         <mat-icon *ngIf="pause">play_arrow</mat-icon>
                     </mat-button-toggle>
-                </mat-button-toggle-group>    
+                </mat-button-toggle-group>
             </span>
-            
-            
+
+
             <span class=forward-btn>
                 <mat-icon>skip_next</mat-icon>
             </span>
-            
-            
+
+
             <span class=save-btn>
                 <mat-icon>save_alt</mat-icon>
             </span>
@@ -56,10 +54,34 @@
             </span>
             <span>69</span>
             <mat-icon>share</mat-icon>
-            
+
 
         </div>
     </div>
 
 
+</div> -->
+
+<div class="main-container">
+    <div class="title-container">
+        <div class="title">
+            <!-- the profile links below should be game_data.game_data.winner/loser.userId-->
+            <a routerLink="profile/{{game_data.game_data.winner}}">{{game_data.game_data.winner}}</a> DEFEATS <a routerLink="profile/{{game_data.game_data.loser}}">{{game_data.game_data.loser}}</a>
+        </div>
+    </div>
+    <div class="line-container">
+        <hr class="center-diamond">
+    </div>
+    <div class="game-container">
+        <div class="game-replay">
+            <!-- a <canvas> will go here-->
+            <img src="../../../assets/images/temp-game.jpg" class="temp-game">
+        </div>
+        <div class="replay-options-container">
+            <div class="replay-options">
+
+            </div>
+        </div>
+
+    </div>
 </div>
