@@ -1,17 +1,21 @@
 const express = require('express');
-require('./services/logging')
+const { logger } = require('./services/logging');
+require('./services/logging').logger
+
 
 const app = express();
 const PORT = 3000;
 
 // App configuaration
 app.use(express.json());
-
+app.set('trust proxy', true)
 
 // External routes
 require('./routing/cred')(app);
 require('./routing/user')(app);
 require('./routing/game')(app);
+require('./routing/code')(app);
+require('./routing/dev')(app);
 
 app.get('/', (req, res) => {
     logger.info('GET /', "API");

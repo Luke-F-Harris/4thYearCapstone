@@ -1,5 +1,6 @@
 
 const jsonwebtoken = require('jsonwebtoken');
+require('./logging').logger
 
 require('dotenv').config()
 
@@ -10,14 +11,14 @@ let userAuth = (req, res, next) => {
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
     if (decoded.user.role === "user" || decoded.user.role === "admin") {
         req.login_state = {
-            message: 'Successfully logged in',
+            message: 'Authenticated',
             user: decoded.user,
             status: 200
         }
         next();
     } else {
         req.login_state = {
-            message: 'Invalid token',
+            message: 'Invalid authentication',
             user: false,
             status: 400
         }

@@ -6,3 +6,11 @@ let query = (q, data) => {
     })
 }
 
+let insert_code = (creator, code, ranking) => {
+    return `INSERT INTO codes (creator, code, ranking) VALUES (${creator}, ${code}, ${ranking})`
+}
+
+module.exports = {
+    query,
+    insert_code
+}

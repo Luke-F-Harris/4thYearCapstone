@@ -1,78 +1,21 @@
-// Handle all of the user routing.
+// Routing for development only
+const development = require('../services/environment_check').development;
+const { normal_sanitizer, email_verifier } = require('../services/sanitize');
+const users = require('../database/models/users');
+const codes = require('../database/models/codes');
+const games = require('../database/models/games');
+const init = require('../database/init');
+const db = require('../database/connect');
+const logger = require('../services/logging').logger;
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const users = require('../database/models/users');
-const db = require('../database/connect');
-const { normal_sanitizer, email_verifier } = require('../services/sanitize');
-const logger = require('../services/logging').logger
-
-
-
-let generateToken = (user) => {
-    return jwt.sign({ user }, process.env.JWT_SECRET, {
-        expiresIn: '6h'
-    });
-}
-
 
 
 module.exports = function (app) {
-    app.post('/api/cred/login', (req, res) => {
-        let username = req.body.username;
-        let password = req.body.password;
-
-        if (username && password) {
-            username = normal_sanitizer(username);
-            db.query(users.search_users(username), (err, result) => {
-                if (err) {
-                    res.status(400);
-                    res.json({
-                        message: 'Error'
-                    });
-                    throw err;
-                }
-                if (result.length === 0) {
-                    res.status(400)
-                    res.json({
-                        message: 'Invalid login attempt'
-                    });
-                }
-                else {
-                    bcrypt.compare(password, result[0].password, (err, result) => {
-                        if (result) {
-                            db.query(users.search_users_soft(username), (err, u) => {
-                                if (u.length !== 1) {
-                                    res.status(400);
-                                    res.json({
-                                        message: 'Invalid login attempt'
-                                    });
-                                } else {
-                                    res.status(200);
-                                    res.json({
-                                        message: 'Successfully logged in',
-                                        user: u[0],
-                                        token: generateToken(u[0])
-                                    });
-                                }
-                            });
-                        }
-                        else {
-                            res.status(400)
-                            res.json({
-                                message: 'Invalid login attempt'
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    });
-
-
-    // Do we want them to sign in after successful registration?
-    app.post('/api/cred/register', (req, res) => {
+    app.post('/api/dev/users', development, (req, res, next) => {
         let first_name = normal_sanitizer(req.body.first_name);
         let last_name = normal_sanitizer(req.body.last_name);
         let username = normal_sanitizer(req.body.username);
@@ -169,32 +112,105 @@ module.exports = function (app) {
 
         }
     });
+    app.post('/api/dev/codes', development, (req, res, next) => {
 
-    // Authentication test
-    // app.get('/u/user', (req, res) => {
-    //     let token = req.headers.authorization;
-    //     if (token) {
-    //         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    //             if (err) {
-    //                 res.status(400);
-    //                 res.json({
-    //                     message: 'Invalid token'
-    //                 });
-    //             }
-    //             else {
-    //                 res.status(200);
-    //                 res.json({
-    //                     message: 'Successfully logged in',
-    //                     user: decoded.user
-    //                 });
-    //             }
-    //         });
-    //     }
-    //     else {
-    //         res.status(400);
-    //         res.json({
-    //             message: 'Invalid token'
-    //         });
-    //     }
-    // });
+        let creator = req.body.creator;
+        let code = req.body.code;
+        let ranking = req.body.ranking;
+
+        if (!code || !creator || !ranking) {
+
+            res.status(400).json({
+                message: 'Bad Request'
+            });
+            logger.error("Bad request in /api/dev/codes");
+        } else {
+            codes.query(codes.insert_code(creator, code, ranking), (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500)
+                    res.json({
+                        message: 'Internal Server Error'
+                    });
+                } else {
+                    logger.log("DB insert success in /api/dev/codes");
+                    res.status(200)
+                    res.json({
+                        message: 'Success'
+                    });
+                }
+            });
+        }
+    });
+    app.post('/api/dev/games', development, (req, res, next) => {
+        const winner_code = req.body.winner_code;
+        const loser_code = req.body.loser_code;
+        const winner_id = req.body.winner_score;
+        const loser_id = req.body.loser_score;
+        const log = req.body.log;
+
+        db.query(games.insert_game(winner_code, loser_code, winner_id, loser_id, log), (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500)
+                res.json({
+                    message: 'Internal Server Error'
+                });
+            } else {
+                console.log("Success");
+                res.status(200)
+                res.json({
+                    message: 'Success'
+                });
+            }
+        });
+
+
+    });
+    app.post('/api/dev/reset_db', development, (req, res, next) => {
+        logger.warning("Database reset initialized")
+        const reset_code = req.body.reset_code;
+        if (reset_code === process.env.RESET_CODE) {
+            let error = false;
+            const tables = ['users', 'codes', 'games'];
+            tables.forEach(table => {
+                db.query(`DELETE FROM ${table}`, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        error = true;
+                    } else {
+                        logger.info(`Successfully reset table: ${table}`, "Database")
+
+                    }
+                });
+            });
+            if (error) {
+                res.status(500)
+                res.json({
+                    message: 'Internal Server Error'
+                });
+            }
+            else {
+                res.status(200)
+                res.json({
+                    message: 'Success'
+                });
+            }
+        } else {
+            res.status(400);
+            res.json({
+                message: 'Bad Request'
+            });
+            console.log('Bad Request');
+        }
+    });
+    app.post('/api/dev/init', (req, res, next) => {
+        init();
+        res.status(200);
+        res.json({
+            message: 'Success'
+        });
+    });
+
+
 }
