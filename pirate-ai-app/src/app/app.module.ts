@@ -16,6 +16,12 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {HttpClientModule} from '@angular/common/http';
+import { RegisterComponent } from './Auth/register/register.component';
+import { LoginComponent } from './Auth/register/login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,19 +30,26 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     GamePageComponent,
     ProfilePageComponent,
     LeaderBoardPageComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
     MatTableModule,
+    MatFormFieldModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

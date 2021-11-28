@@ -9,6 +9,11 @@ export interface playerInfo {
 }
 
 
+const ELEMENT_DATA: playerInfo[] = [
+  {name:"Bob",rank:1,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"},
+  {name:"Alice",rank:2,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"}
+];
+
 @Component({
   selector: 'app-leader-board-page',
   templateUrl: './leader-board-page.component.html',
@@ -17,16 +22,14 @@ export interface playerInfo {
 export class LeaderBoardPageComponent implements OnInit {
 
   
-
+  
   //array holding top players
   public topPlayers:playerInfo[]=[];
-  displayedColumns: string[] = ['name', 'rank', 'picLink', 'lastSubmission'];
-  public dataSource: MatTableDataSource<playerInfo>;
+  displayedColumns: string[] = ['name','rank', 'lastSubmission'];
+  dataSource = ELEMENT_DATA;
+
   constructor() { 
-    
-    this.topPlayers.push({name:"bob",rank:1,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"});
-    this.topPlayers.push({name:"alice",rank:2,picLink:"https://i.stack.imgur.com/l60Hf.png",lastSubmission:"1 day ago"});
-    this.dataSource=new MatTableDataSource(this.topPlayers);
+
   }
 
   ngOnInit(): void {

@@ -1,0 +1,32 @@
+<div class="main-container">
+    <div class="scalable-container">
+        <mat-card class="forum-container" [@leftCenter]>
+            <div class="forum-boxes ">
+                <mat-form-field class="field-container fc-firstname ">
+                    <mat-label>First Name</mat-label>
+                    <input class="firstname " matInput />
+                </mat-form-field>
+                <mat-form-field class="field-container fc-lastname ">
+                    <mat-label>Last Name</mat-label>
+                    <input class="lastname " matInput />
+                </mat-form-field>
+                <mat-form-field class="field-container fc-username ">
+                    <mat-label>Username</mat-label>
+                    <input class="username " matInput />
+                </mat-form-field>
+                <mat-form-field class="field-container fc-password ">
+                    <mat-label>Password</mat-label>
+                    <input type="password" class="password " matInput />
+                </mat-form-field>
+                <mat-form-field class="field-container fc-confirmpassword ">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" class="confirmpassword " matInput />
+                </mat-form-field>
+                <button mat-button class="login-btn "> Register </button>
+            </div>
+
+        </mat-card>
+        <p class="need-account" [@register]>Already have an account? <span class="reg-text"><a routerLink="/login">Login Here</a></span></p>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="main-container">
+    <div class="scalable-container">
+        <mat-card class="forum-container" [@leftCenter]>
+            <div class="forum-boxes ">
+                <mat-form-field class="field-container fc-username ">
+                    <mat-label for="username">Username</mat-label>
+                    <input class="username" [formControl]="username" matInput />
+                </mat-form-field>
+                <mat-form-field class="field-container fc-password ">
+                    <mat-label for="password">Password</mat-label>
+                    <input type="password" [formControl]="password" class="password " matInput />
+                </mat-form-field>
+                <button mat-button class="login-btn" (click)="login()"> Login </button>
+
+            </div>
+            <p class="forgot-password "><a routerLink="/forgot-password ">Forgot Password?</a></p>
+        </mat-card>
+        <p class="need-account" [@register]>Need an account? <span class="reg-text"><a routerLink="/register">Register Here</a></span></p>
+    </div>
+
+</div>

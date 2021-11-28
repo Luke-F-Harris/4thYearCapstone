@@ -1,0 +1,65 @@
+.main-container {
+    max-width: 100%;
+    height: 65%;
+}
+
+.scalable-container {
+    transform: scale(0.7, 0.7);
+}
+
+.forum-container {
+    box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
+    width: 30%;
+    height: 90%;
+    margin: auto;
+    margin-top: -4%;
+    opacity: 1;
+    padding: 2rem;
+}
+
+.field-container {
+    width: 80%;
+    height: 100%;
+    font-size: 1.4rem;
+    margin: auto;
+}
+
+.forum-boxes {
+    display: grid;
+    height: 90%;
+}
+
+.login-btn {
+    font-size: 0.9rem;
+    margin: auto;
+    width: 20%;
+    background: blue;
+    color: white;
+    transform: scale(1.5, 1.5);
+    margin-bottom: 2.6rem;
+    margin-top: 1.6rem;
+}
+
+.forgot-password {
+    margin: auto;
+    text-align: center;
+    padding-bottom: 1.4rem;
+    margin-top: 0.4rem;
+    font-size: 1.3rem;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.need-account {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    height: 1rem;
+}
+
+.reg-text {
+    color: blue;
+    overflow: hidden;
+}
