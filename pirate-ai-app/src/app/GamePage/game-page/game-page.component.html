@@ -79,6 +79,25 @@
         </div>
         <div class="replay-options-container">
             <div class="replay-options">
+                <div class="buttons">
+                    <button mat-button (click)="skip_previous()">
+                      <mat-icon>skip_previous</mat-icon>
+                    </button>
+
+                    <button mat-button (click)="changePause()">
+                            <mat-icon *ngIf="play">pause</mat-icon>
+                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                        </button>
+
+                    <button mat-button (click)="skip_next()">
+                      <mat-icon>skip_next</mat-icon>
+                    </button>
+                    <span>0</span>
+                    <span class="progress-bar">
+                <mat-slider thumbLabel  (change)="sliderEvent($event)" class="slider" min="0" max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
+            </span>
+                    <span>{{game_data.game_data.game_length}}</span>
+                </div>
 
             </div>
         </div>

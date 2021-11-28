@@ -47,7 +47,6 @@
 }
 
 .replay-options-container {
-    background: red;
     height: 50px;
     width: 100%;
 }
@@ -55,6 +54,18 @@
 .temp-game {
     width: inherit;
     height: inherit;
+}
+
+.slider {
+    width: 400px;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+}
+
+button {
+    height: 50px;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
 }
 
 a {

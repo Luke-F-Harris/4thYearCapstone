@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
   user: object = {};
   username = new FormControl('');
   password = new FormControl('');
+  response:object = {};
 
   constructor(private backendService: BackEndRoutesService) { }
   ngOnInit() { }
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
       "password": this.password.value
     }
     this.backendService.postMethod('cred/login', this.user).subscribe((res) => {
-      console.log(res);
+      this.response = res;
     });
   }
 

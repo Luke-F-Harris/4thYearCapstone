@@ -4,7 +4,7 @@ export interface gameInfo {
   game_id: number,
   game_link: string,
   game_date:string,
-  game_data:{winner:string, loser:string, /* other data */},
+  game_data:{winner:string, loser:string, game_length:number, /* other data */},
   game_players: string[] //this should be playerInfo[] instead of string[], find a way to import this class from leaderboard.ts (same with game_data.winner shit)
 }
 
@@ -19,9 +19,10 @@ export interface gameInfo {
 export class GamePageComponent implements OnInit {
   pause = false;
   play = true;
-
+  slider_value = 0;
+  val = 2;
   game_data: gameInfo =
-    {game_id:120, game_link:'game/?game_id=120', game_date:"Nov 23rd, 22 - 16:56:17", game_data:{winner:"henry123",loser:"donte129"}, game_players: ["henry123", "donte129"]}
+    {game_id:120, game_link:'game/?game_id=120', game_date:"Nov 23rd, 22 - 16:56:17", game_data:{winner:"henry123",loser:"donte129", game_length:120}, game_players: ["henry123", "donte129"]}
 
   constructor() { }
 
@@ -30,10 +31,18 @@ export class GamePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
   }
 
+  skip_previous() {
+    this.sliderEvent(0);
+  }
+
+  skip_next() {
+   this.sliderEvent(this.game_data.game_data.game_length);
+  }
+  sliderEvent(event:any) {
+    this.slider_value = event.value;
+  }
   changePause(){
     this.pause=!this.pause;
     this.play=!this.play;
