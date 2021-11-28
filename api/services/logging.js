@@ -54,7 +54,7 @@ let error = (happened, name = "Error") => {
 // error('Logging service error');
 
 
-global.logger = {
+module.exports.logger = {
     log: log,
     info: info,
     warning: warning,

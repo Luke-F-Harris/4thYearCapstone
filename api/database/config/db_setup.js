@@ -1,6 +1,7 @@
 // This should be run standalone
 
 const db = require('../connect');
+//require('../../services/logging').logger
 
 // the tables 
 
@@ -72,6 +73,11 @@ function setup(reset = false, reset_only = false) {
     }
 
     // Close connection
+
 }
 
-module.exports = setup;
+const kill = () => {
+    db.end();
+}
+
+module.exports = { setup, kill };

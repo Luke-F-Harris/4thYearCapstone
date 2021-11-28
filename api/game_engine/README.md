@@ -42,3 +42,15 @@ This section handles the game mechanics
  - Constrain the language used to set list of functionalities
  - Disable imports
  - Limit imports
+
+
+# Steps
+
+Probably best to just go step by step, but think into the future about practical application.
+
+1. Accept standalone code. ``code_input.js``
+2. Create an object for this input.
+3. Validate the code
+    - Check length.
+    - Check if the syntax is valid? This can be postponed
+4. Add route to post code.

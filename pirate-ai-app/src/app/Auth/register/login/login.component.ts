@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {trigger, state, style, animate, transition} from "@angular/animations";
+import { trigger, state, style, animate, transition } from "@angular/animations";
 import { BackEndRoutesService } from 'src/app/back-end-routes.service';
 import { FormControl } from '@angular/forms';
-import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ import { HttpHeaders } from '@angular/common/http';
         style({
           transform: 'translateX(-100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -28,7 +28,7 @@ import { HttpHeaders } from '@angular/common/http';
         style({
           transform: 'translateY(100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -41,31 +41,20 @@ import { HttpHeaders } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   // animation code
-  isLeft='left';
-  user:object = {};
+  isLeft = 'left';
+  user: object = {};
   username = new FormControl('');
   password = new FormControl('');
 
   constructor(private backendService: BackEndRoutesService) { }
-  ngOnInit() {}
+  ngOnInit() { }
 
-
-  login () {
-
-    let header = new HttpHeaders({
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Methods': 'POST',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-    });
-    let options = {headers: header};
-
-    console.log(header)
+  login() {
     this.user = {
-        "username":this.username.value,
-        "password":this.password.value
+      "username": this.username.value,
+      "password": this.password.value
     }
-    this.backendService.postMethod('cred/login', this.user, options).subscribe((res) => {
+    this.backendService.postMethod('cred/login', this.user).subscribe((res) => {
       console.log(res);
     });
   }

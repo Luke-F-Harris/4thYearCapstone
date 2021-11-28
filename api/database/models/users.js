@@ -25,7 +25,7 @@ let search_user_emails = (u) => `SELECT id FROM users WHERE email = "${u}"`;
 
 let search_user_usernames = (u) => `SELECT id FROM users WHERE username = "${u}"`;
 
-let search_users_soft = (u) => `SELECT username, email, role FROM users WHERE username = "${u}" OR email = "${u}"`;
+let search_users_soft = (u) => `SELECT id, username, email, role FROM users WHERE username = "${u}" OR email = "${u}"`;
 
 module.exports = { insert_user, get_users, search_users, search_user_emails, search_user_usernames, search_users_soft };
 
