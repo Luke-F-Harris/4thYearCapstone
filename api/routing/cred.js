@@ -68,6 +68,12 @@ module.exports = function (app) {
                 }
             });
         }
+        else {
+            res.status(400);
+            res.json({
+                message: 'Invalid login attempt'
+            });
+        }
     });
 
 
