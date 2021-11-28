@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {trigger, state, style, animate, transition} from "@angular/animations";
+import { trigger, state, style, animate, transition } from "@angular/animations";
 import { BackEndRoutesService } from 'src/app/back-end-routes.service';
 import { FormControl } from '@angular/forms';
 @Component({
@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
         style({
           transform: 'translateX(-100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -26,7 +26,7 @@ import { FormControl } from '@angular/forms';
         style({
           transform: 'translateY(100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -39,20 +39,20 @@ import { FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   // animation code
-  isLeft='left';
-  user:object = {};
+  isLeft = 'left';
+  user: object = {};
   username = new FormControl('');
   password = new FormControl('');
 
   constructor(private backendService: BackEndRoutesService) { }
-  ngOnInit() {}
+  ngOnInit() { }
 
-  login () {
+  login() {
     this.user = {
-        "username":this.username.value,
-        "password":this.password.value
+      "username": this.username.value,
+      "password": this.password.value
     }
-    this.backendService.postMethod('login', this.user).subscribe((res) => {
+    this.backendService.postMethod('cred/login', this.user).subscribe((res) => {
       console.log(res);
     });
   }
