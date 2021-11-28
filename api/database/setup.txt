@@ -1,4 +1,13 @@
 1. Create a schema in mysql called 'capstone'
 2. run this command: ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
-3. Run: node config/db_setup.js
-4. Run: node config/db_populate.js
+3. Start api by running npm start in /api
+4. In the .env in the /api folder, add two lines:
+    
+    ENVTYPE="development"
+    RESET_CODE=""
+
+    Set reset code to anything you want. This is an extra failsafe that you pass in dev request bodies.
+
+5. In insomnia or postman, send a post request to: http://localhost:3000/api/dev/init there is no body or headers needed
+6. If you want to empty your database, send a post request to http://localhost:3000/api/dev/reset_db with 
+    a json body {"reset_code":YOUR ENV RESET CODE FROM STEP 4}
