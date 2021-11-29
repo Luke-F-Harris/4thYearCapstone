@@ -16,6 +16,7 @@ require('dotenv').config();
 
 module.exports = function (app) {
     app.post('/api/dev/users', development, (req, res, next) => {
+        logger.warning('Dev users endpoint called');
         let first_name = normal_sanitizer(req.body.first_name);
         let last_name = normal_sanitizer(req.body.last_name);
         let username = normal_sanitizer(req.body.username);
@@ -31,7 +32,7 @@ module.exports = function (app) {
                         res.json({
                             message: 'Error'
                         });
-                        console.log(err);
+                        logger.log(err);
                         throw err;
                     }
                     if (result.length === 0) {
@@ -41,7 +42,7 @@ module.exports = function (app) {
                                 res.json({
                                     message: 'Error'
                                 });
-                                console.log(err);
+                                logger.log(err);
                                 throw err;
                             }
                             if (result.length === 0) {
@@ -51,7 +52,7 @@ module.exports = function (app) {
                                         res.json({
                                             message: 'Error'
                                         });
-                                        console.log(err);
+                                        logger.log(err);
                                         throw err;
                                     }
                                     else {
@@ -61,7 +62,7 @@ module.exports = function (app) {
                                                 res.json({
                                                     message: 'Error'
                                                 });
-                                                console.log(err);
+                                                logger.log(err);
                                                 throw err;
                                             }
                                             else {
@@ -80,7 +81,7 @@ module.exports = function (app) {
                                 res.json({
                                     message: 'Email already in use'
                                 });
-                                console.log('Email already in use');
+                                logger.warning('Email already in use', 'Regstration');
 
                             }
                         });
@@ -90,7 +91,7 @@ module.exports = function (app) {
                         res.json({
                             message: 'Username already in use'
                         });
-                        console.log('Username already in use');
+                        logger.warning('Username already in use', 'Regstration');
 
                     }
                 });
@@ -100,7 +101,7 @@ module.exports = function (app) {
                 res.json({
                     message: 'Passwords do not match'
                 });
-                console.log('Passwords do not match');
+                logger.warning('Passwords do not match', 'Regstration');
 
             }
         } else {
@@ -108,12 +109,12 @@ module.exports = function (app) {
             res.json({
                 message: 'Invalid email'
             });
-            console.log('Invalid email');
+            logger.warning('Invalid email', 'Regstration');
 
         }
     });
     app.post('/api/dev/codes', development, (req, res, next) => {
-
+        logger.warning('Dev codes endpoint called');
         let creator = req.body.creator;
         let code = req.body.code;
         let ranking = req.body.ranking;
@@ -127,7 +128,7 @@ module.exports = function (app) {
         } else {
             codes.query(codes.insert_code(creator, code, ranking), (err, result) => {
                 if (err) {
-                    console.log(err);
+                    logger.error(err);
                     res.status(500)
                     res.json({
                         message: 'Internal Server Error'
@@ -143,6 +144,7 @@ module.exports = function (app) {
         }
     });
     app.post('/api/dev/games', development, (req, res, next) => {
+        logger.warning('Dev games endpoint called');
         const winner_code = req.body.winner_code;
         const loser_code = req.body.loser_code;
         const winner_id = req.body.winner_score;
@@ -151,13 +153,13 @@ module.exports = function (app) {
 
         db.query(games.insert_game(winner_code, loser_code, winner_id, loser_id, log), (err, result) => {
             if (err) {
-                console.log(err);
+                logger.log(err);
                 res.status(500)
                 res.json({
                     message: 'Internal Server Error'
                 });
             } else {
-                console.log("Success");
+                logger.log("Successful game update");
                 res.status(200)
                 res.json({
                     message: 'Success'
@@ -168,7 +170,7 @@ module.exports = function (app) {
 
     });
     app.post('/api/dev/reset_db', development, (req, res, next) => {
-        logger.warning("Database reset initialized")
+        logger.warning('Dev reset_db endpoint called');
         const reset_code = req.body.reset_code;
         if (reset_code === process.env.RESET_CODE) {
             let error = false;
@@ -176,7 +178,7 @@ module.exports = function (app) {
             tables.forEach(table => {
                 db.query(`DELETE FROM ${table}`, (err, result) => {
                     if (err) {
-                        console.log(err);
+                        logger.error(err);
                         error = true;
                     } else {
                         logger.info(`Successfully reset table: ${table}`, "Database")
@@ -201,11 +203,13 @@ module.exports = function (app) {
             res.json({
                 message: 'Bad Request'
             });
-            console.log('Bad Request');
+            logger.error('Bad Request', 'Reset DB');
         }
     });
     app.post('/api/dev/init', (req, res, next) => {
+        logger.warning('Dev init endpoint called');
         init();
+        // Add error handling
         res.status(200);
         res.json({
             message: 'Success'

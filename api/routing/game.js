@@ -8,7 +8,7 @@ module.exports = function (app) {
     app.get('/api/games/all', (req, res, next) => {
         games.query(games.games(), (err, res) => {
             if (err) {
-                console.log(err);
+                logger.error(err)
                 res.status(500);
                 res.json({
                     message: 'Error getting games'
@@ -28,7 +28,7 @@ module.exports = function (app) {
 
         games.query(games.insert_game(winner_code, loser_code, winner_id, loser_id, log), (err, res) => {
             if (err) {
-                console.log(err);
+                logger.log(err);
                 res.status(500);
                 res.json({
                     message: 'Error adding game'

@@ -1,8 +1,9 @@
 // connect to db, create tables if not exist, then populate tables
-let fs = require('fs');
-let axios = require('axios');
-let db = require('./connect');
-var path = require('path')
+const fs = require('fs');
+const axios = require('axios');
+const db = require('./connect');
+const path = require('path')
+require('../services/logging').logger
 
 const users = {
     name: 'users',
@@ -53,15 +54,15 @@ let create = () => {
     tables.forEach(table => {
         db.query(`CREATE TABLE IF NOT EXISTS ${table.name} (${table.features})`, (err, result) => {
             if (err) throw err;
-            console.log(`Table ${table.name} created`);
+            logger.log(`Table ${table.name} created`, "Database");
             JSON.parse(fs.readFileSync(`database/config/data/${table.name}.json`, 'utf8')).forEach(row => {
                 axios.post(`http://localhost:3000/api/dev/${table.name}`, row)
                     .then(res => {
-                        console.log(`${res.data.message}`);
+                        logger.log(`${res.data.message}`);
                     }
                     )
                     .catch(err => {
-                        console.log(`${err}`);
+                        logger.error(`${err}`);
                     }
                     )
 

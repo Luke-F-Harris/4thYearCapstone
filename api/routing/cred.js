@@ -55,6 +55,8 @@ module.exports = function (app) {
                                         user: u[0],
                                         token: generateToken(u[0])
                                     });
+                                    logger.info(`${u[0].username} logged in`);
+
                                 }
                             });
                         }
@@ -94,7 +96,7 @@ module.exports = function (app) {
                         res.json({
                             message: 'Error'
                         });
-                        console.log(err);
+                        logger.error(err);
                         throw err;
                     }
                     if (result.length === 0) {
@@ -104,7 +106,7 @@ module.exports = function (app) {
                                 res.json({
                                     message: 'Error'
                                 });
-                                console.log(err);
+                                logger.error(err);
                                 throw err;
                             }
                             if (result.length === 0) {
@@ -114,7 +116,7 @@ module.exports = function (app) {
                                         res.json({
                                             message: 'Error'
                                         });
-                                        console.log(err);
+                                        logger.error(err);
                                         throw err;
                                     }
                                     else {
@@ -124,7 +126,7 @@ module.exports = function (app) {
                                                 res.json({
                                                     message: 'Error'
                                                 });
-                                                console.log(err);
+                                                logger.error(err);
                                                 throw err;
                                             }
                                             else {
@@ -143,7 +145,7 @@ module.exports = function (app) {
                                 res.json({
                                     message: 'Email already in use'
                                 });
-                                console.log('Email already in use');
+                                logger.warning('Email already in use', "Registration");
 
                             }
                         });
@@ -153,7 +155,7 @@ module.exports = function (app) {
                         res.json({
                             message: 'Username already in use'
                         });
-                        console.log('Username already in use');
+                        logger.warning('Username already in use', "Registration");
 
                     }
                 });
@@ -163,7 +165,7 @@ module.exports = function (app) {
                 res.json({
                     message: 'Passwords do not match'
                 });
-                console.log('Passwords do not match');
+                logger.warning('Passwords do not match', "Registration");
 
             }
         } else {
@@ -171,7 +173,7 @@ module.exports = function (app) {
             res.json({
                 message: 'Invalid email'
             });
-            console.log('Invalid email');
+            logger.warning('Invalid email', "Registration");
 
         }
     });
