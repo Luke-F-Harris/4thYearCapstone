@@ -10,8 +10,11 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   title = 'pirate-ai-app';
 
+  currentRoute = "";
   constructor(public router: Router) {
-
+    router.events.subscribe((event) => {
+      this.currentRoute = this.router.url;
+    })
   }
 
   ngOnInit() {
