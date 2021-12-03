@@ -37,40 +37,4 @@
     <router-outlet></router-outlet>
 </div>
 
-<div *ngIf="currentRoute == '/home'" class="footer-container">
-    <div class="footer">
-
-        <div class="footer-div">
-            <ul class="ul">
-                <span class="footer-head">
-            PIRATEAI
-          </span>
-                <li><a routerLink="about">What is PIRATEAI?</a></li>
-                <li><a routerLink="tutorial">How To Play</a></li>
-                <li><a routerLink="profile">Upload Your AI</a></li>
-            </ul>
-        </div>
-        <div class="footer-div">
-            <ul class="ul">
-                <span class="footer-head">
-            Developers
-          </span>
-                <li><a href="https://github.com/Luke-F-Harris">Luke Harris</a></li>
-                <li><a href="https://github.com/abdin20">Naymul Mohommad</a></li>
-                <li><a href="https://github.com/over4">Riley Overland</a></li>
-                <li><a href="https://github.com/ZachRaposo">Zach Raposo</a></li>
-                <li><a href="https://github.com/andrewharrop">Andrew Harrop</a></li>
-
-            </ul>
-        </div>
-        <div class="footer-div">
-            <ul class="ul">
-                <span class="footer-head">
-            Community
-          </span>
-                <li><a routerLink="leaderboard">Leaderboards</a></li>
-
-            </ul>
-        </div>
-    </div>
-</div>
+<app-app-footer *ngIf="currentRoute == '/home'"></app-app-footer>
