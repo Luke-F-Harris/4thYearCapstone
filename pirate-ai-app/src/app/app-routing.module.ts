@@ -10,7 +10,8 @@ import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.co
 
 const routes: Routes = [
 
-  {path:"", component: HomePageComponent},
+  {path:"", redirectTo:'home', pathMatch:"full"},
+  {path:"home", component: HomePageComponent},
   {path:"register", component: RegisterComponent},
   {path:"login", component: LoginComponent},
   {path:"home", component: HomePageComponent},

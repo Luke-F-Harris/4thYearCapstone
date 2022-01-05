@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'pirate-ai-app';
 
   currentRoute = "";
-  constructor(public router: Router) {
+  constructor(public router: Router, private authService:AuthenticationService) {
     router.events.subscribe((event) => {
       this.currentRoute = this.router.url;
     })
@@ -21,7 +22,8 @@ export class AppComponent {
 
   }
 
-  // implement logging in feature
-  loggedIn = false;
-  // implement register feature and guard and such
+  logout() {
+    this.authService.logout();
+  }
+  loggedIn = this.authService.currentUserValue;
 }

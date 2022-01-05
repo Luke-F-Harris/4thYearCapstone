@@ -5,12 +5,14 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
+    "strictNullChecks":false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -26,6 +28,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+
     "strictTemplates": true
   }
 }

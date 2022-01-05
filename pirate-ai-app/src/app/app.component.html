@@ -10,11 +10,15 @@
             <li class="nav-item" *ngIf="!loggedIn" routerLink="login">
                 <p class="nav-item-font">LOGIN</p>
             </li>
+
             <li class="nav-item" *ngIf="!loggedIn" routerLink="game">
                 <p class="nav-item-font">GAME</p>
             </li>
             <li class="nav-item" routerLink="leaderboard">
                 <p class="nav-item-font">LEADER BOARD</p>
+            </li>
+            <li class="nav-item" *ngIf="loggedIn" (click)="logout()">
+                <p class="nav-item-font">LOGOUT</p>
             </li>
         </ul>
     </div>

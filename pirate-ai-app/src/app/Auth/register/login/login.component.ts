@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from "@angular/animations";
+import { trigger, style, animate, transition } from "@angular/animations";
 import { BackEndRoutesService } from 'src/app/back-end-routes.service';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/authentication.service';
+
 
 
 @Component({
@@ -39,25 +43,50 @@ import { FormControl } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-
   // animation code
   isLeft = 'left';
-  user: object = {};
-  username = new FormControl('');
-  password = new FormControl('');
-  response:object = {};
 
-  constructor(private backendService: BackEndRoutesService) { }
-  ngOnInit() { }
+  loginForm: FormGroup;
+  returnUrl: string;
+  html_response:any;
 
-  login() {
-    this.user = {
-      "username": this.username.value,
-      "password": this.password.value
+  constructor(
+    private backendService: BackEndRoutesService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService
+  ) {
+
+    // if user logged in already bring them to profile
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/profile']);
     }
-    this.backendService.postMethod('cred/login', this.user).subscribe((res) => {
-      this.response = res;
-    });
   }
 
+  ngOnInit() {
+
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    })
+
+    // get return url from route parameters or default to '/'
+    if (this.route.snapshot.queryParams['returnUrl'] == "/login"){
+      this.returnUrl= "/profile";
+    } else {
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.html_response = this.authenticationService.login(this.f['username'].value, this.f['password'].value);
+    console.log(this.html_response)
+  }
 }

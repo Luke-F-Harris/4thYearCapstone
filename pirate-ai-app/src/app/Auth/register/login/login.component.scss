@@ -8,10 +8,22 @@
     transform: scale(0.7, 0.7);
 }
 
+.html_response {
+    color: red;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+a:visited {
+    color: blue;
+}
+
 .forum-container {
+    overflow: hidden;
     box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
-    width: 30%;
-    height: 90%;
+    width: 500px;
+    height: 400px;
     margin: auto;
     opacity: 1;
     padding: 2rem;
