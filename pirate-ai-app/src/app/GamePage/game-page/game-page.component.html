@@ -75,7 +75,10 @@
     <div class="game-container">
         <div class="game-replay">
             <!-- a <canvas> will go here-->
-            <img src="../../../assets/images/temp-game.jpg" class="temp-game">
+            <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
+            <video controls width="850" #myVideo autoplay muted>
+                <source src="https://www.angulartraining.com/Cybertruck.mp4" />
+            </video>
         </div>
         <div class="replay-options-container">
             <div class="replay-options">
@@ -85,8 +88,8 @@
                     </button>
 
                     <button mat-button (click)="changePause()">
-                            <mat-icon *ngIf="play">pause</mat-icon>
-                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                            <mat-icon *ngIf="play" (click)="myVideo.pause()">pause</mat-icon>
+                            <mat-icon *ngIf="pause" (click)="myVideo.play()">play_arrow</mat-icon>
                         </button>
 
                     <button mat-button (click)="skip_next()">
