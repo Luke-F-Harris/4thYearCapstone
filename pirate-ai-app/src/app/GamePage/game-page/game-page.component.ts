@@ -14,6 +14,9 @@ export class GamePageComponent implements OnInit {
   play = true;
   slider_value = 0;
   val = 2;
+  vid = <HTMLVideoElement>document.getElementById("myVideo");
+  
+  
   game_data: GameData =
     {game_id:120, game_link:'game/?game_id=120', game_date:"Nov 23rd, 22 - 16:56:17", game_data:{winner:"henry123",loser:"donte129", game_length:120}, game_players: ["henry123", "donte129"]}
 
@@ -24,6 +27,7 @@ export class GamePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   skip_previous() {
@@ -37,6 +41,7 @@ export class GamePageComponent implements OnInit {
     this.slider_value = event.value;
   }
   changePause(){
+    
     this.pause=!this.pause;
     this.play=!this.play;
   }

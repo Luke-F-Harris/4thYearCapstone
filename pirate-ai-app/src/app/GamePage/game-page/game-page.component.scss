@@ -37,22 +37,26 @@
     margin-top: 1.4rem;
     height: 460px;
     width: 100%;
+    margin:0 auto;
 }
 
 .game-replay {
     height: inherit;
-    width: 890px;
-    margin: auto;
+    width: 45%;
+    margin: 0 auto;
     margin-bottom: 2rem;
-    margin-left: auto;
-    margin-right: auto;
+    
 
+}
+.buttons{
+    width:45%;
+    margin: 0 auto;
 }
 
 .replay-options-container {
     height: 50px;
-    width: 100%;
-    margin:auto;
+    
+    margin:0 auto;
     margin-left: auto;
     margin-right: auto;
 }

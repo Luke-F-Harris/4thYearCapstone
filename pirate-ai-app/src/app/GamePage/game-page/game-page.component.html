@@ -76,8 +76,8 @@
         <div class="game-replay">
             <!-- a <canvas> will go here-->
             <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
-            <video  width="850" #myVideo autoplay [muted]="'muted'" >
-                <source src="https://www.angulartraining.com/Cybertruck.mp4" />
+            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'" >
+                <source src="https://www.angulartraining.com/Cybertruck.mp4" /><!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
             </video>
         </div>
         <div class="replay-options-container">
@@ -88,8 +88,8 @@
                     </button>
 
                     <button mat-button (click)="changePause()">
-                            <mat-icon *ngIf="play" (click)="myVideo.pause()">pause</mat-icon>
-                            <mat-icon *ngIf="pause" (click)="myVideo.play()">play_arrow</mat-icon>
+                            <mat-icon (click)="myVideo.pause()" *ngIf="play" >pause</mat-icon>
+                            <mat-icon (click)="myVideo.play()" *ngIf="pause" >play_arrow</mat-icon>
                         </button>
 
                     <button mat-button (click)="skip_next()">
@@ -99,6 +99,9 @@
                     <span class="progress-bar">
                 <mat-slider thumbLabel  (change)="sliderEvent($event)" class="slider" min="0" max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
             </span>
+            <button mat-button (click)="skip_next()">
+                <mat-icon>skip_next</mat-icon>
+              </button>
                     <span>{{game_data.game_data.game_length}}</span>
                 </div>
 
