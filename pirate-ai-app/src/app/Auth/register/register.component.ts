@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { BackEndRoutesService } from 'src/app/back-end-routes.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -36,26 +36,35 @@ import { BackEndRoutesService } from 'src/app/back-end-routes.service';
   ]
 })
 export class RegisterComponent implements OnInit {
+  form: any = {
+    fist_name:null,
+    last_name:null,
+    username: null,
+    email: null,
+    password: null
+  };
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  user:object = {
-    first_name: '',
-    last_name: '',
-    username: '',
-    email: '',
-    password: '',
-    password_confirm: ''
-  }
-
-  response: any = "";
-  constructor(private backendservice: BackEndRoutesService) { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
-  registerUser(user_details : object) {
 
-    this.backendservice.postMethod('register', user_details).subscribe((res:any) => {
-      this.response = res;
-      console.log(this.response);
-    })
+  onSubmit(): void {
+    const { first_name, last_name, username, email, password } = this.form;
+
+    this.authService.register(first_name, last_name, username, email, password).subscribe({
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    });
   }
 }

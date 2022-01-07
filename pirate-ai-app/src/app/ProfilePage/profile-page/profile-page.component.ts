@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserData} from '../../Interfaces/UserData'
-import { BackEndRoutesService } from 'src/app/back-end-routes.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-page',
@@ -10,7 +10,7 @@ import { BackEndRoutesService } from 'src/app/back-end-routes.service';
 
 export class ProfilePageComponent implements OnInit {
 
-  constructor(public BEservice: BackEndRoutesService) { }
+  constructor(private http:HttpClient) { }
 
 
   // temp user data
