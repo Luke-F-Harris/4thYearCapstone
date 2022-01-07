@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {GameData} from "../../Interfaces/GameData"
+import {GameData} from "../../Interfaces/GameData";
+import { NgModule } from '@angular/core';
+import {ThemePalette} from '@angular/material/core';
 
 
 
@@ -15,6 +17,15 @@ export class GamePageComponent implements OnInit {
   slider_value = 0;
   val = 2;
   vid = <HTMLVideoElement>document.getElementById("myVideo");
+  color: ThemePalette = 'primary';
+  replayName="https://www.angulartraining.com/Cybertruck.mp4";
+  otherGames=[
+    {"winner":"henry123", "loser":"donte129", "video":"https://www.angulartraining.com/Cybertruck.mp4"},
+    {"winner":"henry123", "loser":"dad12", "video": "https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4"},
+    {"winner":"Pen_ISLAND", "loser":"henry123"},
+    {"winner":"henry123", "loser":"MudRoomMan"}
+  
+  ];
   
   
   game_data: GameData =
@@ -44,6 +55,9 @@ export class GamePageComponent implements OnInit {
     
     this.pause=!this.pause;
     this.play=!this.play;
+  }
+  selectReplay(NameTime:string){ //WIP in switching videos
+    this.replayName=NameTime;
   }
 
 
