@@ -21,8 +21,8 @@ export class AuthenticationService {
     return this.http.post(this.baseUrl+"cred/login", {username, password}, httpOptions)
   };
 
-  register(first_name:string, last_name:string, username:string, email:string, password:string): Observable<any> {
-    return this.http.post(this.baseUrl+"cred/register", {first_name, last_name, username, email, password}, httpOptions)
+  register(first_name:string, last_name:string, username:string, email:string, password:string, confirmpassword: string): Observable<any> {
+    return this.http.post(this.baseUrl+"cred/register", {first_name, last_name, username, email, password, password_confirm: confirmpassword}, httpOptions)
   }
 
 }

@@ -1,6 +1,7 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { trigger, style, animate, transition } from "@angular/animations";
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
         style({
           transform: 'translateX(-100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -26,7 +27,7 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
         style({
           transform: 'translateY(100%)',
 
-          opacity:'0',
+          opacity: '0',
 
         }),
         animate('0.65s ease-out')
@@ -36,12 +37,16 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
   ]
 })
 export class RegisterComponent implements OnInit {
+  // animation code
+  isLeft = 'left';
+
   form: any = {
-    fist_name:null,
+    first_name:null,
     last_name:null,
     username: null,
     email: null,
-    password: null
+    password: null,
+    confirmpassword: null
   };
   isSuccessful = false;
   isSignUpFailed = false;
@@ -49,13 +54,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthenticationService) { }
 
+
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    const { first_name, last_name, username, email, password } = this.form;
+    const {first_name,last_name, username, email, password, confirmpassword } = this.form;
 
-    this.authService.register(first_name, last_name, username, email, password).subscribe({
+    this.authService.register(first_name, last_name, username, email, password, confirmpassword).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
