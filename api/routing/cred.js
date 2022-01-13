@@ -14,7 +14,7 @@ let generateToken = (user) => {
     });
 };
 
-module.exports = function (app) {
+module.exports = function(app) {
     app.post("/api/cred/login", (req, res) => {
         let username = req.body.username;
         let password = req.body.password;
@@ -46,14 +46,12 @@ module.exports = function (app) {
                                         if (u.length !== 1) {
                                             res.status(400);
                                             res.json({
-                                                message:
-                                                    "Invalid login attempt",
+                                                message: "Invalid login attempt",
                                             });
                                         } else {
                                             res.status(200);
                                             res.json({
-                                                message:
-                                                    "Successfully logged in",
+                                                message: "Successfully logged in",
                                                 user: u[0],
                                                 token: generateToken(u[0]),
                                             });
@@ -141,8 +139,7 @@ module.exports = function (app) {
                                                             if (err) {
                                                                 res.status(400);
                                                                 res.json({
-                                                                    message:
-                                                                        "Error",
+                                                                    message: "Error",
                                                                 });
                                                                 logger.error(
                                                                     err
@@ -151,8 +148,7 @@ module.exports = function (app) {
                                                             } else {
                                                                 res.status(200);
                                                                 res.json({
-                                                                    message:
-                                                                        "Successfully registered",
+                                                                    message: "Successfully registered",
                                                                     user: result,
                                                                 });
                                                             }

@@ -6,7 +6,9 @@
                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                     <div class="form-group">
                         <div class="field-container  fc-firstname ">
-                            <label class="lbl" for="firstname">First Name</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="firstname">First Name</mat-label><br/>
+                            </div>
                             <input type="text" class="firstname form-control" name="firstname" [(ngModel)]="form.first_name" required minlength="3" maxlength="20" #firstname="ngModel" />
                             <div class="alert" *ngIf="firstname.errors && f.submitted">
                                 <div *ngIf="firstname.errors['required']">First name is required</div>
@@ -23,8 +25,9 @@
                         <div class="field-container">
 
 
-
-                            <label class="lbl" for="lastname">Last Name</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="lastname">Last Name</mat-label><br/>
+                            </div>
                             <input type="text" class="lastname form-control" name="lastname" [(ngModel)]="form.lastname" required minlength="3" maxlength="20" #lastname="ngModel" />
                             <div class="alert" *ngIf="lastname.errors && f.submitted">
                                 <div *ngIf="lastname.errors['required']">Last name is required</div>
@@ -39,7 +42,9 @@
                     </div>
                     <div class="form-group">
                         <div class="field-container">
-                            <label class="lbl" for="username">Username</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="username">Username</mat-label><br/>
+                            </div>
                             <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel" />
                             <div class="alert" *ngIf="username.errors && f.submitted">
                                 <div *ngIf="username.errors['required']">Username is required</div>
@@ -54,7 +59,9 @@
                     </div>
                     <div class="form-group">
                         <div class="field-container">
-                            <label class="lbl" for="email">Email</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="email">Email</mat-label><br/>
+                            </div>
                             <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
                             <div class="alert" *ngIf="email.errors && f.submitted">
                                 <div *ngIf="email.errors['required']">Email is required</div>
@@ -66,7 +73,9 @@
                     </div>
                     <div class="form-group">
                         <div class="field-container">
-                            <label class="lbl" for="password">Password</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="password">Password</mat-label><br/>
+                            </div>
                             <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
                             <div class="alert" *ngIf="password.errors && f.submitted">
                                 <div *ngIf="password.errors['required']">Password is required</div>
@@ -78,7 +87,9 @@
                     </div>
                     <div class="form-group">
                         <div class="field-container">
-                            <label class="lbl" for="confirmpassword">Confirm Password</label><br/>
+                            <div class="lbll">
+                                <mat-label class="lbl" for="confirmpassword">Confirm Password</mat-label><br/>
+                            </div>
                             <input type="password" class="form-control" name="confirmpassword" [(ngModel)]="form.confirmpassword" required minlength="6" #confirmpassword="ngModel" />
                             <div class="alert" *ngIf="confirmpassword.errors && f.submitted">
                                 <div *ngIf="confirmpassword.errors['required']">Password confirmation is required</div>
