@@ -76,14 +76,15 @@
         <div id="otherReplays">
             <tr *ngFor="let other of otherGames">
                 <div id=testHover>
-                    <mat-card (click)="selectReplay('https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4')"> <!--WIP on switching videos-->
+                    <mat-card (click)="selectReplay('https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4')">
+                        <!--WIP on switching videos-->
                         <mat-card-content style="text-align: center;">{{other.winner}} DEFEATS {{other.loser}}</mat-card-content>
-                        
+
                     </mat-card>
                     <br>
                 </div>
             </tr>
-            
+
         </div>
         <div id="GameStats">
             <h1>LIVE GAME STATS</h1>
@@ -99,7 +100,7 @@
             </div>
             <!--<div id=probability_bar>
                 <mat-progress-bar value=50 style="width: 35%; top: 10px;">
-                    
+
                 </mat-progress-bar>
             </div>-->
             <div id=Opponent2>
@@ -111,19 +112,19 @@
             </div>
             <div id=probability_bar>
                 <mat-progress-bar value=50 style="width: 38%; top: 15px;">
-                    
+
                 </mat-progress-bar>
             </div>
-            
+
         </div>
         <div class="game-replay">
             <!-- a <canvas> will go here-->
             <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
-            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'" >
+            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'">
                 <source src={{replayName}} /><!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
             </video>
         </div>
-        
+
         <div class="replay-options-container">
             <div class="replay-options">
                 <div class="buttons">
@@ -143,9 +144,6 @@
                     <span class="progress-bar">
                 <mat-slider thumbLabel  (change)="sliderEvent($event)" class="slider" min="0" max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
             </span>
-            <button mat-button (click)="skip_next()">
-                <mat-icon>skip_next</mat-icon>
-              </button>
                     <span>{{game_data.game_data.game_length}}</span>
                 </div>
 
