@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './HomePage/home-page/home-page.component';
@@ -18,10 +18,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {HttpClientModule} from '@angular/common/http';
 import { RegisterComponent } from './Auth/register/register.component';
-import { LoginComponent } from './Auth/register/login/login.component';
+import { LoginComponent } from './Auth/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     LeaderBoardPageComponent,
     RegisterComponent,
     LoginComponent,
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
@@ -49,7 +53,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatTabsModule,
     MatButtonToggleModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

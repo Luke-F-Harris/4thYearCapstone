@@ -9,6 +9,8 @@ export interface playerInfo {
   userId: number;
 }
 
+// change playerInfo to UserData
+
 
 const ELEMENT_DATA: playerInfo[] = [
   {name:"AIrules192",rank:1,picLink:"https://cloudfront-us-east-2.images.arcpublishing.com/reuters/7GBCHQUCEROJDPEVYQW7XG7VAE.jpg",lastSubmission:"1 day ago", userId:1000},

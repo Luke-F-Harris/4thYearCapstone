@@ -37,18 +37,60 @@
     margin-top: 1.4rem;
     height: 460px;
     width: 100%;
+    margin: 0 auto;
 }
 
 .game-replay {
     height: inherit;
-    width: 890px;
-    margin: auto;
+    width: 45%;
+    margin: 0 auto;
     margin-bottom: 2rem;
+}
+
+#otherReplays {
+    float: right;
+    width: 500px;
+}
+
+#GameStats {
+    text-align: center;
+    float: left;
+    width: 500px;
+}
+
+#Opponent1 {
+    float: left;
+}
+
+#Opponent2 {
+    float: right;
+}
+
+#testHover:hover {
+    cursor: pointer;
+    font-size: 41px;
+    transform: scale(1.03, 1.03) translateY(-1.8px);
+    transition: 0.2s ease-out;
+}
+
+#probability_bar {
+    right: 50%;
+    left: 50%;
+}
+
+.buttons {
+    width: 50%;
+    margin: 0 auto;
 }
 
 .replay-options-container {
     height: 50px;
     width: 100%;
+    padding-top: 18.5rem;
+    padding-bottom: 2rem;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .temp-game {

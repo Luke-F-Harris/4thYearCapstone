@@ -1,11 +1,11 @@
-const mysql = require('mysql');
+const mysql = require("mysql");
 
 let db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: "localhost",
+    user: "root",
     port: 3306,
-    database: 'capstone',
-    password: 'root'
+    database: "capstone",
+    password: "root",
 });
 
 db.connect((err) => {
@@ -14,6 +14,4 @@ db.connect((err) => {
     }
 });
 
-
 module.exports = db;
-

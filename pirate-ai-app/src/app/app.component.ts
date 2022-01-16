@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthenticationService } from './_services/authentication.service';
+import { TokenStorageService } from './_services/token-storage.service';
+
 
 @Component({
   selector: 'app-root',
@@ -10,15 +13,27 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   title = 'pirate-ai-app';
 
-  constructor(public router: Router) {
+  loggedIn:any;
+  currentRoute = "";
+  constructor(public router: Router, private token: TokenStorageService) {
 
+    router.events.subscribe((event) => {
+      this.currentRoute = this.router.url;
+    })
+  }
+
+
+  logout() {
+    this.token.signOut();
+    window.location.reload();
   }
 
   ngOnInit() {
-
+    this.loggedIn = !!this.token.getToken();
+    if (this.loggedIn) {
+      const user = this.token.getUser();
+    }
   }
 
-  // implement logging in feature
-  loggedIn = false;
-  // implement register feature and guard and such
+
 }

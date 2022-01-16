@@ -10,11 +10,15 @@
             <li class="nav-item" *ngIf="!loggedIn" routerLink="login">
                 <p class="nav-item-font">LOGIN</p>
             </li>
+
             <li class="nav-item" *ngIf="!loggedIn" routerLink="game">
                 <p class="nav-item-font">GAME</p>
             </li>
             <li class="nav-item" routerLink="leaderboard">
                 <p class="nav-item-font">LEADER BOARD</p>
+            </li>
+            <li class="nav-item" *ngIf="loggedIn" (click)="logout()">
+                <p class="nav-item-font">LOGOUT</p>
             </li>
         </ul>
     </div>
@@ -22,8 +26,19 @@
 
 <div class="toolbar-seperator">
     <p class="toolbar-seperator-text">
+        <span *ngIf="currentRoute == '/home'">
         Ready to test your AI's skills? <span *ngIf="loggedIn"> <a routerLink="/profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
+        </span>
+        <span *ngIf="currentRoute =='/leaderboard'">
+        Can't find yourself? <span *ngIf="loggedIn"> <a routerLink="/profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
+        </span>
+
+
     </p>
 </div>
 
-<router-outlet></router-outlet>
+<div>
+    <router-outlet></router-outlet>
+</div>
+
+<app-app-footer *ngIf="currentRoute == '/home'"></app-app-footer>

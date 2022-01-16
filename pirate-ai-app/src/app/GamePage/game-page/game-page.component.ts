@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface gameInfo {
-  game_id: number,
-  game_link: string,
-  game_date:string,
-  game_data:{winner:string, loser:string, game_length:number, /* other data */},
-  game_players: string[] //this should be playerInfo[] instead of string[], find a way to import this class from leaderboard.ts (same with game_data.winner shit)
-}
+import {GameData} from "../../Interfaces/GameData";
+import { NgModule } from '@angular/core';
+import {ThemePalette} from '@angular/material/core';
 
 
 
@@ -21,7 +16,19 @@ export class GamePageComponent implements OnInit {
   play = true;
   slider_value = 0;
   val = 2;
-  game_data: gameInfo =
+  vid = <HTMLVideoElement>document.getElementById("myVideo");
+  color: ThemePalette = 'primary';
+  replayName="https://www.angulartraining.com/Cybertruck.mp4";
+  otherGames=[
+    {"winner":"henry123", "loser":"donte129", "video":"https://www.angulartraining.com/Cybertruck.mp4"},
+    {"winner":"henry123", "loser":"dad12", "video": "https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4"},
+    {"winner":"Pen_ISLAND", "loser":"henry123"},
+    {"winner":"henry123", "loser":"MudRoomMan"}
+  
+  ];
+  
+  
+  game_data: GameData =
     {game_id:120, game_link:'game/?game_id=120', game_date:"Nov 23rd, 22 - 16:56:17", game_data:{winner:"henry123",loser:"donte129", game_length:120}, game_players: ["henry123", "donte129"]}
 
   constructor() { }
@@ -31,6 +38,7 @@ export class GamePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   skip_previous() {
@@ -44,8 +52,12 @@ export class GamePageComponent implements OnInit {
     this.slider_value = event.value;
   }
   changePause(){
+    
     this.pause=!this.pause;
     this.play=!this.play;
+  }
+  selectReplay(NameTime:string){ //WIP in switching videos
+    this.replayName=NameTime;
   }
 
 

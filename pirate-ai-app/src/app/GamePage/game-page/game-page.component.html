@@ -73,10 +73,58 @@
         <hr class="center-diamond">
     </div>
     <div class="game-container">
+        <div id="otherReplays">
+            <tr *ngFor="let other of otherGames">
+                <div id=testHover>
+                    <mat-card (click)="selectReplay('https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4')">
+                        <!--WIP on switching videos-->
+                        <mat-card-content style="text-align: center;">{{other.winner}} DEFEATS {{other.loser}}</mat-card-content>
+
+                    </mat-card>
+                    <br>
+                </div>
+            </tr>
+
+        </div>
+        <div id="GameStats">
+            <h1>LIVE GAME STATS</h1>
+            <div class="line-container">
+                <hr class="center-diamond">
+            </div>
+            <div id=Opponent1>
+                <h2>{{game_data.game_data.winner}} </h2>
+                <h3>Number of ships: </h3>
+                <h3>Number of resources: </h3>
+                <h3>Stat Placeholder </h3>
+                <h3>Stat Placeholder </h3>
+            </div>
+            <!--<div id=probability_bar>
+                <mat-progress-bar value=50 style="width: 35%; top: 10px;">
+
+                </mat-progress-bar>
+            </div>-->
+            <div id=Opponent2>
+                <h2>{{game_data.game_data.loser}} </h2>
+                <h3>Number of ships: </h3>
+                <h3>Number of resources: </h3>
+                <h3>Stat Placeholder </h3>
+                <h3>Stat Placeholder </h3>
+            </div>
+            <div id=probability_bar>
+                <mat-progress-bar value=50 style="width: 38%; top: 15px;">
+
+                </mat-progress-bar>
+            </div>
+
+        </div>
         <div class="game-replay">
             <!-- a <canvas> will go here-->
-            <img src="../../../assets/images/temp-game.jpg" class="temp-game">
+            <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
+            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'">
+                <source src={{replayName}} /><!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
+            </video>
         </div>
+
         <div class="replay-options-container">
             <div class="replay-options">
                 <div class="buttons">
@@ -85,8 +133,8 @@
                     </button>
 
                     <button mat-button (click)="changePause()">
-                            <mat-icon *ngIf="play">pause</mat-icon>
-                            <mat-icon *ngIf="pause">play_arrow</mat-icon>
+                            <mat-icon (click)="myVideo.pause()" *ngIf="play" >pause</mat-icon>
+                            <mat-icon (click)="myVideo.play()" *ngIf="pause" >play_arrow</mat-icon>
                         </button>
 
                     <button mat-button (click)="skip_next()">

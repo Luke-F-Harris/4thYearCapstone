@@ -8,36 +8,66 @@
     transform: scale(0.7, 0.7);
 }
 
-.forum-container {
-    box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
-    width: 30%;
-    height: 90%;
-    margin: auto;
-    opacity: 1;
+.error_message {
+    color: red;
+    font-size: 1.5rem;
+    text-align: center;
     padding: 2rem;
 }
 
+a:visited {
+    color: blue;
+}
+
+.forum-container {
+    box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
+    width: 500px;
+    margin: auto;
+    opacity: 1;
+    padding: 1rem;
+}
+
+.form-control {
+    font-size: 1.3rem;
+    padding: 0.3rem;
+}
+
 .field-container {
-    width: 80%;
     height: 100%;
     font-size: 1.4rem;
     margin: auto;
 }
 
+.alert {
+    color: red;
+    font-size: 15 px;
+    padding-top: 0.5rem;
+}
+
+.lbll {
+    padding-bottom: 1rem;
+}
+
 .forum-boxes {
     display: grid;
     height: 90%;
+    padding-top: 2rem;
 }
 
 .login-btn {
     font-size: 0.9rem;
     margin: auto;
-    width: 20%;
+    display: flex;
+    text-align: center;
     background: blue;
     color: white;
     transform: scale(1.5, 1.5);
     margin-bottom: 2.6rem;
-    margin-top: 1.6rem;
+    margin-top: 4.6rem;
+}
+
+input {
+    border-width: 1.5px;
 }
 
 .forgot-password {
