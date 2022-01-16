@@ -4,7 +4,7 @@ module.exports = {
     //ship radius
     ship_radius: 0.7,
     //radius of the dock for the ship
-    radius_dock: 3,
+    dock_radius: 3,
     //how long it will take to dock a ship in game units
     docking_speed: 3,
     //how many resources the ship will gain while docked per turn
