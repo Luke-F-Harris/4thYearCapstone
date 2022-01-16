@@ -6,6 +6,7 @@
                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                     <div class="form-group">
                         <div class="field-container  fc-firstname ">
+
                             <div class="lbll">
                                 <mat-label class="lbl" for="firstname">First Name</mat-label><br/>
                             </div>
@@ -26,15 +27,15 @@
 
 
                             <div class="lbll">
-                                <mat-label class="lbl" for="lastname">Last Name</mat-label><br/>
+                                <mat-label class="lbl" for="last_name">Last Name</mat-label><br/>
                             </div>
-                            <input type="text" class="lastname form-control" name="lastname" [(ngModel)]="form.lastname" required minlength="3" maxlength="20" #lastname="ngModel" />
-                            <div class="alert" *ngIf="lastname.errors && f.submitted">
-                                <div *ngIf="lastname.errors['required']">Last name is required</div>
-                                <div *ngIf="lastname.errors['minlength']">
+                            <input type="text" class="last_name form-control" name="lastname" [(ngModel)]="form.last_name" required minlength="3" maxlength="20" #last_name="ngModel" />
+                            <div class="alert" *ngIf="last_name.errors && f.submitted">
+                                <div *ngIf="last_name.errors['required']">Last name is required</div>
+                                <div *ngIf="last_name.errors['minlength']">
                                     Last name must be at least 3 characters
                                 </div>
-                                <div *ngIf="lastname.errors['maxlength']">
+                                <div *ngIf="last_name.errors['maxlength']">
                                     Last name must be at most 20 characters
                                 </div>
                             </div>
@@ -108,7 +109,7 @@
                     </div>
                 </form>
 
-                <div class="alert " *ngIf="isSuccessful">
+                <div class="alert " *ngIf="isSuccessful" style="color:green">
                     Your registration is successful!
                 </div>
             </div>
