@@ -1,54 +1,54 @@
-const Geometry = require('./Geometry');
-const Entity = require('./Entity');
+const Geo = require('./Geo');
+const Ent = require('./Ent');
 const StaticConstants = require('./StaticConstants');
-const DockingStatus = require('./DockingStatus');
+const DS = require('./DockingStatus');
 
 class PirateShip extends Entity {
-    constructor(gameMap, shipOwnerId, params) {
+    constructor(game_map, ship_owner_id, params) {
         super(params);
-        this.gameMap = gameMap;
-        this.shipOwnerId = shipOwnerId;
+        this._game_map = game_map;
+        this._ship_owner_id = ship_owner_id;
 
         this.params = {
-            health: StaticConstants.PIRATE_SHIP_HEALTH,
-            dockingStatus: DockingStatus.UNDOCKED,
+            health: StaticConstants.base_ship_health,
+            docking_status: DS.undocked,
             ...params
         };
 
     }
 
     isShipDocked() {
-        return this.params.dockingStatus === DockingStatus.DOCKED;
+        return this.params.docking_status === DS.docked;
     }
 
     isShipDocking() {
-        return this.params.dockingStatus === DockingStatus.DOCKING;
+        return this.params.docking_status === DS.docking;
     }
 
     isShipUndocking() {
-        return this.params.dockingStatus === DockingStatus.UNDOCKING;
+        return this.params.docking_status === DS.undocking;
     }
 
     isShipUndocked() {
-        return this.params.dockingStatus === DockingStatus.UNDOCKED;
+        return this.params.docking_status === DS.undocked;
     }
 
     canShipDock(island) {
-        const island_distance = Geometry.distance(this, island);
-        const ship_distance = StaticConstants.PIRATE_SHIP_DOCK_RADIUS + StaticConstants.ship_radius + island.radius;
+        const island_distance = Geo.distance(this, island);
+        const ship_distance = StaticConstants.dock_radius + StaticConstants.ship_radius + island.radius;
         const is_island_free = island.hasSpaceForShips();
-        const is_island_owned_by_me = island.ownerId == this.shipOwnerId;
+        const is_island_owned_by_me = island.ownerId == this._ship_owner_id;
         const is_island_unowned = island.isIslandOwned() == false;
 
         return island_distance <= ship_distance && is_island_free && (is_island_unowned || is_island_owned_by_me);
     }
 
     getOwnerId() {
-        return this.shipOwnerId;
+        return this._ship_owner_id;
     }
 
     getDockingStatus() {
-        return this.params.dockingStatus;
+        return this.params.docking_status;
     }
 
     getRadius() {
@@ -68,12 +68,12 @@ class PirateShip extends Entity {
     }
 
     approaching(target_point, d) {
-        return Geometry.encloseEndpoint(this, target_point, d);
+        return Geo.encloseEndpoint(this, target_point, d);
     }
 
     // For logging:
     dock(island) {
-        retiurn`docking ${this.id} ${island.id}`;
+        retiurn `docking ${this.id} ${island.id}`;
     }
 
     unDock() {
@@ -90,15 +90,17 @@ class PirateShip extends Entity {
 
         if (obstacles.length) {
             return this.navigate({
-                target: Geometry.rotateEnd(this, target, angularStep),
+                target: Geo.rotateEnd(this, target, angularStep),
                 keepDistanceToTarget,
                 speed: speed,
                 avoidObstacles,
                 maxCorrections: maxCorrections - 1,
-                angularStep, ignoreShips, ignoreIslands
+                angularStep,
+                ignoreShips,
+                ignoreIslands
             })
         }
-        const closeToTarget = Geometry.reduceEnd(this, target, keepDistanceToTarget);
+        const closeToTarget = Geo.reduceEnd(this, target, keepDistanceToTarget);
         const distance = this.distanceBetween(closeToTarget);
         const angleDegree = this.angleBetweenInDegree(closeToTarget);
 
