@@ -26,7 +26,7 @@ class PirateGame {
             for (let i = 0; i < lines.length; i++) {
                 Logging.log(lines[i]);
             };
-            Log.log(JSON.stringify(parsed_game_meta));
+            Logging.log(JSON.stringify(parsed_game_meta));
             map_parser = new PirateGameMapParser(parsedGameMeta);
 
             startPreProcessing();

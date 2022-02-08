@@ -12,6 +12,7 @@ class Log {
 
     // called to write to the logging file
     static log(lines) {
+        console.log(lines);
         file_log.write(lines + '\n')
     }
 }
