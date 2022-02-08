@@ -18,3 +18,5 @@ const Geometry = require('../pirate_game/Geometry');
 function sampleStrategy(gameMap) {
     // If there are ships that are undocked, we should dock them to the nearest island.
 }
+
+module.exports = sampleStrategy;
