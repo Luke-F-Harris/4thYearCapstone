@@ -1,5 +1,5 @@
-const Geo = require('./Geo');
-const Ent = require('./Ent');
+const Geo = require('./Geometry');
+const Entity = require('./GameEntity');
 const StaticConstants = require('./StaticConstants');
 const DS = require('./DockingStatus');
 
@@ -73,7 +73,7 @@ class PirateShip extends Entity {
 
     // For logging:
     dock(island) {
-        retiurn `docking ${this.id} ${island.id}`;
+        retiurn`docking ${this.id} ${island.id}`;
     }
 
     unDock() {

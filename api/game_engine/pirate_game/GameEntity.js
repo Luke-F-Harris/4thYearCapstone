@@ -1,4 +1,4 @@
-const Geo = require('./Geo');
+const Geo = require('./Geometry');
 
 class Ent {
     constructor(params) {

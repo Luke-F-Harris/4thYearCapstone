@@ -1,4 +1,4 @@
-const GameMap = require('./GameMap');
+const GameMap = require('./PirateGameMap');
 
 class GameMapParser {
     constructor({ myPlayerId, width, height }) {

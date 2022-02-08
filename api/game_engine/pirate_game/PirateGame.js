@@ -1,6 +1,6 @@
 // Imports for logging, handling network, and parsing game map
 const Logging = require("./Logging")
-const Networking = require("./Netowrking")
+const Networking = require("./Networking")
 const PirateGameMapParser = require("./PirateGameMapParser")
 
 let map_parser = null;
