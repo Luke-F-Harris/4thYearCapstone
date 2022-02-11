@@ -4,7 +4,7 @@ const fs = require('fs');
 let file_log;
 
 
-class logs {
+class Log {
     // initializes the logging file
     static init(file_path) {
         file_log = fs.createWriteStream(file_path, { flags: 'w' })
@@ -12,6 +12,7 @@ class logs {
 
     // called to write to the logging file
     static log(lines) {
+        console.log(lines);
         file_log.write(lines + '\n')
     }
 }

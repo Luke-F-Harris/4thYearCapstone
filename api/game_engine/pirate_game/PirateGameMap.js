@@ -2,7 +2,6 @@ const PirateShip = require('./PirateShip');
 const Island = require('./Island');
 const Geometry = require('./Geometry');
 
-const constants = require('./Constants');
 
 class GameMap {
     constructor({ myPlayerId, width, height }) {

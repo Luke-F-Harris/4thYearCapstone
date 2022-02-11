@@ -1,6 +1,6 @@
-const Geo = require('./Geo');
+const Geometry = require('./Geometry');
 
-class Ent {
+class Entity {
     constructor(params) {
         this._params = params;
     }
@@ -20,10 +20,10 @@ class Ent {
         return this._params.id;
     }
     degreesBetween(target_point) { //degreesBetween function uses the degreeAngle function in the Geo class to find the angle between this entity and the target point in degrees
-        return Geo.degreeAngle(this, target_point);
+        return Geometry.degreeAngle(this, target_point);
     }
     distance(target_point) { //distance function uses the distanceBetween function in the Geo class to find the distance between this entity and the target point
-        return Geo.distanceBetween(this, target_point);
+        return Geometry.distanceBetween(this, target_point);
     }
 }
-module.exports = Ent;
+module.exports = Entity;

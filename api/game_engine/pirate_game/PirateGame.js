@@ -1,6 +1,6 @@
 // Imports for logging, handling network, and parsing game map
 const Logging = require("./Logging")
-const Networking = require("./Netowrking")
+const Networking = require("./Networking")
 const PirateGameMapParser = require("./PirateGameMapParser")
 
 let map_parser = null;
@@ -26,7 +26,7 @@ class PirateGame {
             for (let i = 0; i < lines.length; i++) {
                 Logging.log(lines[i]);
             };
-            Log.log(JSON.stringify(parsed_game_meta));
+            Logging.log(JSON.stringify(parsed_game_meta));
             map_parser = new PirateGameMapParser(parsedGameMeta);
 
             startPreProcessing();
