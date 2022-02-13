@@ -7,18 +7,20 @@ require("../services/logging").logger;
 
 module.exports = function (app) {
     app.post("/api/codes/create", (req, res) => {
-        let creator = req.body.creator;
+        let creator = req.body.creator_id;
         let code = req.body.code;
-        let ranking = req.body.ranking;
+        // Code is a file, so we need to convert it to a string
+        code = req.body.code.toString();
 
-        if (!code || !creator || !ranking) {
+
+        if (!code || !creator) {
             res.status(400).json({
                 message: "Bad Request",
             });
             logger.warning("Bad Request, missing fields");
         } else {
             codes.query(
-                codes.insert_code(creator, code, ranking),
+                codes.insert_code(creator, code),
                 (err, result) => {
                     if (err) {
                         logger.error(err);

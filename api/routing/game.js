@@ -19,20 +19,17 @@ module.exports = function (app) {
             }
         });
     });
-    app.post("/api/games/code", userAuth, (req, res, next) => {
-        const winner_code = req.body.winner_code;
-        const loser_code = req.body.loser_code;
-        const winner_id = req.body.winner_score;
-        const loser_id = req.body.loser_score;
-        const log = req.body.log;
-
+    app.post("/api/games", userAuth, (req, res, next) => {
+        const creator_id = req.user.id;
+        const code_id = req.body.code_id;
+        const level = req.body.level;
+        const outcome = req.body.outcome;
         games.query(
             games.insert_game(
-                winner_code,
-                loser_code,
-                winner_id,
-                loser_id,
-                log
+                creator_id,
+                code_id,
+                level,
+                outcome
             ),
             (err, res) => {
                 if (err) {

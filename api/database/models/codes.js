@@ -6,8 +6,8 @@ let query = (q, data) => {
     });
 };
 
-let insert_code = (creator, code, ranking) => {
-    return `INSERT INTO codes (creator, code, ranking) VALUES (${creator}, ${code}, ${ranking})`;
+let insert_code = (creator, code) => {
+    return `INSERT INTO codes (creator, code) VALUES (${creator}, ${code})`;
 };
 
 module.exports = {
