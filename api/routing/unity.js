@@ -6,21 +6,19 @@ const { logger } = require("../services/logging");
 require("../services/logging").logger;
 
 module.exports = function (app) {
-    app.post("/api/codes/create", (req, res) => {
-        let creator = req.body.creator_id;
-        let code = req.body.code;
-        // Code is a file, so we need to convert it to a string
-        code = req.body.code.toString();
+    app.post("/api/files/create", (req, res) => {
+        let creator = req.body.creator;
+        let file = req.body.file;
+        let ranking = req.body.ranking;
 
-
-        if (!code || !creator) {
+        if (!code || !creator || !ranking) {
             res.status(400).json({
                 message: "Bad Request",
             });
             logger.warning("Bad Request, missing fields");
         } else {
             codes.query(
-                codes.insert_code(creator, code),
+                codes.insert_code(creator, code, ranking),
                 (err, result) => {
                     if (err) {
                         logger.error(err);
