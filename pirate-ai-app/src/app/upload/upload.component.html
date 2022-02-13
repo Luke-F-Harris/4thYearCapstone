@@ -1,0 +1,17 @@
+<div class="main-container">
+    <div class="scalable-container">
+        <mat-card class="forum-container" [@leftCenter]>
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="lbll">
+                    <mat-label for="username" class="lbl">Upload your AI here!</mat-label>
+                </div>
+                <div class="input-field">
+                <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" [(ngModel)]="form.aiupload" required #aiupload="ngModel" accept=".cs">
+                </div>
+                <div class="submit"><button mat-button class="submit-btn"> Submit </button>
+                    </div>
+                </form>
+        </mat-card>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import { GamePageComponent } from './GamePage/game-page/game-page.component';
 import { HomePageComponent } from './HomePage/home-page/home-page.component';
 import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/leader-board-page.component';
 import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.component';
+import { UploadComponent } from './upload/upload.component';
 import { AuthStopGuard } from './_helpers/auth-stop.guard';
 import { AuthGuard } from './_helpers/auth.guard';
 
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path:"profile", component: ProfilePageComponent, canActivate:[AuthGuard]},
   {path:"leaderboard", component: LeaderBoardPageComponent},
   {path:"game", component: GamePageComponent},
+  {path:"upload", component: UploadComponent,canActivate:[AuthGuard]},
+  
 
 ];
 

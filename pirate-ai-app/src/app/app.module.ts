@@ -24,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     RegisterComponent,
     LoginComponent,
     AppFooterComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
