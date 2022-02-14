@@ -162,6 +162,37 @@ module.exports = function (app) {
             );
         }
     });
+    app.post("/api/dev/unity_game", development, (req, res, next) => {
+        logger.warning("Dev unity game endpoint called");
+        let creator = req.body.creator_id;
+        let code = req.body.code_id;
+        let level = req.body.level;
+
+        let ocs = ["win", "lose", "draw"];
+        let outcome = ocs[Math.floor(Math.random() * ocs.length)];
+
+        // Store game in database
+        db.query(
+            games.insert_game(creator, code, level, outcome),
+            (err, result) => {
+                if (err) {
+                    logger.error(err);
+                    res.status(500);
+                    res.json({
+                        message: "Internal Server Error",
+                    });
+                } else {
+                    logger.log("DB insert success in /api/dev/unity_game");
+                    res.status(200);
+                    res.json({
+                        message: "Success",
+                        outcome: outcome,
+                    });
+                }
+
+            });
+    });
+
     app.post("/api/dev/games", development, (req, res, next) => {
         logger.warning("Dev games endpoint called");
         const winner_code = req.body.winner_code;
