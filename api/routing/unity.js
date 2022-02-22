@@ -38,6 +38,8 @@ module.exports = function (app) {
         }
     });
     app.post("/api/unity/post_here", (req, res) => {
+        console.log("unity post")
+
         console.log(req.body);
         res.status(200).json({
             message: "Success",
@@ -45,6 +47,7 @@ module.exports = function (app) {
     });
 
     app.get("/api/unity/get_here", (req, res) => {
+        console.log("unity get")
         res.status(200).json({
             message: "Success",
         });
