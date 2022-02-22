@@ -3,6 +3,7 @@ const db = require("../database/connect");
 const { normal_sanitizer, email_verifier } = require("../services/sanitize");
 const userAuth = require("../services/auth").userAuth;
 const { logger } = require("../services/logging");
+const fs = require("fs");
 require("../services/logging").logger;
 
 module.exports = function (app) {
