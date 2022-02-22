@@ -76,7 +76,35 @@ module.exports = function (app) {
             }
         });
     });
+    // More custom saves? Later
+    app.post("/api/unity/code", (req, res) => {
+        let secret_dir = "../../4thYearCapstone/Capstone/Unity-Capstone/Assets"
+
+        // Use this in the upload
+        let user = req.body.user;
+        let code_id = req.body.code_id;
 
 
+        let file_name = `code_${user}_${code_id}.cs`;
 
+        let file_body = req.body.code;
+
+        let file_path = `${secret_dir}/${file_name}`;
+
+        fs.writeFile(file_path, file_body, (err) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                // logger.log("Success");
+                res.status(200);
+                res.json({
+                    message: "Success",
+                });
+            }
+        });
+    });
 };
