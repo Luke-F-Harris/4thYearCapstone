@@ -56,7 +56,7 @@ module.exports = function (app) {
 
     app.post("/api/files/save_code_secret", (req, res) => {
         //. post the code here and then sneak it into unity
-        let secret_dir = "../../Capstone/Unity-Capstone/Assets"
+        let secret_dir = "../../4thYearCapstone/Capstone/Unity-Capstone/Assets"
         let file_name = "secret.txt"
         let file_body = "Inside your file"
         let file_path = `${secret_dir}/${file_name}`
