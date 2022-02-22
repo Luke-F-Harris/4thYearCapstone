@@ -162,7 +162,7 @@ module.exports = function (app) {
             );
         }
     });
-    app.post("/api/dev/unity_game", development, (req, res, next) => {
+    app.post("/api/dev/unity", (req, res, next) => {
         logger.warning("Dev unity game endpoint called");
         let creator = req.body.creator_id;
         let code = req.body.code_id;
