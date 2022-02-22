@@ -412,6 +412,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1257231784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1257231786}
+  - component: {fileID: 1257231785}
+  m_Layer: 0
+  m_Name: mapgen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1257231785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257231784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1682a2d7530f1004b8abb5fda6e2fed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  islandPreFab: {fileID: 4810833344498308499, guid: 81c2a4357a054474d969b034216f6755, type: 3}
+  islandRadius: 3
+  playerIslandSpawnRadius: 3
+  xRange1: -10
+  xRange2: -20
+  yRange1: -5
+  yRange2: 5
+--- !u!4 &1257231786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257231784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3607597, y: 0.6484029, z: -2.675302}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1409972278235342684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -467,6 +517,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OppShip
       objectReference: {fileID: 0}
+    - target: {fileID: 1409972278108596767, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+      propertyPath: m_TagString
+      value: OppShip
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
 --- !u!1001 &4810833345511725926
@@ -479,6 +533,10 @@ PrefabInstance:
     - target: {fileID: 4810833344498308499, guid: 81c2a4357a054474d969b034216f6755, type: 3}
       propertyPath: m_Name
       value: island
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810833344498308499, guid: 81c2a4357a054474d969b034216f6755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4810833344498308511, guid: 81c2a4357a054474d969b034216f6755, type: 3}
       propertyPath: m_RootOrder
@@ -535,6 +593,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7447924584055520768, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
       propertyPath: m_Name
+      value: PlayerShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447924584055520768, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
+      propertyPath: m_TagString
       value: PlayerShip
       objectReference: {fileID: 0}
     - target: {fileID: 7447924584055520770, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
