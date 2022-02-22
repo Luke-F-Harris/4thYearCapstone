@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+// Use this to post to the unity api - testing, change url
 
 let new_game = (creator_id, code_id, level) => {
     // Response should contain the outcome of the game. Can use this for testing as well
@@ -8,7 +9,7 @@ let new_game = (creator_id, code_id, level) => {
         "code_id": code_id,
         "level": level,
     };
-    return axios.post('http://localhost:3000/api/dev/unity', {
+    return axios.post('http://localhost:3000/api/unity/post_here', {
         body
     })
         .then(function (response) {
