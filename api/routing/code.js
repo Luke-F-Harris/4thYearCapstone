@@ -11,7 +11,7 @@ module.exports = function (app) {
         let code = req.body.code;
         // Code is a file, so we need to convert it to a string
         code = req.body.code.toString();
-
+        // Do we want to save this here? No
 
         if (!code || !creator) {
             res.status(400).json({

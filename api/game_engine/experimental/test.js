@@ -1,10 +1,11 @@
 const PirateGame = require('../pirate_game/PirateGame');
-const Logger = require('../pirate_game/Logging');
+const Logger = require('../pirate_game/Logger');
 
 const { sampleStrategy } = require('.//strategy');
 
 
 Logger.init('log.txt');
+Logger.log("Logger initialized at " + new Date());
 PirateGame.start({
     botName: 'AndrewTestBot',
     preProcessing: map => {

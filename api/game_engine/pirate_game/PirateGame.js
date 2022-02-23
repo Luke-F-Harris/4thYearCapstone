@@ -1,5 +1,5 @@
 // Imports for logging, handling network, and parsing game map
-const Logging = require("./Logging")
+const Logger = require("./Logger")
 const Networking = require("./Networking")
 const PirateGameMapParser = require("./PirateGameMapParser")
 
@@ -15,18 +15,17 @@ class PirateGame {
         let turn = 1;
 
         // reads the networking lines to parse the game data
-        Networking.readNLines(2, lines => {
+        Networking.readNLines(2, lines => { // Bottleneck
             const parsed_game_meta = parseGameMeta(lines);
-
             // creates a logging file for the name of current bot and players id
-            Logging.init(`${bot_name}${parsed_game_meta.my_player_id}.log `);
-            Logging.log(`game meta:`);
+            Logger.init(`${bot_name}${parsed_game_meta.my_player_id}.log `);
+            Logger.log(`game meta:`);
 
             // writes each line
             for (let i = 0; i < lines.length; i++) {
-                Logging.log(lines[i]);
+                Logger.log(lines[i]);
             };
-            Logging.log(JSON.stringify(parsed_game_meta));
+            Logger.log(JSON.stringify(parsed_game_meta));
             map_parser = new PirateGameMapParser(parsedGameMeta);
 
             startPreProcessing();
@@ -36,8 +35,8 @@ class PirateGame {
         function startPreProcessing() {
             Networking.readLine(line => {
                 const game_map = map_parser.parse(line);
-                Logging.log('initial map:');
-                Logging.log(line);
+                Logger.log('initial map:');
+                Logger.log(line);
 
                 if (pre_processing == true) {
                     pre_processing(game_map);
@@ -51,15 +50,15 @@ class PirateGame {
         // called when game starts and begins to log each turn with the data
         function startGameLoop() {
             Networking.forEachReadLine(line => {
-                Logging.log('turn #' + turn + ", map:");
-                Logging.log(line);
+                Logger.log('turn #' + turn + ", map:");
+                Logger.log(line);
 
                 const game_map = map_parser.parse(line);
                 const moves = strategy(game_map);
 
                 Networking.sendMoves(moves.filter(m => m !== null));
-                Logging.log('moves:');
-                Logging.log(moves.join(' '));
+                Logger.log('moves:');
+                Logger.log(moves.join(' '));
 
                 turn++;
             })
