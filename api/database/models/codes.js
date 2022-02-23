@@ -7,10 +7,14 @@ let query = (q, data) => {
 };
 
 let insert_code = (creator, code) => {
-    return `INSERT INTO codes (creator, code) VALUES (${creator}, ${code})`;
+    return `INSERT INTO codes (creator_id, code) VALUES ("${creator}", "${code}")`;
 };
+let get_code = (id) => {
+    return `SELECT * FROM codes WHERE id = "${id}"`;
+}
 
 module.exports = {
     query,
     insert_code,
+    get_code,
 };
