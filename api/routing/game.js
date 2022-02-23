@@ -69,6 +69,7 @@ module.exports = function (app) {
 
                                 // Start game from CLI here with the code_id and level as parameters, then intert the outcome
                                 /*
+                                Unity listener for init, not api. Respone to game with post to this route
  
                                 IN(Level, filename), OUT(Outcome)
                     
