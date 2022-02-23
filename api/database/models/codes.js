@@ -13,6 +13,7 @@ let get_code = (id) => {
     return `SELECT * FROM codes WHERE id = "${id}"`;
 }
 
+
 module.exports = {
     query,
     insert_code,
