@@ -2,7 +2,8 @@ const userAuth = require("../services/auth.js").userAuth;
 const games = require("../database/models/games");
 const codes = require("../database/models/codes");
 const fs = require("fs");
-require("../services/logging").logger;
+const logger = require("../services/logging").logger;
+var path = require('path');
 
 // What type of permissions do these routes need?
 
@@ -37,7 +38,7 @@ module.exports = function (app) {
             logger.warning("Bad Request, missing fields");
         }
         else {
-            codes.query(codes.get_code(code_id), (err, res) => {
+            codes.query(codes.get_code(code_id), (err, result) => {
                 if (err) {
                     logger.error(err);
                     res.status(500);
@@ -45,17 +46,19 @@ module.exports = function (app) {
                         message: "Internal Server Error",
                     });
                 } else {
-                    if (res.length === 0) {
+                    if (result.length === 0) {
                         res.status(400).json({
                             message: "Bad Request",
                         });
                         logger.warning("Bad Request, missing fields");
                     } else {
-                        let code = res[0].code;
-                        let unity_dir = "../../4thYearCapstone/Capstone/Unity-Capstone/Uploads/Assets";
-                        let file_name = `code_${code_id}.cs`;
+                        let code = result[0].code;
 
-                        fs.writeFile(`${unity_dir}/${file_name}`, code, (err) => {
+
+                        let file_name = `code_${code_id}.cs`;
+                        let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
+
+                        fs.writeFile(file_path, code, (err) => {
                             if (err) {
                                 logger.error(err);
                                 res.status(500);
@@ -63,13 +66,15 @@ module.exports = function (app) {
                                     message: "Internal Server Error",
                                 });
                             } else {
+
                                 // Start game from CLI here with the code_id and level as parameters, then intert the outcome
                                 /*
+ 
+                                IN(Level, filename), OUT(Outcome)
+                    
                                 1. Get output (Outcome value)
                                 2. INSERT GAME
                                 */
-
-
 
                                 res.status(200);
                                 res.json({
