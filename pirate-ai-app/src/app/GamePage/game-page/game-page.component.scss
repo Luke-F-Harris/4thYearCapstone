@@ -26,6 +26,9 @@
     padding-bottom: 3rem;
     width: 100%;
 }
+.file-input {
+  display: none;
+}
 
 .title-container {
     text-align: center;
@@ -71,6 +74,12 @@
     font-size: 41px;
     transform: scale(1.03, 1.03) translateY(-1.8px);
     transition: 0.2s ease-out;
+}
+#slightHover:hover {
+    cursor: pointer;
+    transform: scale(1.01, 1.01) translateY(-1.8px);
+    transition: 0.2s ease-out;
+
 }
 
 #probability_bar {
@@ -153,4 +162,18 @@ hr {
     transform: rotate( 45deg);
     -ms-transform: rotate(45deg);
     -webkit-transform: rotate( 45deg);
+}
+.file-upload-div {
+    width: fit-content;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.upload-btn {
+    margin-left: 3rem;
+    margin-right: 3rem;
 }

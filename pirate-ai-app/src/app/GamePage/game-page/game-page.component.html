@@ -66,7 +66,8 @@
     <div class="title-container">
         <div class="title">
             <!-- the profile links below should be game_data.game_data.winner/loser.userId-->
-            <a routerLink="profile/{{game_data.game_data.winner}}">{{game_data.game_data.winner}}</a> DEFEATS <a routerLink="profile/{{game_data.game_data.loser}}">{{game_data.game_data.loser}}</a>
+            <a routerLink="profile/{{game_data.game_data.winner}}">{{game_data.game_data.winner}}</a> DEFEATS <a
+                routerLink="profile/{{game_data.game_data.loser}}">{{game_data.game_data.loser}}</a>
         </div>
     </div>
     <div class="line-container">
@@ -76,9 +77,11 @@
         <div id="otherReplays">
             <tr *ngFor="let other of otherGames">
                 <div id=testHover>
-                    <mat-card (click)="selectReplay('https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4')">
+                    <mat-card
+                        (click)="selectReplay('https://tesla-cdn.thron.com/static/A7I6LP_lane_change_0.mp4-2000_PYSUF4.mp4')">
                         <!--WIP on switching videos-->
-                        <mat-card-content style="text-align: center;">{{other.winner}} DEFEATS {{other.loser}}</mat-card-content>
+                        <mat-card-content style="text-align: center;">{{other.winner}} DEFEATS {{other.loser}}
+                        </mat-card-content>
 
                     </mat-card>
                     <br>
@@ -86,23 +89,28 @@
             </tr>
 
         </div>
+        <!--
+
         <div id="GameStats">
+
             <h1>LIVE GAME STATS</h1>
             <div class="line-container">
                 <hr class="center-diamond">
             </div>
+
             <div id=Opponent1>
                 <h2>{{game_data.game_data.winner}} </h2>
                 <h3>Number of ships: </h3>
                 <h3>Number of resources: </h3>
                 <h3>Stat Placeholder </h3>
                 <h3>Stat Placeholder </h3>
-            </div>
-            <!--<div id=probability_bar>
+            </div>-->
+        <!--<div id=probability_bar>
                 <mat-progress-bar value=50 style="width: 35%; top: 10px;">
 
                 </mat-progress-bar>
             </div>-->
+        <!--
             <div id=Opponent2>
                 <h2>{{game_data.game_data.loser}} </h2>
                 <h3>Number of ships: </h3>
@@ -114,14 +122,75 @@
                 <mat-progress-bar value=50 style="width: 38%; top: 15px;">
 
                 </mat-progress-bar>
-            </div>
+                </div
+                
+        </div>
+        -->
+        <div id="GameStats">
+            <h1>Game Center</h1>
+            <div class="line-container">
+                <hr class="center-diamond">
+                <div>
+                    <h2>Upload your bot:</h2>
+                </div>
+                <div>
+                    <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
+                        <mat-icon>cloud_upload</mat-icon>
+                        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                    </button>
+                    {{fileName || "No file uploaded yet."}}
+                </div>
+                <!-- input uploadCodeName-->
+                <mat-form-field>
+                    <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
+                </mat-form-field>
+                <div>
+                    <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
+                        Upload
+                        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                    </button>
+                </div>
+                <br>
 
+
+
+                <div>
+                    <h2>Start a new game:</h2>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <!-- Drop down to select a bot-->
+                        <mat-select placeholder="Select a bot" [(ngModel)]="selectedBot">
+                            <mat-option *ngFor="let bot of bots" [value]="bot.name" (click)="selectBot(bot.name)">
+                                {{bot.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <div>
+                        <mat-form-field>
+                            <mat-select placeholder="Select a code" [(ngModel)]="selectedCodeName">
+                                <mat-option *ngFor="let code of codes" [value]="code.name" (click)="selectCode(code)">
+                                    {{code.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()">
+                            Start
+                        </button>
+
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="game-replay">
             <!-- a <canvas> will go here-->
             <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
             <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'">
-                <source src={{replayName}} /><!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
+                <source src={{replayName}} />
+                <!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
             </video>
         </div>
 
@@ -129,26 +198,29 @@
             <div class="replay-options">
                 <div class="buttons">
                     <button mat-button (click)="skip_previous()">
-                      <mat-icon>skip_previous</mat-icon>
+                        <mat-icon>skip_previous</mat-icon>
                     </button>
 
                     <button mat-button (click)="changePause()">
-                            <mat-icon (click)="myVideo.pause()" *ngIf="play" >pause</mat-icon>
-                            <mat-icon (click)="myVideo.play()" *ngIf="pause" >play_arrow</mat-icon>
-                        </button>
+                        <mat-icon (click)="myVideo.pause()" *ngIf="play">pause</mat-icon>
+                        <mat-icon (click)="myVideo.play()" *ngIf="pause">play_arrow</mat-icon>
+                    </button>
 
                     <button mat-button (click)="skip_next()">
-                      <mat-icon>skip_next</mat-icon>
+                        <mat-icon>skip_next</mat-icon>
                     </button>
                     <span>0</span>
                     <span class="progress-bar">
-                <mat-slider thumbLabel  (change)="sliderEvent($event)" class="slider" min="0" max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
-            </span>
+                        <mat-slider thumbLabel (change)="sliderEvent($event)" class="slider" min="0"
+                            max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
+                    </span>
                     <span>{{game_data.game_data.game_length}}</span>
                 </div>
 
             </div>
         </div>
+
+
 
     </div>
 </div>

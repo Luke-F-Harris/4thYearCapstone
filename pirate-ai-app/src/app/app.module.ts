@@ -8,23 +8,23 @@ import { GamePageComponent } from './GamePage/game-page/game-page.component';
 import { ProfilePageComponent } from './ProfilePage/profile-page/profile-page.component';
 import { LeaderBoardPageComponent } from './LeaderBoardPage/leader-board-page/leader-board-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSliderModule} from "@angular/material/slider";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import{MatCardModule} from '@angular/material/card';
+import { MatSliderModule } from "@angular/material/slider";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {HttpClientModule} from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './Auth/register/register.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppFooterComponent } from './app-footer/app-footer.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +54,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatTabsModule,
     MatButtonToggleModule,
     BrowserAnimationsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

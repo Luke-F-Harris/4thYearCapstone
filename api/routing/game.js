@@ -7,6 +7,16 @@ var path = require('path');
 
 // What type of permissions do these routes need?
 
+let game_map = {
+    "Beginner": 1,
+    "Intermediate": 2,
+    "Advanced": 3,
+    "Expert": 4,
+    "Master": 5,
+    "Grandmaster": 6,
+    "Challenger": 7,
+};
+
 module.exports = function (app) {
     app.get("/api/games/all", (req, res, next) => {
         games.query(games.games(), (err, res) => {
@@ -23,13 +33,13 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/game/start", (req, res, next) => {
+    app.post("/api/games/start", (req, res, next) => {
 
         // Start game from this route, the code is already posted so we expect to know the id
 
         let creator_id = req.body.creator_id;
         let code_id = req.body.code_id;
-        let level = req.body.level;
+        let level = game_map[req.body.level];
 
         if (!creator_id || !code_id || !level) {
             res.status(400).json({
@@ -53,7 +63,7 @@ module.exports = function (app) {
                         logger.warning("Bad Request, missing fields");
                     } else {
                         let code = result[0].code;
-
+                        code = Buffer.from(code, "base64").toString();
 
                         let file_name = `code_${code_id}.cs`;
                         let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
@@ -66,24 +76,44 @@ module.exports = function (app) {
                                     message: "Internal Server Error",
                                 });
                             } else {
+                                // Generate random outcome, call on unity later
+                                let outcome = ["win", "lose", "draw"][Math.floor(Math.random() * 3)];
 
-                                // Start game from CLI here with the code_id and level as parameters, then intert the outcome
-                                /*
-                                Unity listener for init, not api. Respone to game with post to this route
- 
-                                IN(Level, filename), OUT(Outcome)
-                    
-                                1. Get output (Outcome value)
-                                2. INSERT GAME
 
-                                
-                                */
-
-                                res.status(200);
-                                res.json({
-                                    message: "Success",
+                                games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
+                                    if (err) {
+                                        logger.error(err);
+                                        res.status(500);
+                                        res.json({
+                                            message: "Internal Server Error",
+                                        });
+                                    } else {
+                                        res.status(200);
+                                        res.json({
+                                            message: "Success",
+                                            outcome: outcome,
+                                        });
+                                    }
                                 });
                             }
+
+
+
+
+                            // Start game from CLI here with the code_id and level as parameters, then intert the outcome
+                            /*
+                            Unity listener for init, not api. Respone to game with post to this route
+ 
+                            IN(Level, filename), OUT(Outcome)
+                
+                            1. Get output (Outcome value)
+                            2. INSERT GAME
+
+                            
+                            */
+
+
+
                         });
                     }
                 }
