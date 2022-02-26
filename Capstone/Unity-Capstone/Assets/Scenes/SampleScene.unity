@@ -123,6 +123,33 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &133758137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3010230753475560614, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
+  m_PrefabInstance: {fileID: 3010230752778805126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &133758144
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133758137}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.16
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.4800001
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &341688798
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +508,23 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
+--- !u!208 &1832188732
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832188726}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.2800001, y: 1.9200001, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.9200001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1409972278235342684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -489,17 +532,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1409972278108596761, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409972278108596761, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+      propertyPath: m_FlipY
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1409972278108596762, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1409972278108596762, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 1409972278108596762, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.47
       objectReference: {fileID: 0}
     - target: {fileID: 1409972278108596762, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
       propertyPath: m_LocalPosition.z
@@ -537,6 +588,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OppShip
       objectReference: {fileID: 0}
+    - target: {fileID: 1409972278108596767, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+      propertyPath: m_TagString
+      value: OppShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321762752618912276, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
 --- !u!1001 &3010230752778805126
@@ -552,11 +611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3010230753475560612, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.91
+      value: -8.041
       objectReference: {fileID: 0}
     - target: {fileID: 3010230753475560612, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9
+      value: 3.081
       objectReference: {fileID: 0}
     - target: {fileID: 3010230753475560612, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
       propertyPath: m_LocalPosition.z

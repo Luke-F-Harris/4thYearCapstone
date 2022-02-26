@@ -47,8 +47,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\ShipDocking.cs" />
      <Compile Include="Assets\OppStats.cs" />
      <Compile Include="Assets\PlayerStats.cs" />
+     <Compile Include="Assets\Uploads\code_6.cs" />
      <Compile Include="Assets\CodeGrabber.cs" />
      <Compile Include="Assets\island.cs" />
      <Compile Include="Assets\Uploads\code_1.cs" />
