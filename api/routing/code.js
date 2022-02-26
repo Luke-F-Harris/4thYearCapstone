@@ -8,9 +8,16 @@ require("../services/logging").logger;
 module.exports = function (app) {
     app.post("/api/codes/create", (req, res) => {
         let creator = req.body.creator_id;
+        let name = req.body.name;
         let code = req.body.code;
-        // Code is a file, so we need to convert it to a string
+
+
+        // Code is a file, so we need to convert it to a string 
         code = req.body.code.toString();
+
+        // Encode the code because sql does not like "
+        code = Buffer.from(code).toString("base64");
+
         // Do we want to save this here? No
 
         if (!code || !creator) {
@@ -20,7 +27,7 @@ module.exports = function (app) {
             logger.warning("Bad Request, missing fields");
         } else {
             codes.query(
-                codes.insert_code(creator, code),
+                codes.insert_code(creator, name, code),
                 (err, result) => {
                     if (err) {
                         logger.error(err);
@@ -39,4 +46,19 @@ module.exports = function (app) {
             );
         }
     });
+    app.get("/api/codes/all", (req, res) => {
+        codes.query(codes.codes(creator_id = 1), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json(result);
+            }
+        });
+    });
+
 };

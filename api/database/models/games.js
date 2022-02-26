@@ -11,7 +11,7 @@ let games = () => {
 };
 
 let insert_game = (creator_id, code_id, level, outcome) => {
-    return `INSERT INTO games (creator_id, code_id, level, outcome) VALUES (${creator_id}, ${code_id}, ${level}, ${outcome}')`;
+    return `INSERT INTO games (creator_id, code_id, level, outcome) VALUES ("${creator_id}", "${code_id}", "${level}", "${outcome}")`;
 };
 
 module.exports = {
