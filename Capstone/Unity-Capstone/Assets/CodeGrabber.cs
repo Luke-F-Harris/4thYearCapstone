@@ -8,7 +8,7 @@ public class CodeGrabber : MonoBehaviour
     
     void Start()
     {
-        test.AddComponent<code_1>();//Needs to be class naming conventions to ensure Code Grabber picks it up, also code uploaded needs to be of format
+        //test.AddComponent<code_1>();//Needs to be class naming conventions to ensure Code Grabber picks it up, also code uploaded needs to be of format
         /*using System.Collections;
         using System.Collections.Generic;
         using UnityEngine;
