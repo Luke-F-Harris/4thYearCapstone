@@ -1,67 +1,3 @@
-<!-- <div class="game-heading">
-    <i class="xline-top">
-
-    </i>
-    <i class="xline-bottom">
-
-    </i>
-    <p class="game-date">Nov 23rd, 22 - 16:56:17</p>
-    <div class="game-players">
-        <div class="long">
-            <span class="player1" style="color:rgb(15, 255, 15)">PLAYER 1</span>
-            <span class="defeat">DEFEATS</span>
-            <span class="player2" style="color:red">PLAYER 2</span>
-
-        </div>
-    </div>
-</div>
-
-<div class="game-replay">
-    <hr>
-    <div class="game-replay-viewer">
-        <canvas width="100%" height="100%" style="touch-action: none; zoom: normal; cursor: inherit;"></canvas>
-    </div>
-    <hr>
-    <div class="game-replay-controller">
-        <div class="buttons">
-            <span class="speed">
-                <span>3x</span>
-            </span>
-            <span class=reverse-btn>
-                <mat-icon>skip_previous</mat-icon>
-            </span>
-            <span class=play-btn>
-                <mat-button-toggle-group>
-                    <mat-button-toggle (click)="changePause()">
-                        <mat-icon *ngIf="play">pause</mat-icon>
-                        <mat-icon *ngIf="pause">play_arrow</mat-icon>
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
-            </span>
-
-
-            <span class=forward-btn>
-                <mat-icon>skip_next</mat-icon>
-            </span>
-
-
-            <span class=save-btn>
-                <mat-icon>save_alt</mat-icon>
-            </span>
-            <span>0</span>
-            <span class="progress-bar">
-                <mat-slider></mat-slider>
-            </span>
-            <span>69</span>
-            <mat-icon>share</mat-icon>
-
-
-        </div>
-    </div>
-
-
-</div> -->
-
 <div class="main-container">
     <div class="title-container">
         <div class="title">
@@ -87,45 +23,7 @@
                     <br>
                 </div>
             </tr>
-
         </div>
-        <!--
-
-        <div id="GameStats">
-
-            <h1>LIVE GAME STATS</h1>
-            <div class="line-container">
-                <hr class="center-diamond">
-            </div>
-
-            <div id=Opponent1>
-                <h2>{{game_data.game_data.winner}} </h2>
-                <h3>Number of ships: </h3>
-                <h3>Number of resources: </h3>
-                <h3>Stat Placeholder </h3>
-                <h3>Stat Placeholder </h3>
-            </div>-->
-        <!--<div id=probability_bar>
-                <mat-progress-bar value=50 style="width: 35%; top: 10px;">
-
-                </mat-progress-bar>
-            </div>-->
-        <!--
-            <div id=Opponent2>
-                <h2>{{game_data.game_data.loser}} </h2>
-                <h3>Number of ships: </h3>
-                <h3>Number of resources: </h3>
-                <h3>Stat Placeholder </h3>
-                <h3>Stat Placeholder </h3>
-            </div>
-            <div id=probability_bar>
-                <mat-progress-bar value=50 style="width: 38%; top: 15px;">
-
-                </mat-progress-bar>
-                </div
-                
-        </div>
-        -->
         <div id="GameStats">
             <h1>Game Center</h1>
             <div class="line-container">
@@ -151,9 +49,6 @@
                     </button>
                 </div>
                 <br>
-
-
-
                 <div>
                     <h2>Start a new game:</h2>
                 </div>
@@ -180,47 +75,9 @@
                         <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()">
                             Start
                         </button>
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="game-replay">
-            <!-- a <canvas> will go here-->
-            <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
-            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'">
-                <source src={{replayName}} />
-                <!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
-            </video>
-        </div>
-
-        <div class="replay-options-container">
-            <div class="replay-options">
-                <div class="buttons">
-                    <button mat-button (click)="skip_previous()">
-                        <mat-icon>skip_previous</mat-icon>
-                    </button>
-
-                    <button mat-button (click)="changePause()">
-                        <mat-icon (click)="myVideo.pause()" *ngIf="play">pause</mat-icon>
-                        <mat-icon (click)="myVideo.play()" *ngIf="pause">play_arrow</mat-icon>
-                    </button>
-
-                    <button mat-button (click)="skip_next()">
-                        <mat-icon>skip_next</mat-icon>
-                    </button>
-                    <span>0</span>
-                    <span class="progress-bar">
-                        <mat-slider thumbLabel (change)="sliderEvent($event)" class="slider" min="0"
-                            max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
-                    </span>
-                    <span>{{game_data.game_data.game_length}}</span>
-                </div>
-
-            </div>
-        </div>
-
-
-
     </div>
 </div>

@@ -5,6 +5,8 @@ import { ThemePalette } from '@angular/material/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
+// How to add auth?
+
 
 
 @Component({
