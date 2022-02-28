@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { PlaygameComponent } from './playgame/playgame.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
     RegisterComponent,
     LoginComponent,
     AppFooterComponent,
+    PlaygameComponent,
   ],
   imports: [
     BrowserModule,

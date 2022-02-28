@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service';
+
 
 export interface playerInfo {
   name: string;
@@ -12,10 +13,7 @@ export interface playerInfo {
 // change playerInfo to UserData
 
 
-const ELEMENT_DATA: playerInfo[] = [
-  {name:"AIrules192",rank:1,picLink:"https://cloudfront-us-east-2.images.arcpublishing.com/reuters/7GBCHQUCEROJDPEVYQW7XG7VAE.jpg",lastSubmission:"1 day ago", userId:1000},
-  {name:"xXguidedpirateshipsXx",rank:2,picLink:"https://cloudfront-us-east-2.images.arcpublishing.com/reuters/43YAWLITTZJLZIQTCP2JSS4KSM.jpg",lastSubmission:"1 day ago", userId:12012}
-];
+const ELEMENT_DATA: playerInfo[] = []
 
 @Component({
   selector: 'app-leader-board-page',
@@ -27,20 +25,34 @@ export class LeaderBoardPageComponent implements OnInit {
 
 
   //array holding top players
-  public topPlayers:playerInfo[]=[];
+  public top_players:playerInfo[]=[];
   displayedColumns: string[] = ['name','rank', 'lastSubmission'];
   dataSource = ELEMENT_DATA;
 
-  constructor() {
+  constructor(private bs:BackEndRoutesService) {
 
   }
 
   ngOnInit(): void {
 
-
-
     //replace code here with db fetching top players
 
+
+    // get 20 players
+    this.top_players = this.getTopPlayerData();
+    console.log(this.top_players)
+  }
+
+  getTopPlayerData() {
+
+    let player_data: any[] = []
+
+    this.bs.getMethod("user/all").subscribe((req:any) => {
+      player_data = req;
+      console.log(req)
+    })
+    console.log(player_data)
+    return player_data.sort((a,b) => (a.score < b.score) ? 1:-1);
 
   }
 
