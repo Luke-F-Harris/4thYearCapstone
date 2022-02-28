@@ -25,7 +25,6 @@ module.exports = function (app) {
     });
 
     app.get("/api/user/all", (req, res, next) => {
-
         users.query(users.get_users()).then((result) => {
             res.status(200);
             res.json(result);
