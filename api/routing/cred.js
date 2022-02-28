@@ -7,9 +7,8 @@ const users = require("../database/models/users");
 const db = require("../database/connect");
 const { normal_sanitizer, email_verifier } = require("../services/sanitize");
 const logger = require("../services/logging").logger;
-
 let generateToken = (user) => {
-    return jwt.sign({ user }, process.env.JWT_SECRET, {
+    return jwt.sign({ user }, "IjWJqlKu2IqMjl2pV7rF", {
         expiresIn: "6h",
     });
 };
@@ -18,7 +17,6 @@ module.exports = function (app) {
     app.post("/api/cred/login", (req, res) => {
         let username = req.body.username;
         let password = req.body.password;
-
         if (username && password) {
             username = normal_sanitizer(username);
             db.query(users.search_users(username), (err, result) => {

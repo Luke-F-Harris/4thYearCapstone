@@ -17,6 +17,9 @@ let game_map = {
     "Challenger": 7,
 };
 
+
+
+
 module.exports = function (app) {
     app.get("/api/games/all", (req, res, next) => {
         games.query(games.games(), (err, res) => {
@@ -76,6 +79,10 @@ module.exports = function (app) {
                                     message: "Internal Server Error",
                                 });
                             } else {
+
+                                //
+
+
                                 // Generate random outcome, call on unity later
                                 let outcome = ["win", "lose", "draw"][Math.floor(Math.random() * 3)];
 
