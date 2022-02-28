@@ -29,6 +29,7 @@ let search_users_soft = (u) =>
     `SELECT id, username, email, role FROM users WHERE username = "${u}" OR email = "${u}"`;
 
 module.exports = {
+    query,
     insert_user,
     get_users,
     search_users,
