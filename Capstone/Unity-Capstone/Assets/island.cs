@@ -15,33 +15,56 @@ public class island : MonoBehaviour
    private bool ownedByOpp = false;
    
    void Update() {
-       //check for docked ships to update number of docked ships vars
+       //always check for ships 
    }
     
         //if ship enters island
-    void OnTriggerEnter2D(Collider2D col)
-    {
+    void OnCollisionEnter2D(Collision2D col)
+    {   
+
         //check for ship collision and enough spots to dock
-        if (col.gameObject.tag == "PlayerShip" || col.gameObject.tag == "OppShip" && numShips<numberOfPorts)
+        if (col.gameObject.tag == "PlayerShip" && !ownedByOpp)
         {
+            ownedByPlayer=true;
             numShips += 1;
             resourceGain += 10f;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
             Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
-            Debug.Log("ship docked successfully");
+            Debug.Log("player ship docked successfully");
         }
+
+        if (col.gameObject.tag == "OppShip" && !ownedByPlayer)
+        {
+            ownedByOpp=true;
+            numShips += 1;
+            resourceGain += 10f;
+            //variable to keep track if ship is docked
+            col.gameObject.GetComponent<ShipDocking>().isDocked = true;
+            Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
+            Debug.Log("Opp ship docked successfully");
+        }
+
+
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    void OnCollisionExit2D(Collision2D col)
     {
-        
-        if ((col.gameObject.tag == "PlayerShip" || col.gameObject.tag == "OppShip") && col.gameObject.GetComponent<ShipDocking>().isDocked)
-        {
+        Debug.Log("entereted");
+        if ((col.gameObject.tag == "PlayerShip" || col.gameObject.tag == "OppShip" && col.gameObject.GetComponent<ShipDocking>().isDocked))
+        {   
             numShips -= 1;
             resourceGain -= 10f;
             col.gameObject.GetComponent<ShipDocking>().isDocked = false;
             Debug.Log("ship undocked successfully");
+            
+            //if no ships left no owners
+            if(numShips==0){
+            ownedByPlayer=false;
+            ownedByOpp=false;
+            Debug.Log("Island has no owners");
+            }
+
         }
     }
    
