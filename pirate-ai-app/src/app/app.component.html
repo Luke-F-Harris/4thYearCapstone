@@ -4,6 +4,9 @@
     </span>
     <div class="nav-items-wrapper">
         <ul class="nav-items">
+          <li class="nav-item" *ngIf="loggedIn" routerLink="play">
+            <p class="nav-item-font">PLAY</p>
+        </li>
             <li class="nav-item" *ngIf="loggedIn" routerLink="profile">
                 <p class="nav-item-font">PROFILE</p>
             </li>
