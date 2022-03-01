@@ -36,9 +36,13 @@
                     </td>
                     <td>
                         <div class="link-container">
-                            <a routerLink="profile/profileid?={{game.game_data.winner}}}"><span class="norm">Winner:</span> {{game.game_data.winner}}</a> </div>
+                            <a routerLink="profile/profileid?={{game.game_data.winner}}}"><span
+                                    class="norm">Winner:</span> {{game.game_data.winner}}</a>
+                        </div>
                         <div class="link-container">
-                            <a routerLink="profile/profileid?={{game.game_data.loser}}}"><span class="norm">Loser:</span> {{game.game_data.loser}}</a></div>
+                            <a routerLink="profile/profileid?={{game.game_data.loser}}}"><span
+                                    class="norm">Loser:</span> {{game.game_data.loser}}</a>
+                        </div>
 
                     </td>
                     <td>
@@ -46,6 +50,26 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div>
+            <h2>Upload your bot:</h2>
+        </div>
+        <div>
+            <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
+                <mat-icon>cloud_upload</mat-icon>
+                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            </button>
+            {{fileName || "No file uploaded yet."}}
+        </div>
+        <!-- input uploadCodeName-->
+        <mat-form-field>
+            <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
+                Upload
+                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            </button>
         </div>
     </div>
 </div>

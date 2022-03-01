@@ -40,6 +40,8 @@ export class GamePageComponent implements OnInit {
     { "name": "Advanced" },
     { "name": "Expert" }
   ];
+  // Get Stuff from the local session storage 
+
 
 
   fileName = '';
@@ -76,23 +78,23 @@ export class GamePageComponent implements OnInit {
 
         this.uploaded_bot = file_text;
       };
-
-
-
-
     }
   }
   startGame() {
     let base_url = environment.wsBaseURL;
     const url = base_url + this.start_game_url;
     console.log(this.selectedBot)
-    this.http.post(url, {
-      "creator_id": 1,
-      "code_id": this.selectedCode.id,
-      "level": this.selectedBot
-    }).subscribe(data => {
-      console.log(data);
-    });
+    // Add headers with the token
+    this.http.post(url,
+      {
+        "creator_id": 1,
+        "code_id": this.selectedCode.id,
+        "level": this.selectedBot,
+
+
+      }).subscribe(data => {
+        console.log(data);
+      });
   }
 
 

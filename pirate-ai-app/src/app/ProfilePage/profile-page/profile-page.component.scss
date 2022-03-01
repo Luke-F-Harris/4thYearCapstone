@@ -104,3 +104,182 @@ td {
     padding-left: 0.6rem;
     line-height: 1.5rem;
 }
+// .game-replay .game-replay-controller .game-replay-btn-table {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     height: 100%;
+//     width: 100%;
+//     flex-wrap: wrap;
+// }
+// body {
+//     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+//     background-color: transparent;
+//     color: #ECFFFB;
+//     font-size: 1.6rem;
+// }
+// .game-replay .game-replay-controller .game-replay-btn-table .game-replay-btn-cell {
+//     position: relative;
+//     width: 100%;
+//     width: 500px;
+//     padding-top: 10px;
+//     padding-bottom: 10px;
+//     display: flex;
+//     align-items: center;
+// }
+.main-container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    width: 100%;
+}
+.file-input {
+  display: none;
+}
+
+.title-container {
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 1rem;
+}
+
+.game-container {
+    margin-top: 1.4rem;
+    height: 460px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.game-replay {
+    height: inherit;
+    width: 45%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+#otherReplays {
+    float: right;
+    width: 500px;
+}
+
+#GameStats {
+    text-align: center;
+    float: left;
+    width: 500px;
+}
+
+#Opponent1 {
+    float: left;
+}
+
+#Opponent2 {
+    float: right;
+}
+
+#testHover:hover {
+    cursor: pointer;
+    font-size: 41px;
+    transform: scale(1.03, 1.03) translateY(-1.8px);
+    transition: 0.2s ease-out;
+}
+#slightHover:hover {
+    cursor: pointer;
+    transform: scale(1.01, 1.01) translateY(-1.8px);
+    transition: 0.2s ease-out;
+
+}
+
+#probability_bar {
+    right: 50%;
+    left: 50%;
+}
+
+.buttons {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.replay-options-container {
+    height: 50px;
+    width: 100%;
+    padding-top: 18.5rem;
+    padding-bottom: 2rem;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.temp-game {
+    width: inherit;
+    height: inherit;
+}
+
+.slider {
+    width: 400px;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+}
+
+button {
+    height: 50px;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.line-container {
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    overflow: visible;
+}
+
+.center-diamond {
+    border-top: 2px solid rgb(24, 26, 27);
+    border-bottom: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-left: 0px solid transparent;
+}
+
+.center-diamond:after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: blue;
+    display: inline-block;
+    border: 2px solid rgb(24, 26, 27);
+    position: relative;
+    top: -12px;
+    margin: 0 0 0 -3px;
+    transform: rotate( 45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate( 45deg);
+}
+.file-upload-div {
+    width: fit-content;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.upload-btn {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}

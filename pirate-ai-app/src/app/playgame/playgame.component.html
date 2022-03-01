@@ -1,3 +1,39 @@
 <div class="main-container">
+    <div class="game-container">
+        <div id="GameStats">
+
+            <div>
+                <h2>Start a new game:</h2>
+            </div>
+            <div>
+                <mat-form-field>
+                    <!-- Drop down to select a bot-->
+                    <mat-select placeholder="Select a bot" [(ngModel)]="selectedBot">
+                        <mat-option *ngFor="let bot of bots" [value]="bot.name" (click)="selectBot(bot.name)">
+                            {{bot.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="Select a code" [(ngModel)]="selectedCodeName">
+                            <mat-option *ngFor="let code of codes" [value]="code.name" (click)="selectCode(code)">
+                                {{code.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()">
+                        Start
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="code-view-pane">
+            {{selectedCodeCode}}
+        </div>
+    </div>
 
 </div>
