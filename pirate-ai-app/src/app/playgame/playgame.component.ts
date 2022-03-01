@@ -22,6 +22,7 @@ export class PlaygameComponent implements OnInit {
   get_url = "/api/codes/get"; // For testing we just default to being user with id 1? Makes a lot of stuff useless...
   start_game_url = "/api/games/start";
   codes: Code[];
+  gameRendered: boolean;
   newLines: string[] = [];
   constructor(private http: HttpClient) {
     const headers = new HttpHeaders()
