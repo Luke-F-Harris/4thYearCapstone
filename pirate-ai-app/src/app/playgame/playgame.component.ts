@@ -22,7 +22,7 @@ export class PlaygameComponent implements OnInit {
   get_url = "/api/codes/get"; // For testing we just default to being user with id 1? Makes a lot of stuff useless...
   start_game_url = "/api/games/start";
   codes: Code[];
-
+  newLines: string[] = [];
   constructor(private http: HttpClient) {
     const headers = new HttpHeaders()
     headers.append('Content-Type', 'application/json');
@@ -69,6 +69,18 @@ export class PlaygameComponent implements OnInit {
     this.selectedCode = code;
     this.selectedCodeName = code.name;
     this.selectedCodeCode = atob(code.code);
+    // Add numbers to each line that are greyed out
+    let lines = this.selectedCodeCode.split("\n");
+    let newLines = [];
+    for (let i = 0; i < lines.length + 1; i++) {
+      let numSpace = (8 - (i + 1).toString().length);
+      let space = ""
+      for (let j = 0; j < numSpace; j++) {
+        space += " ";
+      }
+      newLines.push(i + 1 + space + "|   " + lines[i]);
+    }
+    this.selectedCodeCode = newLines.join("\n");
 
 
   }
