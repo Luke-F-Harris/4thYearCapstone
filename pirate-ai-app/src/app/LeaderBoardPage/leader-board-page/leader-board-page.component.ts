@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service';
 
 
@@ -25,11 +27,11 @@ export class LeaderBoardPageComponent implements OnInit {
 
 
   //array holding top players
-  public top_players:playerInfo[]=[];
+  top_players:any = [];
   displayedColumns: string[] = ['name','rank', 'lastSubmission'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private bs:BackEndRoutesService) {
+  constructor(private bs:BackEndRoutesService,private http: HttpClient) {
 
   }
 
@@ -39,21 +41,20 @@ export class LeaderBoardPageComponent implements OnInit {
 
 
     // get 20 players
-    this.top_players = this.getTopPlayerData();
-    console.log(this.top_players)
+    this.sortTopPlayers();
+
+  }
+
+  sortt(dataa:any) {
+    return dataa.sort((a:any,b:any)=>(a.score < b.score)? 1:-1);
+  }
+  sortTopPlayers():void{
+    this.getTopPlayerData().subscribe(data => {
+      this.top_players = this.sortt(data);
+    });
   }
 
   getTopPlayerData() {
-
-    let player_data: any[] = []
-
-    this.bs.getMethod("user/all").subscribe((req:any) => {
-      player_data = req;
-      console.log(req)
-    })
-    console.log(player_data)
-    return player_data.sort((a,b) => (a.score < b.score) ? 1:-1);
-
+    return this.bs.getMethod("user/all");
   }
-
 }

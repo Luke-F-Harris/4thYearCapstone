@@ -13,15 +13,15 @@
                     Last Submission
                 </th>
             </tr>
-            <tr class="content-rows" *ngFor="let element of dataSource">
+            <tr class="content-rows" *ngFor="let element of top_players.sort()">
                 <td class="content-name">
-                    <a routerLink="profile/{{element.userId}}"><img src="{{element.picLink}}" class="profile-image"> <span class="content-name-text">{{element.name}}</span></a>
+                    <a routerLink="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
                 </td>
                 <td class="content-rank">
-                    {{element.rank}}
+                    {{element.score}}
                 </td>
                 <td class="content-lastsub">
-                    {{element.lastSubmission}}
+                    {{element.created}}
                 </td>
             </tr>
         </table>

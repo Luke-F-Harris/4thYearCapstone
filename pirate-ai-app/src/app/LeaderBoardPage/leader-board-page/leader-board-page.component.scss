@@ -1,55 +1,56 @@
 .main-container {
-    padding: 4rem;
+  padding: 4rem;
 }
 
 .leader-board-table {
-    width: 100%;
-    padding: 0.89rem;
-    box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
+  width: 100%;
+  padding: 0.89rem;
+  box-shadow: 5px 10px 100px rgba(0, 0, 0, 0.158);
 }
 
 .header-row {
-    font-size: 1.5rem;
-    margin: 0;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .columns {
-    width: 33%;
-    padding: 0.4rem;
+  width: 33%;
+  padding: 0.4rem;
 }
 
 .content-name {
-    padding: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .content-rank,
 .content-lastsub {
-    text-align: center;
+  text-align: center;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:link {
-    color: blue;
+  color: blue;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 a:visited {
-    color: blue;
+  color: blue;
 }
 
 .content-name-text {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .profile-image {
-    width: 50px;
-    vertical-align: middle;
-    height: 50px;
-    padding-right: 1rem;
+  width: 50px;
+  vertical-align: middle;
+  height: 50px;
+  padding-right: 1rem;
 }
