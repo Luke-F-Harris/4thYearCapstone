@@ -27,56 +27,40 @@
         <div id="GameStats">
             <h1>Game Center</h1>
             <div class="line-container">
-                <hr class="center-diamond">
-                <div>
-                    <h2>Upload your bot:</h2>
-                </div>
-                <div>
-                    <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
-                        <mat-icon>cloud_upload</mat-icon>
-                        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                Add stuff for watching games
+            </div>
+        </div>
+        <div class="game-replay">
+            <!-- a <canvas> will go here-->
+            <!--<img src="../../../assets/images/temp-game.jpg" class="temp-game">-->
+            <video id="myVideo" width="850" #myVideo autoplay [muted]="'muted'">
+                <source src={{replayName}} />
+                <!--THIS IS A SAMPLE VIDEO JUST FOR TESTING PURPOSES-->
+            </video>
+        </div>
+        <div class="replay-options-container">
+            <div class="replay-options">
+                <div class="buttons">
+                    <button mat-button (click)="skip_previous()">
+                        <mat-icon>skip_previous</mat-icon>
                     </button>
-                    {{fileName || "No file uploaded yet."}}
-                </div>
-                <!-- input uploadCodeName-->
-                <mat-form-field>
-                    <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
-                        Upload
-                        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+                    <button mat-button (click)="changePause()">
+                        <mat-icon (click)="myVideo.pause()" *ngIf="play">pause</mat-icon>
+                        <mat-icon (click)="myVideo.play()" *ngIf="pause">play_arrow</mat-icon>
                     </button>
+
+                    <button mat-button (click)="skip_next()">
+                        <mat-icon>skip_next</mat-icon>
+                    </button>
+                    <span>0</span>
+                    <span class="progress-bar">
+                        <mat-slider thumbLabel (change)="sliderEvent($event)" class="slider" min="0"
+                            max="{{game_data.game_data.game_length}}" step="1" value="0"></mat-slider>
+                    </span>
+                    <span>{{game_data.game_data.game_length}}</span>
                 </div>
-                <br>
-                <div>
-                    <h2>Start a new game:</h2>
-                </div>
-                <div>
-                    <mat-form-field>
-                        <!-- Drop down to select a bot-->
-                        <mat-select placeholder="Select a bot" [(ngModel)]="selectedBot">
-                            <mat-option *ngFor="let bot of bots" [value]="bot.name" (click)="selectBot(bot.name)">
-                                {{bot.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <br>
-                    <div>
-                        <mat-form-field>
-                            <mat-select placeholder="Select a code" [(ngModel)]="selectedCodeName">
-                                <mat-option *ngFor="let code of codes" [value]="code.name" (click)="selectCode(code)">
-                                    {{code.name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()">
-                            Start
-                        </button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
