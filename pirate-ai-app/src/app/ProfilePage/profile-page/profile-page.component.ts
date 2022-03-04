@@ -13,13 +13,13 @@ import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service'
 export class ProfilePageComponent implements OnInit {
 
   uploaded_bot: string;
-  create_code_url = "/api/codes/create";
+
   uploadCodeName: string;
   fileName = '';
 
   form:any = {
-    file:null,
-    botname:null
+    code:null,
+    name:null
   };
   errorMessage = '';
 
@@ -48,20 +48,9 @@ export class ProfilePageComponent implements OnInit {
       };
     }
   }
-  uploadBot(): void {
-    // Sent the file and the name to the server, use a default id of 1 for now
-    let base_url = environment.wsBaseURL;
-    const url = base_url + this.create_code_url;
 
-    const data = {
-      name: this.uploadCodeName,
-      code: this.uploaded_bot,
-      creator_id: this.user_stored_data.id,
-    };
-
-    this.http.post(url, data).subscribe(data => {
-      console.log(data);
-    });
+  reloadPage(): void {
+    window.location.reload();
   }
   // temp user data
   user_data: UserData = {
@@ -93,9 +82,14 @@ export class ProfilePageComponent implements OnInit {
 
 
   onSubmit():void {
-    const {file, botname} = this.form;
-
-
+    const {code, name} = this.form;
+    const data = {
+      name: name,
+      code: code,
+      creator_id: this.user_stored_data.id,
+    };
+    this.bs.postMethod("codes/create", data)
+    this.reloadPage
   }
 
 

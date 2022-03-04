@@ -1,30 +1,28 @@
 <div class="main-container">
+  <div class="profile-container">
+    <div class="profile-image">
+        <img src="{{user_data.image_url}}">
+    </div>
+    <div class="name-space">
+        <p>{{user_stored_data.username}}</p>
 
-    <div class="profile-container">
-
-        <div class="profile-image">
-            <img src="{{user_data.image_url}}">
-        </div>
-        <div class="name-space">
-            <p>{{user_data.username}}</p>
-            <p class="code">Codes in {{user_data.prefered_language}}</p>
-        </div>
-        <div class="rank-space">
-            <p>Current Rank: {{user_data.rank}}</p>
-            <p>Highest Rank Reached: {{user_data.highest_rank_achieved}}</p>
-        </div>
+    </div>
+    <div class="rank-space">
+        <p>Current Rank: {{user_stored_data.score}}</p>
+        <p>Highest Rank Reached: {{user_stored_data.best_score}}</p>
+    </div>
 
 
 
-        <div class="upload-header">
-          <h2>Upload Your Bot</h2>
-      </div>
+    <div class="upload-header">
+      <h2>Upload Your Bot</h2>
+  </div>
 
       <form name="upform" (ngSubmit)="f.form.valid && onSubmit()" #f = "ngForm" novalidate>
         <div class="upload-btn-container">
             <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
                 <mat-icon>cloud_upload</mat-icon>
-                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                <input type="file" name= "code" class="file-input" [(ngModel)]="form.code" (change)="onFileSelected($event)" required #code="ngModel" #fileUpload>
             </button>
             <br>
             <div class="submission-text">
@@ -34,10 +32,10 @@
         <!-- input uploadCodeName-->
         <div class="upload-btn-container">
           <mat-form-field >
-              <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
+              <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName" name="name" [(ngModel)]="form.name" required #name ="ngModel">
           </mat-form-field>
           <div class="upload-btn-container">
-              <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
+              <button mat-raised-button class="upload-btn" id=slightHover (click)="onSubmit()">
                   Upload
                   <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
               </button>
@@ -87,47 +85,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- <div id="user info" style="text-align: left;">
-    <mat-card class="profile-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <img mat-card-avatar src="https://ih1.redbubble.net/image.612707664.4256/flat,128x128,075,t.jpg" style="width:100px;height:120px;" alt="profile picture">
-            <mat-card-title>John</mat-card-title>
-            <mat-card-subtitle>Rank: Diamond</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>Matches:</p>
-            <p>From:</p>
-            <p>Highest Rank:</p>
-        </mat-card-content>
-    </mat-card>
-</div>
-<mat-tab-group>
-    <mat-tab label="Recent Games">
-        <div id="leaderboard">
-            <p>Recent Games</p>
-            <ol>
-
-                <li *ngFor="let game of user_data.games.slice(0,20)">
-
-
-
-                </li>
-            </ol>
-        </div>
-    </mat-tab>
-    <mat-tab label="Analysis">
-        <div id="analysis">
-            <p>Stats</p>
-            <ul>
-                <li>Rating:</li>
-                <li>Rating:</li>
-                <li>Rating:</li>
-
-            </ul>
-        </div>
-    </mat-tab>
-</mat-tab-group> -->

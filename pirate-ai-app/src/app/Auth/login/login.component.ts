@@ -16,9 +16,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
       transition(':enter', [
         style({
           transform: 'translateX(-100%)',
-
           opacity: '0',
-
         }),
         animate('0.65s ease-out')
       ]),
