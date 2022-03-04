@@ -26,6 +26,9 @@ module.exports = function (app) {
 
     app.get("/api/user/all", (req, res, next) => {
         users.query(users.get_users()).then((result) => {
+            result.rows.forEach((user) => {
+                delete user.password;
+            });
             res.status(200);
             res.json(result);
         }).catch((err) => {
@@ -34,5 +37,20 @@ module.exports = function (app) {
         }
         );
     });
+    app.get("/api/user/:id", (req, res, next) => {
+        const id = parseInt(req.params.id);
+        users.query(users.get_user(id)).then((result) => {
+            // Remove password
+            result = result[0]
+            delete result.password;
+            res.status(200);
+            res.json(result);
+        }).catch((err) => {
+            res.status(500);
+            res.json(err);
+        }
+        );
+    });
+
 
 };
