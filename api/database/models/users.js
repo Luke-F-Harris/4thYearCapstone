@@ -17,6 +17,8 @@ let get_users = () => {
     return `SELECT * FROM users`;
 };
 
+let get_user = (id) => `SELECT * FROM users WHERE id = ${id}`;
+
 let search_users = (u) =>
     `SELECT id, username, email, password FROM users WHERE username = "${u}" OR email = "${u}"`;
 
@@ -31,6 +33,7 @@ let search_users_soft = (u) =>
 module.exports = {
     query,
     insert_user,
+    get_user,
     get_users,
     search_users,
     search_user_emails,
