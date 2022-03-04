@@ -13,41 +13,17 @@
                     Last Submission
                 </th>
             </tr>
-            <tr class="content-rows" *ngFor="let element of dataSource">
+            <tr class="content-rows" *ngFor="let element of top_players.sort()">
                 <td class="content-name">
-                    <a routerLink="profile/{{element.userId}}"><img src="{{element.picLink}}" class="profile-image"> <span class="content-name-text">{{element.name}}</span></a>
+                  <a routerLink="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
                 </td>
                 <td class="content-rank">
-                    {{element.rank}}
+                  {{element.score}}
                 </td>
                 <td class="content-lastsub">
-                    {{element.lastSubmission}}
+                  {{element.created}}
                 </td>
             </tr>
         </table>
-        <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-
-
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef class="name-text"> Name </th>
-                <td mat-cell *matCellDef="let element" class="name-user-text"> <img class="scaled picture" src={{element.picLink}}> {{element.name}} </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="rank">
-                <th mat-header-cell *matHeaderCellDef class="rank-text"> Rank </th>
-                <td mat-cell *matCellDef="let element" class="rank-user-text"> {{element.rank}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="lastSubmission">
-                <th mat-header-cell *matHeaderCellDef class="sub-text"> Last Submission </th>
-                <td mat-cell *matCellDef="let element" class="sub-user-text"> {{element.lastSubmission}}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table> -->
     </div>
-
 </div>
