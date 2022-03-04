@@ -23,6 +23,7 @@ const codes = {
         "creator_id INTEGER references users(id)",
         "created_at TIMESTAMP DEFAULT NOW()",
         "code TEXT(16384)",
+        "name VARCHAR(255)",
     ].join(", "),
 };
 
