@@ -80,10 +80,10 @@ module.exports = function (app) {
                                 });
                             } else {
 
-                                //
+                                // Call BAT Files, with the script name as a parameter. Wait for some response?
 
 
-                                // Generate random outcome, call on unity later
+                                // Generate random outcome (Pending for now?)
                                 let outcome = ["win", "lose", "draw"][Math.floor(Math.random() * 3)];
 
 
@@ -126,6 +126,17 @@ module.exports = function (app) {
                 }
             });
         }
+    });
+
+    app.get("/api/games/end", (req, res, next) => {
+        //Add outcome, game length, index.html here
+
+        console.log("End game");
+
+        res.status(200);
+        res.json({
+            message: "Success",
+        });
     });
 
 
