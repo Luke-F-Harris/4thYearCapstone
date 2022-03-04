@@ -13,6 +13,37 @@
             <p>Current Rank: {{user_data.rank}}</p>
             <p>Highest Rank Reached: {{user_data.highest_rank_achieved}}</p>
         </div>
+
+
+
+        <div class="upload-header">
+          <h2>Upload Your Bot</h2>
+      </div>
+
+      <form name="upform" (ngSubmit)="f.form.valid && onSubmit()" #f = "ngForm" novalidate>
+        <div class="upload-btn-container">
+            <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
+                <mat-icon>cloud_upload</mat-icon>
+                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            </button>
+            <br>
+            <div class="submission-text">
+            {{fileName || "No file uploaded."}}
+          </div>
+        </div>
+        <!-- input uploadCodeName-->
+        <div class="upload-btn-container">
+          <mat-form-field >
+              <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
+          </mat-form-field>
+          <div class="upload-btn-container">
+              <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
+                  Upload
+                  <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+              </button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="game-list-container">
@@ -53,26 +84,6 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div>
-            <h2>Upload your bot:</h2>
-        </div>
-        <div>
-            <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
-                <mat-icon>cloud_upload</mat-icon>
-                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-            </button>
-            {{fileName || "No file uploaded yet."}}
-        </div>
-        <!-- input uploadCodeName-->
-        <mat-form-field>
-            <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName">
-        </mat-form-field>
-        <div>
-            <button mat-raised-button class="upload-btn" id=slightHover (click)="uploadBot()">
-                Upload
-                <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-            </button>
         </div>
     </div>
 </div>

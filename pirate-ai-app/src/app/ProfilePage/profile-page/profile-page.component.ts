@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserData } from '../../Interfaces/UserData'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,9 +16,16 @@ export class ProfilePageComponent implements OnInit {
   create_code_url = "/api/codes/create";
   uploadCodeName: string;
   fileName = '';
+
+  form:any = {
+    file:null,
+    botname:null
+  };
+  errorMessage = '';
+
   user_stored_data = JSON.parse(sessionStorage.getItem('auth-user'));
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private bs:BackEndRoutesService) { }
 
   onFileSelected(event: Event) {
 
@@ -84,7 +92,11 @@ export class ProfilePageComponent implements OnInit {
   }
 
 
+  onSubmit():void {
+    const {file, botname} = this.form;
 
+
+  }
 
 
   ngOnInit(): void {
