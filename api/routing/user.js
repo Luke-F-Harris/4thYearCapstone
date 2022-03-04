@@ -26,7 +26,8 @@ module.exports = function (app) {
 
     app.get("/api/user/all", (req, res, next) => {
         users.query(users.get_users()).then((result) => {
-            result.rows.forEach((user) => {
+
+            result.forEach((user) => {
                 delete user.password;
             });
             res.status(200);
