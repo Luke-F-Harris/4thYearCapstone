@@ -8,11 +8,12 @@ public class island : MonoBehaviour
    public float resourceGain;
    public float resourcesRemaining = 100;
    public float currentResources = 100;
-   private int numShips = 0;
+   public int numShips = 0;
    public int numberOfPorts = 4;
-   private bool hasPortsAvailable = true;
-   private bool ownedByPlayer = false;
-   private bool ownedByOpp = false;
+   public bool hasPortsAvailable = true;
+   public bool ownedByPlayer = false;
+   public bool ownedByOpp = false;
+   public static island land;
    
    void Update() {
        //always check for ships 
@@ -27,7 +28,6 @@ public class island : MonoBehaviour
         {
             ownedByPlayer=true;
             numShips += 1;
-            resourceGain += 10f;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
             Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
@@ -38,7 +38,6 @@ public class island : MonoBehaviour
         {
             ownedByOpp=true;
             numShips += 1;
-            resourceGain += 10f;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
             Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);

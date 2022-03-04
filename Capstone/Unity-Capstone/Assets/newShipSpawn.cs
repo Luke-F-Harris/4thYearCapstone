@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class newShipSpawn : MonoBehaviour
 {
+
     //boolean to store if is island is claimed by the player or Opp
+    
     private bool isClaimedByPlayer;
     private bool isClaimedByOpp;
+    private int numShips;
+    private int numberOfPorts;
 
     //references to the ships that we want to create and the transform of the island
     public GameObject OppShip;
     public GameObject PlayerShip;
     public Transform islandLocation;
+
 
 
     //variables to store info about resources
@@ -37,6 +42,11 @@ public class newShipSpawn : MonoBehaviour
     private void Start()
     {
         //maybe a reference to the game manager to find what islands are owned
+        isClaimedByPlayer = island.land.ownedByPlayer;
+        isClaimedByOpp = island.land.ownedByOpp;
+        numShips = island.land.numShips;
+        numberOfPorts = island.land.numberOfPorts;
+
     }
     private void LateUpdate(){
         //late update the resources of the player or opp
@@ -59,13 +69,13 @@ public class newShipSpawn : MonoBehaviour
     }
     private void AddResources(bool forPlayer){
         //will be true if for the player and false for the opp
-        if(portsLeft == 2){
+        if((numberOfPorts - numShips) == 2){
                 //1 docked ship
                 gainedResources = gainedResources + gainedWith1Ship;
-        }else if(portsLeft == 1){
+        }else if((numberOfPorts - numShips) == 1){
                 //2 docked ships
                 gainedResources = gainedResources + gainedWith2Ships;
-        }else if(portsLeft == 0){
+        }else if((numberOfPorts - numShips) == 0){
                 //max docked ships of 3
                 gainedResources = gainedResources + gainedWith3Ships;
                 
