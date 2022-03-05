@@ -22,7 +22,7 @@ let game_map = {
 
 module.exports = function (app) {
     app.get("/api/games/all", (req, res, next) => {
-        games.query(games.games(), (err, res) => {
+        games.query(games.games(), (err, result) => {
             if (err) {
                 logger.error(err);
                 res.status(500);
@@ -31,7 +31,7 @@ module.exports = function (app) {
                 });
             } else {
                 res.status(200);
-                res.json(res);
+                res.json(result);
             }
         });
     });
@@ -128,8 +128,11 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/api/games/end", (req, res, next) => {
-        //Add outcome, game length, index.html here
+    app.post("/api/games/end", (req, res, next) => {
+        // Send index file path here.
+        const index_file_path = req.body.index_file_path;
+        console.log(index_file_path);
+        // Render game, then determine the outcome and the duration.
 
         console.log("End game");
 
