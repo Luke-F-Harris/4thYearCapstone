@@ -19,6 +19,8 @@ let get_users = () => {
 
 let get_user = (id) => `SELECT * FROM users WHERE id = ${id}`;
 
+
+
 let search_users = (u) =>
     `SELECT id, username, email, password FROM users WHERE username = "${u}" OR email = "${u}"`;
 

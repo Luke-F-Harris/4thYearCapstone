@@ -30,7 +30,7 @@ img {
 .upload-header {
   text-align: center;
 }
-.submission-text { 
+.submission-text {
   text-align: center;
   padding-top: 1rem;
 }
@@ -44,14 +44,18 @@ img {
   text-align: center;
   line-height: 1.1rem;
 }
-
+.ratio {
+  text-align: center;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
 .code {
   font-size: 1.1rem;
 }
 
 .rank-space {
   margin-top: 8vh;
-  height: 15vh;
+  height: 6vh;
   width: 100%;
   text-align: center;
   font-size: 1.1rem;
