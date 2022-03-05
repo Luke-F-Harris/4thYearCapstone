@@ -1,6 +1,7 @@
 let userAuth = require("../services/auth").userAuth;
 require("../services/logging").logger;
 const users = require("../database/models/users");
+const games = require("../database/models/games");
 // All user operations could go here. Notice the use of userAuth middleware.
 
 module.exports = function (app) {
@@ -44,6 +45,18 @@ module.exports = function (app) {
             // Remove password
             result = result[0]
             delete result.password;
+            res.status(200);
+            res.json(result);
+        }).catch((err) => {
+            res.status(500);
+            res.json(err);
+        }
+        );
+    });
+    app.get("/api/user/:id/games", (req, res, next) => {
+        const id = parseInt(req.params.id);
+        
+        games.query(games.get_user_games(id)).then((result) => {
             res.status(200);
             res.json(result);
         }).catch((err) => {
