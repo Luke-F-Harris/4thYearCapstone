@@ -22,7 +22,7 @@ let game_map = {
 
 module.exports = function (app) {
     app.get("/api/games/all", (req, res, next) => {
-        games.query(games.games(), (err, res) => {
+        games.query(games.games(), (err, result) => {
             if (err) {
                 logger.error(err);
                 res.status(500);
