@@ -129,7 +129,10 @@ module.exports = function (app) {
     });
 
     app.get("/api/games/end", (req, res, next) => {
-        //Add outcome, game length, index.html here
+        // Send index file path here.
+        const index_file_path = req.body.index_file_path;
+        console.log(index_file_path);
+        // Render game, then determine the outcome and the duration.
 
         console.log("End game");
 
