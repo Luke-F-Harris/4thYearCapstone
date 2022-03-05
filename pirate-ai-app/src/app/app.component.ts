@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'pirate-ai-app';
 
   loggedIn:any;
+  logged_in_id: any;
   currentRoute = "";
   constructor(public router: Router, private token: TokenStorageService) {
 
@@ -29,10 +30,13 @@ export class AppComponent {
   }
 
   ngOnInit() {
+
     this.loggedIn = !!this.token.getToken();
     if (this.loggedIn) {
       const user = this.token.getUser();
+      this.logged_in_id = user.id;
     }
+
   }
 
 

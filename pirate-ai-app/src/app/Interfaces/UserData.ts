@@ -2,6 +2,7 @@ import {GameData} from './GameData';
 export interface UserData {
   username: string;
   prefered_language: string;
+  id:string,
   rank: number;
   uploads:number;
   games: GameData[];

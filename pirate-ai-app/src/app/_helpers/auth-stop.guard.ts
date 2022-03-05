@@ -13,7 +13,8 @@ export class AuthStopGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.token.getToken()) {
-        this.router.navigateByUrl('/profile');
+
+        this.router.navigateByUrl(`/profile/${this.token.getUser().id}`);
         return false;
       } else {
         return true;

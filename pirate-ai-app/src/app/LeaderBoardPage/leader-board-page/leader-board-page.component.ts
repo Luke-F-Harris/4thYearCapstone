@@ -39,9 +39,6 @@ export class LeaderBoardPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //replace code here with db fetching top players
-
-
     // get 20 players
     this.sortTopPlayers();
 

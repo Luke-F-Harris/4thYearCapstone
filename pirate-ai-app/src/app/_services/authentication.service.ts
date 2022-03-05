@@ -20,8 +20,6 @@ export class AuthenticationService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<User>(this.baseUrl + "cred/login", { username, password }, httpOptions)
-
-
   };
 
   register(first_name: string, last_name: string, username: string, email: string, password: string, confirmpassword: string): Observable<any> {

@@ -1,24 +1,21 @@
 <div class="main-container">
   <div class="profile-container">
     <div class="profile-image">
-        <img src="{{user_data.image_url}}">
+        <img src="{{''}}">
     </div>
     <div class="name-space">
-        <p>{{user_stored_data.username}}</p>
+        <p>{{profiles_data.username}}</p>
 
     </div>
     <div class="rank-space">
-        <p>Current Rank: {{user_stored_data.score}}</p>
-        <p>Highest Rank Reached: {{user_stored_data.best_score}}</p>
+        <p>Current Rank: {{profiles_data.score}}</p>
     </div>
 
-
-
-    <div class="upload-header">
+    <div class="upload-header" *ngIf="isProfileMine() == true">
       <h2>Upload Your Bot</h2>
   </div>
 
-      <form name="upform" (ngSubmit)="f.form.valid && onSubmit()" #f = "ngForm" novalidate>
+      <form name="upform" (ngSubmit)="f.form.valid && onSubmit()" #f = "ngForm" novalidate *ngIf="isProfileMine() == true">
         <div class="upload-btn-container">
             <button mat-raised-button class="upload-btn" id=slightHover (click)="fileUpload.click()">
                 <mat-icon>cloud_upload</mat-icon>
@@ -40,6 +37,10 @@
                   <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
               </button>
           </div>
+          <div class="error_text">
+            <p *ngIf="errorMessage[0] != 'S'" style="color:red; padding-top:1rem">{{errorMessage}}</p>
+            <p *ngIf="errorMessage[0] == 'S'" style="color:green; padding-top:1rem">{{errorMessage}}</p>
+          </div>
         </div>
       </form>
     </div>
@@ -51,34 +52,41 @@
             <table>
                 <tr>
                     <th>
-                        Date
-                    </th>
-                    <th>
                         Result
                     </th>
                     <th>
-                        Game Time
+                        Level
+                    </th>
+                    <th>
+                      Game Time
+                  </th>
+                    <th>
+                        Date of Game
                     </th>
                 </tr>
-                <tr *ngFor="let game of user_data.games.slice(0,20)">
+                <tr *ngFor="let game of profiles_data.games.slice(0,20)">
                     <td>
                         <div class="link-container">
-                            <a routerLink="game/gameid?={{game.game_id}}">{{game.game_date}}</a>
+                          <p *ngIf="game.outcome === 'W'" style="color:green">
+                            {{game.outcome}}
+                          </p>
+                          <p *ngIf="game.outcome === 'L'" style="color:red" >
+                            {{game.outcome}}
+                          </p>
                         </div>
                     </td>
                     <td>
                         <div class="link-container">
-                            <a routerLink="profile/profileid?={{game.game_data.winner}}}"><span
-                                    class="norm">Winner:</span> {{game.game_data.winner}}</a>
+                                  {{game.level}}
                         </div>
-                        <div class="link-container">
-                            <a routerLink="profile/profileid?={{game.game_data.loser}}}"><span
-                                    class="norm">Loser:</span> {{game.game_data.loser}}</a>
-                        </div>
-
                     </td>
                     <td>
-                        {{game.game_data.game_length}}
+                      <div class="link-container">
+                                {{game.game_length}}
+                      </div>
+                  </td>
+                    <td>
+                        {{game.created_at}}
                     </td>
                 </tr>
             </table>

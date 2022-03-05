@@ -13,9 +13,9 @@
                     Last Submission
                 </th>
             </tr>
-            <tr class="content-rows" *ngFor="let element of top_players.sort()">
+            <tr class="content-rows" *ngFor="let element of top_players">
                 <td class="content-name">
-                  <a routerLink="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
+                  <a href="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
                 </td>
                 <td class="content-rank">
                   {{element.score}}

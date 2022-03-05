@@ -7,7 +7,7 @@
           <li class="nav-item" *ngIf="loggedIn" routerLink="play">
             <p class="nav-item-font">PLAY</p>
         </li>
-            <li class="nav-item" *ngIf="loggedIn" routerLink="profile">
+            <li class="nav-item" *ngIf="loggedIn" routerLink="profile/{{logged_in_id}}">
                 <p class="nav-item-font">PROFILE</p>
             </li>
             <li class="nav-item" *ngIf="!loggedIn" routerLink="login">
