@@ -10,6 +10,9 @@
     <div class="rank-space">
         <p>Current Rank: {{profiles_data.score}}</p>
     </div>
+    <div class="ratio">
+      <p><span style="color:green">{{wins}}</span>:<span style="color:rgb(155, 3, 3)">{{losses}}</span>:<span style="color:grey">{{draws}}</span></p>
+    </div>
 
     <div class="upload-header" *ngIf="isProfileMine() == true">
       <h2>Upload Your Bot</h2>
@@ -43,6 +46,7 @@
           </div>
         </div>
       </form>
+
     </div>
 
     <div class="game-list-container">
@@ -57,21 +61,22 @@
                     <th>
                         Level
                     </th>
-                    <th>
-                      Game Time
-                  </th>
+
                     <th>
                         Date of Game
                     </th>
                 </tr>
-                <tr *ngFor="let game of profiles_data.games.slice(0,20)">
+                <tr *ngFor="let game of profiles_games.slice(0,20)">
                     <td>
                         <div class="link-container">
-                          <p *ngIf="game.outcome === 'W'" style="color:green">
-                            {{game.outcome}}
+                          <p *ngIf="game.outcome === 'win'" style="color:green">
+                            Win
                           </p>
-                          <p *ngIf="game.outcome === 'L'" style="color:red" >
-                            {{game.outcome}}
+                          <p *ngIf="game.outcome === 'draw'">
+                            Draw
+                          </p>
+                          <p *ngIf="game.outcome === 'lose'" style="color:rgb(155, 3, 3)" >
+                            Loss
                           </p>
                         </div>
                     </td>
@@ -80,11 +85,7 @@
                                   {{game.level}}
                         </div>
                     </td>
-                    <td>
-                      <div class="link-container">
-                                {{game.game_length}}
-                      </div>
-                  </td>
+
                     <td>
                         {{game.created_at}}
                     </td>

@@ -6,6 +6,7 @@ import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service'
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { Observable } from 'rxjs';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,7 +17,7 @@ import { Observable } from 'rxjs';
 export class ProfilePageComponent implements OnInit {
 
   uploaded_bot: string;
-
+  wins:any;losses:any;draws:any;
   uploadCodeName: string;
   fileName = '';
   env_url = environment.wsBaseURL
@@ -27,7 +28,7 @@ export class ProfilePageComponent implements OnInit {
   errorMessage = '';
 
   profiles_data:any;
-
+  profiles_games:any;
   constructor(private http: HttpClient, private bs:BackEndRoutesService, private router:Router, private token:TokenStorageService) { }
 
   onFileSelected(event: Event) {
@@ -94,26 +95,36 @@ export class ProfilePageComponent implements OnInit {
   }
 
 
+
+
   async ngOnInit() {
     // when page loads it loads the user data in, find a cleaner way?
     // this.user_data = this.getUserData("1"); // "1" will be user id
     const route =  this.router.url;
     var regex: RegExp = /(\d*$)/;
     await this.getUserData(route.match(regex)[0]);
+    await this.getUserGames(route.match(regex)[0]);
+
   }
   updateErrors():void {
     this.errorMessage = "";
   }
 
+  getUserGames(id: string): any {
+    this.http.get(`${this.env_url}/api/user/${id}/games`).subscribe(res => {
 
+      this.profiles_games = res;
+      this.wins = this.profiles_games.filter((x: { outcome: string; }) => x.outcome == 'win').length
+      this.losses = this.profiles_games.filter((x: { outcome: string; }) => x.outcome == 'lose').length
+      this.draws = this.profiles_games.filter((x: { outcome: string; }) => x.outcome == 'draw').length
+    })
+  }
   // retrieves user data
   getUserData(id: string): any {
     this.http.get(`${this.env_url}/api/user/${id}`).subscribe(res => {
 
       this.profiles_data = res;
-      if (!this.profiles_data.games) {
 
-      } // REMOVE THIS WHEN IMPLEMENTED
     })
   }
 }
