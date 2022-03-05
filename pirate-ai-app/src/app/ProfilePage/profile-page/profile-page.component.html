@@ -35,7 +35,7 @@
               <input matInput placeholder="Upload Code Name" [(ngModel)]="uploadCodeName" name="name" [(ngModel)]="form.name" required #name ="ngModel">
           </mat-form-field>
           <div class="upload-btn-container">
-              <button mat-raised-button class="upload-btn" id=slightHover (click)="onSubmit()">
+              <button mat-raised-button class="upload-btn" id=slightHover>
                   Upload
                   <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
               </button>
@@ -67,6 +67,7 @@
                     </th>
                 </tr>
                 <tr *ngFor="let game of profiles_games.slice(0,20)">
+                  <div *ngIf="game.outcome!='pending'">
                     <td>
                         <div class="link-container">
                           <p *ngIf="game.outcome === 'win'" style="color:green">
@@ -89,6 +90,7 @@
                     <td>
                         {{game.created_at}}
                     </td>
+                  </div>
                 </tr>
             </table>
         </div>

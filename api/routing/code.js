@@ -46,9 +46,9 @@ module.exports = function (app) {
             );
         }
     });
-    app.get("/api/codes/get", userAuth, (req, res) => {
-        console.log(req.query.user_id)
-        const user_id = req.query.user_id;
+    app.get("/api/codes/:id", userAuth, (req, res) => {
+       
+        const user_id = req.params.id;
         codes.query(codes.codes(creator_id = user_id), (err, result) => {
             if (err) {
                 logger.error(err);

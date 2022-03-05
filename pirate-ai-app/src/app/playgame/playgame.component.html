@@ -8,7 +8,7 @@
             <div>
                 <mat-form-field>
                     <!-- Drop down to select a bot-->
-                    <mat-select placeholder="Select a bot" [(ngModel)]="selectedBot">
+                    <mat-select placeholder="Select Opponent Level" [(ngModel)]="selectedBot">
                         <mat-option *ngFor="let bot of bots" [value]="bot.name" (click)="selectBot(bot.name)">
                             {{bot.name}}
                         </mat-option>
@@ -17,7 +17,7 @@
                 <br>
                 <div>
                     <mat-form-field>
-                        <mat-select placeholder="Select a code" [(ngModel)]="selectedCodeName">
+                        <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedCodeName">
                             <mat-option *ngFor="let code of codes" [value]="code.name" (click)="selectCode(code)">
                                 {{code.name}}
                             </mat-option>

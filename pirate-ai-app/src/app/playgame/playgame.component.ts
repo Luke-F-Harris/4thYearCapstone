@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { TokenStorageService } from '../_services/token-storage.service';
 @Component({
   selector: 'app-playgame',
   templateUrl: './playgame.component.html',
@@ -17,37 +18,27 @@ export class PlaygameComponent implements OnInit {
   selectedCode: Code;
   selectedCodeName = "";
   selectedCodeCode: string;
-  user_data = JSON.parse(sessionStorage.getItem('auth-user'));
-  token = sessionStorage.getItem('auth-token');
+
   get_url = "/api/codes/get"; // For testing we just default to being user with id 1? Makes a lot of stuff useless...
   start_game_url = "/api/games/start";
   codes: Code[];
   gameRendered: boolean;
   newLines: string[] = [];
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenS:TokenStorageService) {
     const headers = new HttpHeaders()
     headers.append('Content-Type', 'application/json');
     headers.append("authorization", this.token);
   }
+  user_data = this.tokenS.getUser();
+  token = this.tokenS.getToken();
 
-  getGames() {
-    // Access env
-    let base_url = environment.wsBaseURL;
-    const url = base_url + this.get_url;
+  getCodes() {
     const headers = new HttpHeaders().append("authorization", this.token)
-    const body = {
-      "user_id": this.user_data.id
-    }
-
-    let params = new HttpParams({ fromObject: body });
-    // Get the data from the server
-    // Headers are needed for authorization
-
-
-    this.http.get(url, { headers, params }).subscribe(data => {
+    this.http.get(environment.wsBaseURL + `/api/codes/${this.user_data.id}`, {headers}).subscribe(data => {
       this.codes = data as Code[];
     });
   }
+
   startGame() {
     let base_url = environment.wsBaseURL;
     const url = base_url + this.start_game_url;
@@ -86,10 +77,8 @@ export class PlaygameComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.getGames();
-
+    this.getCodes();
   }
-
 }
 
 export class Code {
