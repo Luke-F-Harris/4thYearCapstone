@@ -2,3 +2,4 @@
 curl --header "Content-Type: application/json" --request POST --data "{\"index_file_path\":\"C:/Capstone/Builds\"}" http://localhost:3000/api/games/end
 pause
 
+
