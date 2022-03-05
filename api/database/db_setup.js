@@ -39,6 +39,15 @@ const games = {
     ].join(", "),
 };
 
+const index_map = {
+    name: "index_map",
+    features: [
+        "id SERIAL PRIMARY KEY",
+        "game_id INTEGER references games(id)",
+        "index_location VARCHAR(1024)",
+    ].join(", "),
+};
+
 const tables = [users, codes, games];
 
 // Get args from the command line
