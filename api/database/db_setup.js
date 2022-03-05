@@ -54,7 +54,7 @@ const tables = [users, codes, games];
 const args = process.argv.slice(2);
 
 if (args[0] === "--reset" && args[1] === "--all") {
-    [codes, games].forEach((table) => {
+    [codes, games, index_map].forEach((table) => {
         db.query(`DROP TABLE IF EXISTS ${table.name}`, (err, res) => {
             if (err) {
                 throw err;
@@ -63,7 +63,7 @@ if (args[0] === "--reset" && args[1] === "--all") {
     });
 }
 if (args[0] === "--reset" && args.length == 1) {
-    [codes, games].forEach((table) => {
+    [codes, games, index_map].forEach((table) => {
         db.query(`DROP TABLE IF EXISTS ${table.name}`, (err, res) => {
             if (err) {
                 throw err;
