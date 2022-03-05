@@ -111,7 +111,9 @@ export class ProfilePageComponent implements OnInit {
     this.http.get(`${this.env_url}/api/user/${id}`).subscribe(res => {
 
       this.profiles_data = res;
-      this.profiles_data.games = [] // REMOVE THIS WHEN IMPLEMENTED
+      if (!this.profiles_data.games) {
+
+      } // REMOVE THIS WHEN IMPLEMENTED
     })
   }
 }
