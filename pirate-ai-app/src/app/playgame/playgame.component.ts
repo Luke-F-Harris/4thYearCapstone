@@ -24,7 +24,7 @@ export class PlaygameComponent implements OnInit {
   codes: Code[];
   gameRendered: boolean;
   newLines: string[] = [];
-  constructor(private http: HttpClient, private tokenS:TokenStorageService) {
+  constructor(private http: HttpClient, private tokenS: TokenStorageService) {
     const headers = new HttpHeaders()
     headers.append('Content-Type', 'application/json');
     headers.append("authorization", this.token);
@@ -34,7 +34,7 @@ export class PlaygameComponent implements OnInit {
 
   getCodes() {
     const headers = new HttpHeaders().append("authorization", this.token)
-    this.http.get(environment.wsBaseURL + `/api/codes/${this.user_data.id}`, {headers}).subscribe(data => {
+    this.http.get(environment.wsBaseURL + `/api/codes/${this.user_data.id}`, { headers }).subscribe(data => {
       this.codes = data as Code[];
     });
   }
@@ -64,7 +64,7 @@ export class PlaygameComponent implements OnInit {
     // Add numbers to each line that are greyed out
     let lines = this.selectedCodeCode.split("\n");
     let newLines = [];
-    for (let i = 0; i < lines.length + 1; i++) {
+    for (let i = 0; i < lines.length; i++) {
       let numSpace = (8 - (i + 1).toString().length);
       let space = ""
       for (let j = 0; j < numSpace; j++) {

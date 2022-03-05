@@ -17,19 +17,19 @@ import { ThrowStmt } from '@angular/compiler';
 export class ProfilePageComponent implements OnInit {
 
   uploaded_bot: string;
-  wins:any;losses:any;draws:any;
+  wins: any; losses: any; draws: any;
   uploadCodeName: string;
   fileName = '';
   env_url = environment.wsBaseURL
-  form:any = {
-    code:null,
-    name:null
+  form: any = {
+    code: null,
+    name: null
   };
   errorMessage = '';
 
-  profiles_data:any;
-  profiles_games:any;
-  constructor(private http: HttpClient, private bs:BackEndRoutesService, private router:Router, private token:TokenStorageService) { }
+  profiles_data: any;
+  profiles_games: any;
+  constructor(private http: HttpClient, private bs: BackEndRoutesService, private router: Router, private token: TokenStorageService) { }
 
   onFileSelected(event: Event) {
     this.updateErrors();
@@ -60,35 +60,36 @@ export class ProfilePageComponent implements OnInit {
 
 
   isProfileMine() {
-    let result=false;
-    const route =  this.router.url;
+    let result = false;
+    const route = this.router.url;
     var regex: RegExp = /(\d*$)/;
-    if (this.token.getUser().id == route.match(regex)[0]){
-      result=true;
+    if (this.token.getUser().id == route.match(regex)[0]) {
+      result = true;
     }
     return result;
   }
-  onSubmit():void {
-    const {code, name} = this.form;
+  onSubmit(): void {
+
+    const { code, name } = this.form;
     const data = {
       name: name,
-      code: code,
+      code: this.uploaded_bot,
       creator_id: this.profiles_data.id,
     };
 
     console.log(this.fileName);
 
-     if (this.uploadCodeName == undefined || this.uploaded_bot == "") {
+    if (this.uploadCodeName == undefined || this.uploaded_bot == "") {
       this.errorMessage = "Missing File Name"
-    }else if (this.fileName == "") {
+    } else if (this.fileName == "") {
       this.errorMessage = "Missing File"
     }
 
 
     this.bs.postMethod("codes/create", data).subscribe({
       next: res => {
-        if(res){
-        this.errorMessage="Successfully Submitted";
+        if (res) {
+          this.errorMessage = "Successfully Submitted";
         }
       },
     });
@@ -100,13 +101,13 @@ export class ProfilePageComponent implements OnInit {
   async ngOnInit() {
     // when page loads it loads the user data in, find a cleaner way?
     // this.user_data = this.getUserData("1"); // "1" will be user id
-    const route =  this.router.url;
+    const route = this.router.url;
     var regex: RegExp = /(\d*$)/;
     await this.getUserData(route.match(regex)[0]);
     await this.getUserGames(route.match(regex)[0]);
 
   }
-  updateErrors():void {
+  updateErrors(): void {
     this.errorMessage = "";
   }
 
