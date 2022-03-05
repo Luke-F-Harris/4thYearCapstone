@@ -84,7 +84,7 @@ module.exports = function (app) {
 
 
                                 // Generate random outcome (Pending for now?)
-                                let outcome = ["win", "lose", "draw"][Math.floor(Math.random() * 3)];
+                                let outcome = "pending"
 
 
                                 games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
