@@ -128,7 +128,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get("/api/games/end", (req, res, next) => {
+    app.post("/api/games/end", (req, res, next) => {
         // Send index file path here.
         const index_file_path = req.body.index_file_path;
         console.log(index_file_path);
