@@ -5,6 +5,12 @@ const fs = require("fs");
 const logger = require("../services/logging").logger;
 var path = require('path');
 
+
+const replace = require('replace-in-file');
+const { exec } = require("child_process");
+var buildScriptPath = "../../Capstone/Unity-Capstone/Assets/Editor/GameBuilder.cs"
+var buildBatchFilePath = "../../Capstone/Unity-Capstone/runWebGL.bat"
+
 // What type of permissions do these routes need?
 
 let game_map = {
@@ -44,6 +50,7 @@ module.exports = function (app) {
         let code_id = req.body.code_id;
         let level = game_map[req.body.level];
 
+        console.log(req.body)
         if (!creator_id || !code_id || !level) {
             res.status(400).json({
                 message: "Bad Request",
@@ -80,7 +87,38 @@ module.exports = function (app) {
                                 });
                             } else {
 
-                                // Call BAT Files, with the script name as a parameter. Wait for some response?
+
+                                //edit build path of unity to C:/Capstone/Builds/Game_id
+                                let buildGamePath = `C:/Capstone/Builds/${code_id}`
+
+                                const options = {
+                                    files: [buildScriptPath, buildBatchFilePath],
+                                    from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
+                                    to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
+                                };
+
+                                //change game build path specific to the code id
+                                replace(options)
+                                    .then(results => {
+
+                                        //run batch file once replacement is done
+                                        exec(buildBatchFilePath, (error, data, getter) => {
+                                            if (error) {
+                                                console.log("error", error.message);
+                                                return;
+                                            }
+                                            if (getter) {
+                                                console.log("data", data);
+                                                return;
+                                            }
+                                            console.log("data", data);
+
+                                        });
+
+                                    })
+                                    .catch(error => {
+                                        console.error('Error occurred:', error);
+                                    });
 
 
                                 // Generate random outcome (Pending for now?)
