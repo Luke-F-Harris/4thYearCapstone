@@ -13,11 +13,13 @@
   "dependencies": {
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "elo-rating": "^1.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "replace-in-file": "^6.3.2"
   }
 }
