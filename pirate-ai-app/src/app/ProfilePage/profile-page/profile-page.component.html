@@ -1,7 +1,10 @@
 <div class="main-container">
   <div class="profile-container">
     <div class="profile-image">
-        <img src="{{''}}">
+      <svg [data-jdenticon-value]=profiles_data.username>
+        Fallback text for browsers not supporting inline svg
+    </svg>
+
     </div>
     <div class="name-space">
         <p>{{profiles_data.username}}</p>

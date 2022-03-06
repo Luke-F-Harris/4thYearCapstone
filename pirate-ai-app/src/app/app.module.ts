@@ -26,6 +26,7 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { PlaygameComponent } from './playgame/playgame.component';
+import { NgxJdenticonModule } from "ngx-jdenticon";
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { PlaygameComponent } from './playgame/playgame.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxJdenticonModule,
     MatSliderModule,
     MatToolbarModule,
     MatCardModule,

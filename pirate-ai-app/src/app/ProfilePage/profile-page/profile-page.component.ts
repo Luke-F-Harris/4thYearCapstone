@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,InjectionToken, Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-import { Observable } from 'rxjs';
 import { ThrowStmt } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfilePageComponent implements OnInit {
 
   uploaded_bot: string;
@@ -103,6 +105,7 @@ export class ProfilePageComponent implements OnInit {
     // this.user_data = this.getUserData("1"); // "1" will be user id
     const route = this.router.url;
     var regex: RegExp = /(\d*$)/;
+
     await this.getUserData(route.match(regex)[0]);
     await this.getUserGames(route.match(regex)[0]);
 

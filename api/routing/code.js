@@ -46,6 +46,21 @@ module.exports = function (app) {
             );
         }
     });
+    app.get("/api/codes/date", (req, res) => {
+       
+        codes.query(codes.get_dates(), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json(result);
+            }
+        });
+    });
     app.get("/api/codes/:id", userAuth, (req, res) => {
        
         const user_id = req.params.id;
@@ -62,5 +77,6 @@ module.exports = function (app) {
             }
         });
     });
+    
 
 };
