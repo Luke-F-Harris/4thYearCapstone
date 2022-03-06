@@ -35,8 +35,13 @@ export class ProfilePageComponent implements OnInit {
   onFileSelected(event: Event) {
     this.updateErrors();
     const file = (event.target as HTMLInputElement).files[0];
-    // const file: File = event.target.files[0];
-    console.log(file);
+
+    var regex: RegExp = /\..*/;
+    if (file.name.match(regex)[0] != ".cs"){
+      this.errorMessage="Only .cs Files!"
+      return;
+    }
+
     if (file) {
       // Get the file data
       const reader = new FileReader();
@@ -57,8 +62,6 @@ export class ProfilePageComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
-  // temp user data
-
 
   isProfileMine() {
     let result = false;
@@ -78,7 +81,6 @@ export class ProfilePageComponent implements OnInit {
       creator_id: this.profiles_data.id,
     };
 
-    console.log(this.fileName);
 
     if (this.uploadCodeName == undefined || this.uploaded_bot == "") {
       this.errorMessage = "Missing File Name"
@@ -86,6 +88,11 @@ export class ProfilePageComponent implements OnInit {
       this.errorMessage = "Missing File"
     }
 
+    var regex: RegExp = /\..*/;
+    if (this.fileName.match(regex)[0] != ".cs"){
+      this.errorMessage="Only .cs Files!"
+      return;
+    }
 
     this.bs.postMethod("codes/create", data).subscribe({
       next: res => {
@@ -95,9 +102,6 @@ export class ProfilePageComponent implements OnInit {
       },
     });
   }
-
-
-
 
   async ngOnInit() {
     // when page loads it loads the user data in, find a cleaner way?

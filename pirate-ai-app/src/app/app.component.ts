@@ -33,8 +33,8 @@ export class AppComponent {
 
     this.loggedIn = !!this.token.getToken();
     if (this.loggedIn) {
-      const user = this.token.getUser();
-      this.logged_in_id = user.id;
+      const userr = this.token.getUser();
+      this.logged_in_id = userr.id;
     }
 
   }
