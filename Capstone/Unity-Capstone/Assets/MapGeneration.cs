@@ -6,6 +6,7 @@ public class MapGeneration : MonoBehaviour
 {
     //spawn the islands
     public GameObject islandPreFab;
+    public GameObject pathFinderObject;
     private List<Vector2> islandsLocations = new List<Vector2>();
     public float islandRadius = 3;
     private GameObject player;
@@ -57,6 +58,8 @@ public class MapGeneration : MonoBehaviour
             Instantiate(islandPreFab,newpos, Quaternion.identity);
             
         }
+
+        Instantiate(pathFinderObject);
 
     }
     //function to check if point is side of a circle for generating islands near the players

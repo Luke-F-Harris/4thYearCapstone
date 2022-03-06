@@ -104,4 +104,5 @@ dist
 .prettierrc
 
 #ignore unity lib folder
-Capstone/Unity-Capstone/Library
+Capstone/Unity-Capstone/Library/*
+Capstone/Unity-Capstone/Temp/*

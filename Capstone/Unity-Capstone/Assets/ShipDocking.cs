@@ -15,9 +15,6 @@ public class ShipDocking : MonoBehaviour
     void Update()
     {
         
-        //simulated movement until docked
-        if(!isDocked){  
-        this.transform.position = new Vector3(this.transform.position.x+0.001f, this.transform.position.y, this.transform.position.z);
-        }
+       
     }
 }

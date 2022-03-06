@@ -38,23 +38,27 @@ public class newShipSpawn : MonoBehaviour
     public float spawnVerticalOffset = 5;
     public float spawnHorizontalOffset = 0;
     //private island islandRef;
-    private island islandRef;
+
 
 
     private void Start()
     {
         islandLocation = this.gameObject.GetComponent<Transform>();
         //maybe a reference to the game manager to find what islands are owned
-        islandRef = this.gameObject.GetComponent<island>();
+        isClaimedByPlayer = this.gameObject.GetComponent<island>().ownedByPlayer;
+        isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
+        numShips = this.gameObject.GetComponent<island>().numShips;
+        numberOfPorts = this.gameObject.GetComponent<island>().numberOfPorts;
         
 
     }
     private void LateUpdate(){
         //update the variables
-        isClaimedByPlayer = islandRef.ownedByPlayer;
-        isClaimedByOpp = islandRef.ownedByOpp;
-        numShips = islandRef.numShips;
-        numberOfPorts = islandRef.numberOfPorts;
+        Debug.Log(this.GetComponent<island>().ownedByPlayer);
+        isClaimedByPlayer = this.GetComponent<island>().ownedByPlayer;
+        isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
+        numShips = this.gameObject.GetComponent<island>().numShips;
+        numberOfPorts = this.gameObject.GetComponent<island>().numberOfPorts;
         //late update the resources of the player or opp
         //this is so if a player has destoyed the islands ships the gain wont happen until the end
         if(isClaimedByPlayer){
