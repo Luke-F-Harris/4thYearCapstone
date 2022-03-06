@@ -15,6 +15,10 @@ public class island : MonoBehaviour
    public bool ownedByOpp = false;
    public static island land;
    
+   private void Start() {
+        ownedByPlayer = false;
+        ownedByOpp = false;
+   }
    void Update() {
        //always check for ships 
    }
