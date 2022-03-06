@@ -50,7 +50,7 @@ module.exports = function (app) {
         let creator_id = req.body.creator_id;
         let code_id = req.body.code_id;
         let level = game_map[req.body.level];
-
+    
         if (!creator_id || !code_id || !level) {
             res.status(400).json({
                 message: "Bad Request",

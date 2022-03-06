@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { BackEndRoutesService } from 'src/app/_services/back-end-routes.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -37,7 +36,7 @@ export class ProfilePageComponent implements OnInit {
     this.updateErrors();
     const file = (event.target as HTMLInputElement).files[0];
     // const file: File = event.target.files[0];
-
+    console.log(file);
     if (file) {
       // Get the file data
       const reader = new FileReader();

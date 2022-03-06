@@ -5,12 +5,14 @@ const userAuth = require("../services/auth").userAuth;
 const { logger } = require("../services/logging");
 require("../services/logging").logger;
 
+
 module.exports = function (app) {
     app.post("/api/codes/create", (req, res) => {
         let creator = req.body.creator_id;
         let name = req.body.name;
         let code = req.body.code;
 
+        // if the code is not a csharp file we return error
 
         // Code is a file, so we need to convert it to a string 
         code = req.body.code.toString();
@@ -45,6 +47,25 @@ module.exports = function (app) {
                 }
             );
         }
+    });
+      
+    app.post("/api/codes/delete/:id/:codeid", userAuth, (req, res) => {
+        
+        user_id = req.params.id;
+        code_id = req.params.codeid;
+
+        codes.query(codes.delete_code(user_id,code_id), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json({message:"Successfully Deleted"});
+            }
+        });
     });
     app.get("/api/codes/date", (req, res) => {
        
