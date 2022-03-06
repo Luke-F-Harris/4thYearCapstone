@@ -46,6 +46,25 @@ module.exports = function (app) {
             );
         }
     });
+      
+    app.post("/api/codes/delete/:id/:codeid", userAuth, (req, res) => {
+        
+        user_id = req.params.id;
+        code_id = req.params.codeid;
+
+        codes.query(codes.delete_code(user_id,code_id), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json({message:"Successfully Deleted"});
+            }
+        });
+    });
     app.get("/api/codes/date", (req, res) => {
        
         codes.query(codes.get_dates(), (err, result) => {

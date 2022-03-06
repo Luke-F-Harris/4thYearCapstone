@@ -22,170 +22,177 @@
 //     align-items: center;
 // }
 .main-container {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    width: 100%;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  width: 100%;
 }
 .file-input {
   display: none;
 }
-
+.delete-btn {
+  margin-top: 2rem;
+  color: red;
+}
 .title-container {
-    text-align: center;
-    font-size: 1.4rem;
-    padding: 1rem;
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 1rem;
 }
 
 .game-container {
-    margin-top: 1.4rem;
-    height: 460px;
-    width: 100%;
-    margin: 0 auto;
+  margin-top: 1.4rem;
+  height: 460px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .game-replay {
-    height: inherit;
-    width: 45%;
-    margin: 0 auto;
-    margin-bottom: 2rem;
+  height: inherit;
+  width: 45%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 #otherReplays {
-    float: right;
-    width: 500px;
+  float: right;
+  width: 500px;
 }
 
 #GameStats {
-    text-align: center;
-    float: left;
-    width: 500px;
+  text-align: center;
+  float: left;
+  width: 500px;
 }
 
 #Opponent1 {
-    float: left;
+  float: left;
 }
 
 #Opponent2 {
-    float: right;
+  float: right;
 }
 
 #testHover:hover {
-    cursor: pointer;
-    font-size: 41px;
-    transform: scale(1.03, 1.03) translateY(-1.8px);
-    transition: 0.2s ease-out;
+  cursor: pointer;
+  font-size: 41px;
+  transform: scale(1.03, 1.03) translateY(-1.8px);
+  transition: 0.2s ease-out;
 }
 #slightHover:hover {
-    cursor: pointer;
-    transform: scale(1.01, 1.01) translateY(-1.8px);
-    transition: 0.2s ease-out;
-
+  cursor: pointer;
+  transform: scale(1.01, 1.01) translateY(-1.8px);
+  transition: 0.2s ease-out;
 }
 
 #probability_bar {
-    right: 50%;
-    left: 50%;
+  right: 50%;
+  left: 50%;
 }
 
 .buttons {
-    width: 50%;
-    margin: 0 auto;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .replay-options-container {
-    height: 50px;
-    width: 100%;
-    padding-top: 18.5rem;
-    padding-bottom: 2rem;
-    margin: auto;
-    margin-left: auto;
-    margin-right: auto;
+  height: 50px;
+  width: 100%;
+  padding-top: 18.5rem;
+  padding-bottom: 2rem;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .temp-game {
-    width: inherit;
-    height: inherit;
+  width: inherit;
+  height: inherit;
 }
 
 .slider {
-    width: 400px;
-    margin-left: 0.6rem;
-    margin-right: 0.6rem;
+  width: 400px;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
 }
 
 button {
-    height: 50px;
-    margin-right: 0.3rem;
-    margin-left: 0.3rem;
+  height: 50px;
+  margin-right: 0.3rem;
+  margin-left: 0.3rem;
 }
 
 a {
-    color: blue;
-    text-decoration: none;
+  color: blue;
+  text-decoration: none;
 }
 
 a:visited {
-    color: blue
+  color: blue;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .line-container {
-    height: 1rem;
-    width: 100%;
-    text-align: center;
+  height: 1rem;
+  width: 100%;
+  text-align: center;
 }
 
 hr {
-    overflow: visible;
+  overflow: visible;
 }
 
 .center-diamond {
-    border-top: 2px solid rgb(24, 26, 27);
-    border-bottom: 0px solid transparent;
-    border-right: 0px solid transparent;
-    border-left: 0px solid transparent;
+  border-top: 2px solid rgb(24, 26, 27);
+  border-bottom: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-left: 0px solid transparent;
 }
 
 .center-diamond:after {
-    content: "";
-    width: 6px;
-    height: 6px;
-    background: blue;
-    display: inline-block;
-    border: 2px solid rgb(24, 26, 27);
-    position: relative;
-    top: -12px;
-    margin: 0 0 0 -3px;
-    transform: rotate( 45deg);
-    -ms-transform: rotate(45deg);
-    -webkit-transform: rotate( 45deg);
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: blue;
+  display: inline-block;
+  border: 2px solid rgb(24, 26, 27);
+  position: relative;
+  top: -12px;
+  margin: 0 0 0 -3px;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
 .file-upload-div {
-    width: fit-content;
-    position: relative;
-    overflow: hidden;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.reminder {
+  margin-top: 3rem;
+  text-align: center;
+  color: rgb(160, 0, 0);
+  font-size: 1.5rem;
 }
 .upload-btn {
-    margin-left: 3rem;
-    margin-right: 3rem;
+  margin-top: 1rem;
 }
 .code-view-pane {
-    overflow: auto;
+  overflow: auto;
 }
 .code-scroll-container {
-    height: 35em;
-    margin-right: 3rem;
-    overflow-y: scroll;
-    background: #2d2d2d;
-    color: #ffffff;
-    padding: 0.5rem;
-    white-space: pre-wrap;
+  height: 35em;
+  margin-right: 3rem;
+  overflow-y: scroll;
+  background: #2d2d2d;
+  color: #ffffff;
+  padding: 0.5rem;
+  white-space: pre-wrap;
 }

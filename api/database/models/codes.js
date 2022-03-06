@@ -21,10 +21,15 @@ let get_dates =() => {
     FROM codes t2 
     WHERE t2.creator_id = t1.creator_id)`;
 }
+let delete_code = (user_id, code_id) => {
+    return `DELETE FROM codes WHERE creator_id = "${user_id}" AND id = "${code_id}"`;
+}
+
 module.exports = {
     query,
     insert_code,
     get_code,
+    delete_code,
     codes,
     get_dates,
 };

@@ -17,6 +17,8 @@ export class PlaygameComponent implements OnInit {
   selectedBot = "Beginner";
   selectedCode: Code;
   selectedCodeName = "";
+  confirmation_text = "Delete Code"
+  confirmation = false;
   selectedCodeCode: string;
 
   get_url = "/api/codes/get"; // For testing we just default to being user with id 1? Makes a lot of stuff useless...
@@ -37,9 +39,37 @@ export class PlaygameComponent implements OnInit {
     this.http.get(environment.wsBaseURL + `/api/codes/${this.user_data.id}`, { headers }).subscribe(data => {
       this.codes = data as Code[];
     });
+
+  }
+  deleteCode() {
+    if (!this.confirmation) {
+      this.confirmation_text = "Are You Sure?"
+      this.confirmation = true;
+    } else {
+      // send delete request
+      let code_id = this.getCodeId();
+      const headers = new HttpHeaders().append("authorization", this.token)
+
+      this.http.post(environment.wsBaseURL + `/api/codes/delete/${this.user_data.id}/${code_id}`,{}, { headers }).subscribe(data =>{
+        console.log(data);
+      })
+
+      this.selectedCode = undefined
+      this.selectedCodeName = null;
+      this.getCodes();
+      this.reloadPage();
+    }
   }
 
+  reloadPage() {
+    window.location.reload();
+  }
+  getCodeId() {
+    console.log(this.selectedCode.id)
+    return this.selectedCode.id;
+  }
   startGame() {
+    if (this.selectedCode){
     let base_url = environment.wsBaseURL;
     const url = base_url + this.start_game_url;
     const headers = new HttpHeaders().append("authorization", this.token)
@@ -54,10 +84,12 @@ export class PlaygameComponent implements OnInit {
       console.log(data);
     });
   }
+  }
   selectBot(bot: string) {
     this.selectedBot = bot;
   }
   selectCode(code: Code) {
+    this.confirmation = false;
     this.selectedCode = code;
     this.selectedCodeName = code.name;
     this.selectedCodeCode = atob(code.code);

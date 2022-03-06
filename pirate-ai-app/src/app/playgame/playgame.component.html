@@ -1,11 +1,19 @@
 <div class="main-container">
-    <div class="game-container">
+  <div class="reminder" *ngIf="codes.length ==0">
+    <p>You have to upload code to play the game!</p>
+  </div>
+  <div *ngIf="codes.length !=0">
+  <div class="game-container">
         <div id="GameStats">
+
+
+
 
             <div>
                 <h2>Start a new game:</h2>
             </div>
             <div>
+
                 <mat-form-field>
                     <!-- Drop down to select a bot-->
                     <mat-select placeholder="Select Opponent Level" [(ngModel)]="selectedBot">
@@ -25,12 +33,18 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()">
+                    <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()" *ngIf="this.selectedCode">
                         Start
                     </button>
                 </div>
+                <div>
+                  <button mat-raised-button class="delete-btn" id=slightHover *ngIf="selectedCode != undefined" (click)="deleteCode()">
+                      {{confirmation_text}}
+                  </button>
+              </div>
             </div>
         </div>
+
         <div>
             <mat-tab-group>
                 <mat-tab label="Code view">
@@ -53,5 +67,5 @@
 
             </mat-tab-group>
 
-
+</div>
         </div>
