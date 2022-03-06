@@ -48,7 +48,7 @@ public class newShipSpawn : MonoBehaviour
         islandRef = this.gameObject.GetComponent<island>();
         
 
-    }
+    }w
     private void LateUpdate(){
         //update the variables
         isClaimedByPlayer = islandRef.ownedByPlayer;
