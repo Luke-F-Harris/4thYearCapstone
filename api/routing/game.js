@@ -1,6 +1,7 @@
 const userAuth = require("../services/auth.js").userAuth;
 const games = require("../database/models/games");
 const codes = require("../database/models/codes");
+const index_map = require("../database/models/index_map");
 const fs = require("fs");
 const logger = require("../services/logging").logger;
 var path = require('path');
@@ -50,7 +51,7 @@ module.exports = function (app) {
         let creator_id = req.body.creator_id;
         let code_id = req.body.code_id;
         let level = game_map[req.body.level];
-    
+
         if (!creator_id || !code_id || !level) {
             res.status(400).json({
                 message: "Bad Request",
@@ -58,7 +59,7 @@ module.exports = function (app) {
             logger.warning("Bad Request, missing fields");
         }
         else {
-            codes.query(codes.getCodeById(code_id), (err, result) => {
+            codes.query(codes.get_code(code_id), (err, result) => {
                 if (err) {
                     logger.error(err);
                     res.status(500);
@@ -73,13 +74,7 @@ module.exports = function (app) {
                         logger.warning("Bad Request, missing fields");
                     }
                     else {
-                        let code = result[0].code;
-                        code = Buffer.from(code, "base64").toString();
-                        // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
-                        let file_name = `code_${code_id}.cs`;
-                        let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
-
-                        fs.writeFile(file_path, code, (err) => {
+                        games.query(games.get_current_game_id(), (err, result_id) => {
                             if (err) {
                                 logger.error(err);
                                 res.status(500);
@@ -87,59 +82,77 @@ module.exports = function (app) {
                                     message: "Internal Server Error",
                                 });
                             } else {
+                                let curr_game_id = result_id[0].AUTO_INCREMENT;
 
-                                //edit build path of unity to C:/Capstone/Builds/Game_id
-                                let buildGamePath = `C:/Capstone/Builds/${code_id}`
+                                let code = result[0].code;
+                                code = Buffer.from(code, "base64").toString();
+                                // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
+                                let file_name = `code_${code_id}_${curr_game_id}.cs`;
+                                let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
 
-                                const options = {
-                                    files: [buildScriptPath, buildBatchFilePath],
-                                    from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
-                                    to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
-                                };
+                                fs.writeFile(file_path, code, (err) => {
+                                    if (err) {
+                                        logger.error(err);
+                                        res.status(500);
+                                        res.json({
+                                            message: "Internal Server Error",
+                                        });
+                                    } else {
 
-                                var newBatchPath = `${__dirname}//..//..//Capstone//Unity-Capstone//runWebGL.bat`
+                                        //edit build path of unity to C:/Capstone/Builds/Game_id
+                                        let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
+
+                                        const options = {
+                                            files: [buildScriptPath, buildBatchFilePath],
+                                            from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
+                                            to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
+                                        };
+
+                                        var newBatchPath = `${__dirname}//..//..//Capstone//Unity-Capstone//runWebGL.bat`
 
 
-                                //change game build path specific to the code id
-                                replace(options)
-                                    .then(results => {
-                                        console.log(results)
-                                        exec(newBatchPath, (err, stdout, stderr) => {
-                                            if (err) {
-                                                logger.error(err);
-                                                res.status(500);
-                                                res.json({
-                                                    message: "Batch file error",
-                                                });
-                                            } else {
-                                                const outcome = "pending";
-                                                games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
+                                        //change game build path specific to the code id
+                                        replace(options)
+                                            .then(results => {
+                                                console.log(results)
+                                                exec(newBatchPath, (err, stdout, stderr) => {
                                                     if (err) {
                                                         logger.error(err);
                                                         res.status(500);
                                                         res.json({
-                                                            message: "Internal Server Error",
+                                                            message: "Batch file error",
                                                         });
                                                     } else {
-                                                        res.status(200);
-                                                        res.json({
-                                                            message: "Success",
-                                                            outcome: outcome,
+                                                        const outcome = "pending";
+                                                        games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
+                                                            if (err) {
+                                                                logger.error(err);
+                                                                res.status(500);
+                                                                res.json({
+                                                                    message: "Internal Server Error",
+                                                                });
+                                                            } else {
+                                                                res.status(200);
+                                                                res.json({
+                                                                    message: "Success",
+                                                                    outcome: outcome,
+                                                                });
+                                                            }
                                                         });
+
+                                                        console.log(`stdout: ${stdout}`);
                                                     }
                                                 });
-
-                                                console.log(`stdout: ${stdout}`);
-                                            }
-                                        });
-                                    })
-                                    .catch(error => {
-                                        logger.error('Error occurred:', error);
-                                        res.status(500);
-                                        res.json({
-                                            message: "Error occurred",
-                                        });
-                                    });
+                                            })
+                                            .catch(error => {
+                                                logger.error('Error occurred:', error);
+                                                res.status(500);
+                                                res.json({
+                                                    message: "Error occurred",
+                                                });
+                                            });
+                                    }
+                                });
                             }
                         });
                     }
@@ -148,13 +161,37 @@ module.exports = function (app) {
         }
     });
 
+
     app.post("/api/games/end", (req, res, next) => {
         // Send index file path here.
         const index_file_path = req.body.index_file_path;
+        const game_id_list = index_file_path.split("_");
+        const code_id_list = game_id_list[0].split("/");
+        const game_id = game_id_list[game_id_list.length - 1];
+        const code_id = code_id_list[code_id_list.length - 1];
+        console.log("End game");
+
         console.log(index_file_path);
+        console.log(game_id);
+        console.log(code_id);
+        // Insert into database here.
+        index_map.query(index_map.insert_map(game_id, index_file_path), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json({
+                    message: "Success",
+                });
+            }
+        });
+
         // Render game, then determine the outcome and the duration.
 
-        console.log("End game");
 
         res.status(200);
         res.json({
