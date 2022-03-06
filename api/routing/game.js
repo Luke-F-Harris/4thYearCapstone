@@ -169,12 +169,12 @@ module.exports = function (app) {
         const code_id_list = game_id_list[0].split("/");
         const game_id = game_id_list[game_id_list.length - 1];
         const code_id = code_id_list[code_id_list.length - 1];
-        console.log("End game");
 
+        console.log("End game");
         console.log(index_file_path);
         console.log(game_id);
         console.log(code_id);
-        // Insert into database here.
+
         index_map.query(index_map.insert_map(game_id, index_file_path), (err, result) => {
             if (err) {
                 logger.error(err);
