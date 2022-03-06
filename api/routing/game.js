@@ -5,6 +5,13 @@ const fs = require("fs");
 const logger = require("../services/logging").logger;
 var path = require('path');
 
+
+const replace = require('replace-in-file');
+const { execFile, exec, spawn } = require("child_process");
+var buildScriptPath = "../Capstone/Unity-Capstone/Assets/Editor/GameBuilder.cs"
+var buildBatchFilePath = "../Capstone/Unity-Capstone/runWebGL.bat"
+
+
 // What type of permissions do these routes need?
 
 let game_map = {
@@ -51,7 +58,7 @@ module.exports = function (app) {
             logger.warning("Bad Request, missing fields");
         }
         else {
-            codes.query(codes.get_code(code_id), (err, result) => {
+            codes.query(codes.getCodeById(code_id), (err, result) => {
                 if (err) {
                     logger.error(err);
                     res.status(500);
@@ -64,10 +71,11 @@ module.exports = function (app) {
                             message: "Bad Request",
                         });
                         logger.warning("Bad Request, missing fields");
-                    } else {
+                    }
+                    else {
                         let code = result[0].code;
                         code = Buffer.from(code, "base64").toString();
-
+                        // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
                         let file_name = `code_${code_id}.cs`;
                         let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
 
@@ -80,47 +88,59 @@ module.exports = function (app) {
                                 });
                             } else {
 
-                                // Call BAT Files, with the script name as a parameter. Wait for some response?
+                                //edit build path of unity to C:/Capstone/Builds/Game_id
+                                let buildGamePath = `C:/Capstone/Builds/${code_id}`
+
+                                const options = {
+                                    files: [buildScriptPath, buildBatchFilePath],
+                                    from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
+                                    to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
+                                };
+
+                                var newBatchPath = `${__dirname}//..//..//Capstone//Unity-Capstone//runWebGL.bat`
 
 
-                                // Generate random outcome (Pending for now?)
-                                let outcome = "pending"
+                                //change game build path specific to the code id
+                                replace(options)
+                                    .then(results => {
+                                        console.log(results)
+                                        exec(newBatchPath, (err, stdout, stderr) => {
+                                            if (err) {
+                                                logger.error(err);
+                                                res.status(500);
+                                                res.json({
+                                                    message: "Batch file error",
+                                                });
+                                            } else {
+                                                const outcome = "pending";
+                                                games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
+                                                    if (err) {
+                                                        logger.error(err);
+                                                        res.status(500);
+                                                        res.json({
+                                                            message: "Internal Server Error",
+                                                        });
+                                                    } else {
+                                                        res.status(200);
+                                                        res.json({
+                                                            message: "Success",
+                                                            outcome: outcome,
+                                                        });
+                                                    }
+                                                });
 
-
-                                games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
-                                    if (err) {
-                                        logger.error(err);
+                                                console.log(`stdout: ${stdout}`);
+                                            }
+                                        });
+                                    })
+                                    .catch(error => {
+                                        logger.error('Error occurred:', error);
                                         res.status(500);
                                         res.json({
-                                            message: "Internal Server Error",
+                                            message: "Error occurred",
                                         });
-                                    } else {
-                                        res.status(200);
-                                        res.json({
-                                            message: "Success",
-                                            outcome: outcome,
-                                        });
-                                    }
-                                });
+                                    });
                             }
-
-
-
-
-                            // Start game from CLI here with the code_id and level as parameters, then intert the outcome
-                            /*
-                            Unity listener for init, not api. Respone to game with post to this route
- 
-                            IN(Level, filename), OUT(Outcome)
-                
-                            1. Get output (Outcome value)
-                            2. INSERT GAME
-
-                            
-                            */
-
-
-
                         });
                     }
                 }
