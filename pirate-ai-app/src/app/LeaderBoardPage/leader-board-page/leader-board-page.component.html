@@ -15,17 +15,17 @@
                 </th>
             </tr>
             <tr class="content-rows" *ngFor="let element of top_players.slice(0,50);">
-              <div *ngIf="returnDate(element.id)">
-                <td class="content-name">
-                  <a href="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
+
+                <td class="content-name" *ngIf="returnDate(element.id)" style="text-align:center;">
+                  <a  href="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
                 </td>
-                <td class="content-rank">
+                <td class="content-rank" *ngIf="returnDate(element.id)">
                   {{element.score}}
                 </td>
-                <td class="content-lastsub">
+                <td class="content-lastsub" *ngIf="returnDate(element.id)">
                  {{returnDate(element.id)}}
                 </td>
-              </div>
+
             </tr>
         </table>
     </div>

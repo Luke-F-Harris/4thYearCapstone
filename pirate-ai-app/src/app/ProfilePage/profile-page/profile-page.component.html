@@ -1,16 +1,17 @@
 <div class="main-container">
   <div class="profile-container">
-    <div class="profile-image">
+
+    <div class="profile-image" *ngIf="profiles_data">
       <svg [data-jdenticon-value]=profiles_data.username>
         Fallback text for browsers not supporting inline svg
     </svg>
 
     </div>
-    <div class="name-space">
+    <div class="name-space" *ngIf="profiles_data">
         <p>{{profiles_data.username}}</p>
 
     </div>
-    <div class="rank-space">
+    <div class="rank-space" *ngIf="profiles_data">
         <p>Current Rank: {{profiles_data.score}}</p>
     </div>
     <div class="ratio">
@@ -70,6 +71,7 @@
                         Date of Game
                     </th>
                 </tr>
+                <span *ngIf="profiles_games">
                 <tr *ngFor="let game of profiles_games.slice(0,20)">
                   <div *ngIf="game.outcome!='pending'">
                     <td>
@@ -96,6 +98,7 @@
                     </td>
                   </div>
                 </tr>
+              </span>
             </table>
         </div>
     </div>
