@@ -55,12 +55,13 @@ export class LeaderBoardPageComponent implements OnInit {
 
   }
   returnDate(id:any){
-
-    let index = this.most_recent.findIndex((x:any)=> x.creator_id== id)
-    if (index == -1) {
-      return '';
-    } else {
-      return this.most_recent[index].created_at;
+    if (this.most_recent){
+      let index = this.most_recent.findIndex((x:any)=> x.creator_id== id)
+      if (index == -1) {
+        return '';
+      } else {
+        return this.most_recent[index].created_at;
+      }
     }
   }
   getTopPlayerData() {
