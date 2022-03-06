@@ -58,7 +58,7 @@ module.exports = function (app) {
             logger.warning("Bad Request, missing fields");
         }
         else {
-            codes.query(codes.getCodeById(code_id), (err, result) => {
+            codes.query(codes.get_code(code_id), (err, result) => {
                 if (err) {
                     logger.error(err);
                     res.status(500);
