@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,16 +8,18 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private token: TokenStorageService) { }
 
   ngOnInit(): void {
+    let user = this.token.getUser();
+    this.logged_in_id = user.id;
 
   }
   ngAfterViewInit (): void {
 
   }
 
-
+  logged_in_id :any;
   // using this for main page text appear effect
   @HostListener("window:scroll", ["$event"])
   onWindowScroll() {

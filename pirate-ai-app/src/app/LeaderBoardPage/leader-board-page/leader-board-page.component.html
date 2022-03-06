@@ -14,7 +14,8 @@
                     Last Submission
                 </th>
             </tr>
-            <tr class="content-rows" *ngFor="let element of top_players.slice(0,50)">
+            <tr class="content-rows" *ngFor="let element of top_players.slice(0,50);">
+              <div *ngIf="returnDate(element.id)">
                 <td class="content-name">
                   <a href="profile/{{element.id}}"> <span class="content-name-text">{{element.username}}</span></a>
                 </td>
@@ -24,6 +25,7 @@
                 <td class="content-lastsub">
                  {{returnDate(element.id)}}
                 </td>
+              </div>
             </tr>
         </table>
     </div>

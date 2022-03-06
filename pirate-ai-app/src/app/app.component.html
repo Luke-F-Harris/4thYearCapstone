@@ -30,10 +30,10 @@
 <div class="toolbar-seperator">
     <p class="toolbar-seperator-text">
         <span *ngIf="currentRoute == '/home'">
-        Ready to test your AI's skills? <span *ngIf="loggedIn"> <a routerLink="/profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
+        Ready to test your AI's skills? <span *ngIf="loggedIn"> <a routerLink="profile/{{logged_in_id}}">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
         </span>
         <span *ngIf="currentRoute =='/leaderboard'">
-        Can't find yourself? <span *ngIf="loggedIn"> <a routerLink="/profile">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
+        Can't find yourself? <span *ngIf="loggedIn"> <a routerLink="profile/{{logged_in_id}}">Upload Here</a></span> <span *ngIf="!loggedIn"><a routerLink="/register">Register Here</a></span>
         </span>
 
 
