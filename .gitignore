@@ -102,3 +102,6 @@ dist
 # TernJS port file
 .tern-port
 .prettierrc
+
+#ignore unity lib folder
+Capstone/Unity-Capstone/Library

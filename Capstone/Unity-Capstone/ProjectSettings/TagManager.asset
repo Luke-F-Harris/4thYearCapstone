@@ -7,11 +7,12 @@ TagManager:
   - island
   - PlayerShip
   - OppShip
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Environment
+  - 
   - Water
   - UI
   - 

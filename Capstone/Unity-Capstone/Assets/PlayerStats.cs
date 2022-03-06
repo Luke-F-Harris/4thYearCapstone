@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-   //some player stuff here
+   public float health = 100;
+
+
+   private void Update() {
+      if(health <= 0){
+         //this.gameObject.SetActive(false);
+         Destroy(this.gameObject);
+      }
+   }
    
 }
