@@ -5,12 +5,14 @@ const userAuth = require("../services/auth").userAuth;
 const { logger } = require("../services/logging");
 require("../services/logging").logger;
 
+
 module.exports = function (app) {
     app.post("/api/codes/create", (req, res) => {
         let creator = req.body.creator_id;
         let name = req.body.name;
         let code = req.body.code;
 
+        // if the code is not a csharp file we return error
 
         // Code is a file, so we need to convert it to a string 
         code = req.body.code.toString();

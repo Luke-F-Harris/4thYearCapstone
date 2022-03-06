@@ -33,7 +33,7 @@ export class PlaygameComponent implements OnInit {
   }
   user_data = this.tokenS.getUser();
   token = this.tokenS.getToken();
-
+  
   getCodes() {
     const headers = new HttpHeaders().append("authorization", this.token)
     this.http.get(environment.wsBaseURL + `/api/codes/${this.user_data.id}`, { headers }).subscribe(data => {
