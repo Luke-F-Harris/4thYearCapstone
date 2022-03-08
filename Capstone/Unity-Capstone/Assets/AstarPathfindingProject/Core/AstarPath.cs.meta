@@ -8,7 +8,7 @@ MonoImporter:
   defaultReferences:
   - gizmoSurfaceMaterial: {fileID: 2100000, guid: 5ce51318bbfb1466188b929a68a6bd3a, type: 2}
   - gizmoLineMaterial: {fileID: 2100000, guid: 91035448860ba4e708919485c73f7edc, type: 2}
-  executionOrder: -8
+  executionOrder: -1200
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

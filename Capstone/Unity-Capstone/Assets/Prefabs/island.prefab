@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6368232803478501209}
   - component: {fileID: 7943936572301055010}
   - component: {fileID: 7943936572301055021}
+  - component: {fileID: 9062529902913125382}
   m_Layer: 3
   m_Name: island
   m_TagString: Untagged
@@ -117,7 +118,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1.3837315}
@@ -206,3 +207,19 @@ MonoBehaviour:
   spawnThreshHold: 500
   spawnVerticalOffset: 5
   spawnHorizontalOffset: 0
+--- !u!114 &9062529902913125382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943936572996477408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 7935131798956111660
+  updateError: 1
+  checkTime: 0.2

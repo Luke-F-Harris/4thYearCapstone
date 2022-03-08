@@ -28,52 +28,52 @@ public class MapGeneration : MonoBehaviour
         var numberOfIslands = Random.Range(numIslands1,numIslands2);
         //make a random number of islands for one side
        
-        for(int i = 0; i < numberOfIslands;i++) {
-            players = GameObject.FindGameObjectsWithTag("PlayerShip");
-           
-            xPosList = [];
-            yPosList = [];
+        // for(int i = 0; i < numberOfIslands;i++) {
+        //     var players = GameObject.FindGameObjectsWithTag("PlayerShip");
+
+        //     List<Vector3> xPosList = new List<Vector3>();
+        //     List<Vector3> yPosList = new List<Vector3>();
                        
-            players.forEach(player => {
-                xPosList.Add(player.transform.position.x);
-                yPosList.Add(player.transform.position.y);
-            }) 
+        //     players.forEach(player => {
+        //         xPosList.Add(player.transform.position.x);
+        //         yPosList.Add(player.transform.position.y);
+        //     });
 
             
-        }
-        
-        // for(int i = 0; i < numberOfIslands;i++){
-        //     //get the player location
-        //     player = GameObject.FindGameObjectsWithTag("PlayerShip");
-        //     var playerPosx = player.transform.position.x;
-        //     var playerPosy = player.transform.position.y;
-        //     //combine into a new vector2
-        //     Vector2 playerPos = new Vector2(playerPosx,playerPosy);
-        //     // make a random point until it is out of the range of the player
-        //     var count = 0;
-        //     do{
-        //     count++;
-        //     if(count > 300){
-        //         break;
-        //     }
-        //     //make generate some x value to spawn the island
-        //     var xIsland = Random.Range(xRange1,xRange2);
-        //     var yIsland = Random.Range(yRange1,yRange2);
-
-        //     //make a random location for the y value
-        //     genPosition = new Vector2(xIsland,yIsland);
-
-
-        //     //need the pointinside to be false and islandoverlap to be false
-        //     }while( PointInsideSphere(genPosition,playerPos,playerIslandSpawnRadius) || islandOverLap(genPosition)); // checking if in the range of the player
-        //     //add to the list of islands
-        //     islandsLocations.Add(genPosition);
-        //     //make the island
-        //     islandRef = Instantiate(islandPreFab,genPosition, Quaternion.identity) as GameObject;
-        //     //add to the list 
-        //     gmref.GetComponent<GameManager>().IslandList.Add(islandRef);
-        
         // }
+        
+        for(int i = 0; i < numberOfIslands;i++){
+            //get the player location
+            player = GameObject.FindGameObjectWithTag("PlayerShip");
+            var playerPosx = player.transform.position.x;
+            var playerPosy = player.transform.position.y;
+            //combine into a new vector2
+            Vector2 playerPos = new Vector2(playerPosx,playerPosy);
+            // make a random point until it is out of the range of the player
+            var count = 0;
+            do{
+            count++;
+            if(count > 300){
+                break;
+            }
+            //make generate some x value to spawn the island
+            var xIsland = Random.Range(xRange1,xRange2);
+            var yIsland = Random.Range(yRange1,yRange2);
+
+            //make a random location for the y value
+            genPosition = new Vector2(xIsland,yIsland);
+
+
+            //need the pointinside to be false and islandoverlap to be false
+            }while( PointInsideSphere(genPosition,playerPos,playerIslandSpawnRadius) || islandOverLap(genPosition)); // checking if in the range of the player
+            //add to the list of islands
+            islandsLocations.Add(genPosition);
+            //make the island
+            islandRef = Instantiate(islandPreFab,genPosition, Quaternion.identity) as GameObject;
+            //add to the list 
+            gmref.GetComponent<GameManager>().IslandList.Add(islandRef);
+        
+        }
         //mirror for the other side by flipping the values
         foreach(Vector2 value in islandsLocations){
             //invert the x value
@@ -82,9 +82,10 @@ public class MapGeneration : MonoBehaviour
             islandRef = Instantiate(islandPreFab,newpos, Quaternion.identity) as GameObject;
             gmref.GetComponent<GameManager>().IslandList.Add(islandRef);
         }
-        Instantiate(pathFinderObject);
+        
 
     }
+    
     //function to check if point is side of a circle for generating islands near the players
     public bool PointInsideSphere(Vector2 point, Vector2 center, float radius) {
         //if the player is in the radius
