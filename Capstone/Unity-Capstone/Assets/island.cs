@@ -26,7 +26,6 @@ public class island : MonoBehaviour
         //if ship enters island
     void OnCollisionEnter2D(Collision2D col)
     {   
-
         //check for ship collision and enough spots to dock
         if (col.gameObject.tag == "PlayerShip" && !ownedByOpp)
         {
@@ -34,8 +33,6 @@ public class island : MonoBehaviour
             numShips += 1;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
-            Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
-            Debug.Log("player ship docked successfully");
         }
 
         if (col.gameObject.tag == "OppShip" && !ownedByPlayer)
@@ -44,31 +41,23 @@ public class island : MonoBehaviour
             numShips += 1;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
-            Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
-            Debug.Log("Opp ship docked successfully");
         }
-
-
     }
 
     void OnCollisionExit2D(Collision2D col)
     {
-        Debug.Log("entereted");
+        
         if ((col.gameObject.tag == "PlayerShip" || col.gameObject.tag == "OppShip" && col.gameObject.GetComponent<ShipDocking>().isDocked))
         {   
             numShips -= 1;
             resourceGain -= 10f;
             col.gameObject.GetComponent<ShipDocking>().isDocked = false;
-            Debug.Log("ship undocked successfully");
-            
+           
             //if no ships left no owners
             if(numShips==0){
             ownedByPlayer=false;
             ownedByOpp=false;
-            Debug.Log("Island has no owners");
             }
-
         }
     }
-   
 }

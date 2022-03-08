@@ -16,6 +16,10 @@ public class newShipSpawn : MonoBehaviour
     public GameObject OppShip;
     public GameObject PlayerShip;
     public Transform islandLocation;
+    public GameObject PlayerShipRef;
+    public GameObject OppShipRef;
+    public GameObject GameManager;
+    
 
 
 
@@ -123,12 +127,13 @@ public class newShipSpawn : MonoBehaviour
         //make a potation for the 
         Quaternion rot = new Quaternion(0,0,0,0);
         if(isClaimedByPlayer){
-            //spawn player ship
-            Instantiate(PlayerShip,newPos,rot);
+            //spawn player ship and add it to the list
+            PlayerShipRef = Instantiate(PlayerShip,newPos,rot);
+            GameManager.GetComponent<GameManager>().PlayerShipList.Add(PlayerShipRef);
         }else{
-            //spawn opp ship
-            Instantiate(OppShip,newPos,rot);
+            //spawn opp ship and add it to the list
+            OppShipRef = Instantiate(OppShip,newPos,rot);
+             GameManager.GetComponent<GameManager>().OppShipList.Add(OppShipRef);
         }
-
     }
 }

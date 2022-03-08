@@ -48,6 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\newShipSpawn.cs" />
+     <Compile Include="Assets\StartGame.cs" />
      <Compile Include="Assets\MapGeneration.cs" />
      <Compile Include="Assets\ShipDocking.cs" />
      <Compile Include="Assets\GameEnding.cs" />
@@ -59,7 +60,9 @@
      <Compile Include="Assets\OppMovement.cs" />
      <Compile Include="Assets\CodeGrabber.cs" />
      <Compile Include="Assets\island.cs" />
+     <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Uploads\code_1.cs" />
+     <Compile Include="Assets\OPPScripts\NewBehaviourScript.cs" />
      <None Include="Assets\secret.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.28f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
