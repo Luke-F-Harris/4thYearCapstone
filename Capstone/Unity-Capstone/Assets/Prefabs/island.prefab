@@ -146,8 +146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OppShip: {fileID: 1409972278108596767, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
-  PlayerShip: {fileID: 3010230753475560614, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
-  islandLocation: {fileID: 0}
+  PlayerShip: {fileID: 6603072910980289893, guid: 18e3f07d750be0d44bb326e510f51dca, type: 3}
+  islandLocation: {fileID: 7943936572996477420}
+  PlayerShipRef: {fileID: 0}
+  OppShipRef: {fileID: 0}
+  GameManager: {fileID: 3112787100108898044, guid: 7f2e583392f142d43972bb3e3b95c451, type: 3}
   gainedResources: 0
   gainedWith1Ship: 1
   gainedWith2Ships: 2
@@ -192,6 +195,9 @@ MonoBehaviour:
   OppShip: {fileID: 1409972278108596767, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
   PlayerShip: {fileID: 3010230753475560614, guid: 5ffca1f9cb9e5fa4484cdfe4181fef0d, type: 3}
   islandLocation: {fileID: 0}
+  PlayerShipRef: {fileID: 0}
+  OppShipRef: {fileID: 0}
+  GameManager: {fileID: 0}
   gainedResources: 0
   gainedWith1Ship: 1
   gainedWith2Ships: 2
