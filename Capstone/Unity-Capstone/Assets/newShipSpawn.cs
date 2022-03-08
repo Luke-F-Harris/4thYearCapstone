@@ -54,7 +54,6 @@ public class newShipSpawn : MonoBehaviour
     }
     private void LateUpdate(){
         //update the variables
-        Debug.Log(this.GetComponent<island>().ownedByPlayer);
         isClaimedByPlayer = this.GetComponent<island>().ownedByPlayer;
         isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
         numShips = this.gameObject.GetComponent<island>().numShips;
