@@ -16,10 +16,12 @@ public class MapGeneration : MonoBehaviour
     public float xRange2 = -20;
     public float yRange1 = -5;
     public float yRange2 = 5;
+    public int numIslands1 = 4;
+    public int numIslands2 = 7;
     
     void Start()
     {
-        var numberOfIslands = Random.Range(3,4);
+        var numberOfIslands = Random.Range(numIslands1,numIslands2);
         //make a random number of islands for one side
         for(int i = 0; i < numberOfIslands;i++){
             //get the player location
