@@ -7,10 +7,12 @@ public class MapGeneration : MonoBehaviour
     //spawn the islands
     private GameObject islandRef;
     public GameObject islandPreFab;
+    public GameObject gmref;
     public GameObject pathFinderObject;
     private List<Vector2> islandsLocations = new List<Vector2>();
     public float islandRadius = 3;
     private GameObject player;
+
     private Vector2 genPosition;
     public int playerIslandSpawnRadius= 1;
     public float xRange1 = -10;
@@ -22,6 +24,7 @@ public class MapGeneration : MonoBehaviour
     
     void Start()
     {
+       
         var numberOfIslands = Random.Range(numIslands1,numIslands2);
         //make a random number of islands for one side
         for(int i = 0; i < numberOfIslands;i++){
@@ -51,18 +54,18 @@ public class MapGeneration : MonoBehaviour
             //add to the list of islands
             islandsLocations.Add(genPosition);
             //make the island
-            
-            islandRef = Instantiate(islandPreFab,genPosition, Quaternion.identity);
+            islandRef = Instantiate(islandPreFab,genPosition, Quaternion.identity) as GameObject;
             //add to the list 
-            GameManager.IslandList.Add(islandRef);
+            gmref.GetComponent<GameManager>().IslandList.Add(islandRef);
+        
         }
         //mirror for the other side by flipping the values
         foreach(Vector2 value in islandsLocations){
             //invert the x value
             Vector2 newpos = new Vector2(-value.x,value.y);
             //make the new islands
-            islandRef = Instantiate(islandPreFab,newpos, Quaternion.identity);
-            GameManager.IslandList.Add(islandRef);
+            islandRef = Instantiate(islandPreFab,newpos, Quaternion.identity) as GameObject;
+            gmref.GetComponent<GameManager>().IslandList.Add(islandRef);
         }
         Instantiate(pathFinderObject);
 

@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static List<GameObject> PlayerShipList;
-    public static List<GameObject> OppShipList;
-    public static List<GameObject> IslandList;
+    public List<GameObject> PlayerShipList = new List<GameObject>();
+    public List<GameObject> OppShipList = new List<GameObject>();
+    public List<GameObject> IslandList = new List<GameObject>();
 
     
-    public static void navigate(){
+    public void navigate(){
 
     }
 }

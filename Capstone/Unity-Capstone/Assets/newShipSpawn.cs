@@ -18,7 +18,7 @@ public class newShipSpawn : MonoBehaviour
     public Transform islandLocation;
     public GameObject PlayerShipRef;
     public GameObject OppShipRef;
-        
+    public GameObject GameManager;
     
 
 
@@ -130,11 +130,11 @@ public class newShipSpawn : MonoBehaviour
         if(isClaimedByPlayer){
             //spawn player ship and add it to the list
             PlayerShipRef = Instantiate(PlayerShip,newPos,rot);
-            GameManager.PlayerShipList.Add(PlayerShipRef);
+            GameManager.GetComponent<GameManager>().PlayerShipList.Add(PlayerShipRef);
         }else{
             //spawn opp ship and add it to the list
             OppShipRef = Instantiate(OppShip,newPos,rot);
-            GameManager.OppShipList.Add(OppShipRef);
+             GameManager.GetComponent<GameManager>().OppShipList.Add(OppShipRef);
         }
     }
 }
