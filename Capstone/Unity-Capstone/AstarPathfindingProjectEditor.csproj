@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{35FAEAAF-E442-578E-110B-D7E74D6565EF}</ProjectGuid>
+    <ProjectGuid>{A9543A73-69CA-D6D5-43E0-CBADAF333A4B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
+    <AssemblyName>AstarPathfindingProjectEditor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -47,7 +47,28 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\GameBuilder.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\SeekerEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\ModifierEditors\SmoothModifierEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AILerpEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\GraphEditors\GridGeneratorEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AstarUpdateWindow.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\ProceduralGridMoverEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\GraphUpdateSceneEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\GraphEditors\PointGeneratorEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\Legacy\LegacyAIPathEditor2.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\ModifierEditors\RaycastModifierEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\Legacy\LegacyEditorHelper2.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AnimationLinkEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AstarPathEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AstarUpdateChecker.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\GraphEditors\NavMeshGeneratorEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\CustomGraphEditorAttribute.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\AIBaseEditor.cs" />
+     <Compile Include="Assets\AstarPathfindingProject\Editor\GraphEditors\GraphEditor.cs" />
+     <None Include="Assets\AstarPathfindingProject\Editor\AstarPathfindingProjectEditor.asmdef" />
+     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.cginc" />
+     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\NavmeshOutline.shader" />
+     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.28f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -648,122 +669,28 @@
  <Reference Include="System.Xml.XPath.XDocument">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.28f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XPath.XDocument.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.TestRunner">
  <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
- <Reference Include="Unity.2D.Animation.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.InternalAPIEngineBridge.001">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
- </Reference>
- <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
- </Reference>
- <Reference Include="PsdPlugin">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.IK.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Psdimporter.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Path.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Path.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.InternalAPIEditorBridge.001">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Mathematics">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.IK.Runtime">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Animation.Triangle.Runtime">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Animation.Runtime">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Mathematics.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Common.Runtime">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.SpriteShape.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Common.Editor">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.SpriteShape.Runtime">
- <HintPath>C:/Users/lukeh/Documents/School 4th Year/First Sem/4450 Clone/4thYearCapstone/Capstone/Unity-Capstone/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{09148F2C-8E65-7C44-B0FA-88305996E3A6}</Project>
-      <Name>Assembly-CSharp</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{25EA5B77-C71F-6562-6961-FA0AD60F50BC}</Project>
-      <Name>PackageToolsEditor</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="AstarPathfindingProject.csproj">
       <Project>{FA2C0D19-E679-DE71-E76C-3E1C7E1DBC52}</Project>
       <Name>AstarPathfindingProject</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{A9543A73-69CA-D6D5-43E0-CBADAF333A4B}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{25EA5B77-C71F-6562-6961-FA0AD60F50BC}</Project>
+      <Name>PackageToolsEditor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
