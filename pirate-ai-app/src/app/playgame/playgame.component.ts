@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TokenStorageService } from '../_services/token-storage.service';
+
 @Component({
   selector: 'app-playgame',
   templateUrl: './playgame.component.html',

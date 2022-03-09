@@ -91,9 +91,9 @@
                     </mat-tab>
                     <mat-tab label="Game View">
                         <div *ngIf="gameRendered">
-                            <!-- iframe sourcing index_loc-->
-                            here
+                            <!-- iframe sourcing index_loc bypass xss check -->
                             <iframe src="{{index_loc}}" width="100%" height="100%" frameborder="0"></iframe>
+                            here
                         </div>
                         <div *ngIf="!gameRendered">
                             Your game is pending.
