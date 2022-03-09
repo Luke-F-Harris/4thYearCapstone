@@ -48,7 +48,7 @@ const index_map = {
     ].join(", "),
 };
 
-const tables = [users, codes, games];
+const tables = [users, codes, games, index_map];
 
 // Get args from the command line
 const args = process.argv.slice(2);
