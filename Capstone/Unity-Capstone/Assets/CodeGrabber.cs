@@ -5,9 +5,10 @@ using UnityEngine;
 public class CodeGrabber : MonoBehaviour
 {
     public GameObject test;
-    
+
     void Start()
     {
+
         test.AddComponent<code_1>();//Needs to be class naming conventions to ensure Code Grabber picks it up, also code uploaded needs to be of format
         /*using System.Collections;
         using System.Collections.Generic;
@@ -28,12 +29,12 @@ public class CodeGrabber : MonoBehaviour
             }
         }
         */
-        
+
     }
 
-    
+
     void Update()
     {
-        
+
     }
 }
