@@ -199,7 +199,19 @@ module.exports = function (app) {
         });
     });
 
+    app.post("/api/games/finished", (req, res, next) => {
+        // Send index file path here.
+    
+        const winner = req.body;
 
+        console.log(winner);
+
+        // Render game, then determine the outcome and the duration.
+        res.status(200);
+        res.json({
+            message: "Success",
+        });
+    });
 
     app.post("/api/games", userAuth, (req, res, next) => {
         // Starting game: upload code, instantiate unity game: this is the big boi
