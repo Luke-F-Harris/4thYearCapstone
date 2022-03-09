@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:"login", component: LoginComponent, canActivate:[AuthStopGuard]},
   {path:"profile/:id", component: ProfilePageComponent, canActivate:[AuthGuard]},
   {path:"leaderboard", component: LeaderBoardPageComponent},
-  {path:"game", component: GamePageComponent},
+  {path:"game/:id", component: GamePageComponent},
   {path:"play", component: PlaygameComponent, canActivate:[AuthGuard]},
 
 ];

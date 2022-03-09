@@ -13,7 +13,7 @@ public class PirateAIBOT1 : MonoBehaviour
     void Update()
     {
         game = GameObject.Find("GameScriptObject").GetComponent<Game>();
-        List<GameObject> my_ships = game.getEnemeyShips();
+        List<GameObject> my_ships = game.getEnemyShips();
         List<GameObject> enemy_ships = game.getPlayerShips();
 
         foreach (GameObject ship in my_ships)

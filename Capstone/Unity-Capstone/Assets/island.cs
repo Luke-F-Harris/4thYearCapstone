@@ -38,8 +38,7 @@ public class island : MonoBehaviour
             numShips += 1;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
-            Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
-            Debug.Log("player ship docked successfully");
+
         }
 
         //check for ship collision and enough spots to dock, if its trying to dock, and if its at the island it wants to dock at
@@ -51,8 +50,7 @@ public class island : MonoBehaviour
             numShips += 1;
             //variable to keep track if ship is docked
             col.gameObject.GetComponent<ShipDocking>().isDocked = true;
-            Debug.Log(col.gameObject.GetComponent<ShipDocking>().isDocked);
-            Debug.Log("Opp ship docked successfully");
+
         }
 
 

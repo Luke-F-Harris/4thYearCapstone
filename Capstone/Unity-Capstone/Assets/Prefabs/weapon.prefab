@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3856287860482188922}
   - component: {fileID: 1732045827437306572}
-  - component: {fileID: 2601275113049546645}
+  - component: {fileID: -241060378238823009}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Weapon
@@ -48,7 +48,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &2601275113049546645
+--- !u!114 &-241060378238823009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

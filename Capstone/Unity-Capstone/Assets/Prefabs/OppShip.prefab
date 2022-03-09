@@ -35,7 +35,7 @@ Transform:
   m_LocalPosition: {x: -28.38, y: -9.35, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
-  - {fileID: 7436962593842355592}
+  - {fileID: 5859914874487965184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -190,7 +190,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 6
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -244,7 +244,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!1001 &5958595953599871986
+--- !u!1001 &7266224740712521850
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -301,8 +301,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e18e79677a085bc4499809158e49fa56, type: 3}
---- !u!4 &7436962593842355592 stripped
+--- !u!4 &5859914874487965184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3856287860482188922, guid: e18e79677a085bc4499809158e49fa56, type: 3}
-  m_PrefabInstance: {fileID: 5958595953599871986}
+  m_PrefabInstance: {fileID: 7266224740712521850}
   m_PrefabAsset: {fileID: 0}

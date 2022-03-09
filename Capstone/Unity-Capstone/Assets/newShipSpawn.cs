@@ -25,13 +25,7 @@ public class newShipSpawn : MonoBehaviour
     public float gainedResources;
 
     //how many ports are left
-    //private int portsLeft= 3;
-
-    //increases with how many docked ships
-    public float gainedWith1Ship = 1;
-    public float gainedWith2Ships = 2;
-    public float gainedWith3Ships = 3;
-    public float gainedWith4Ships = 4;
+    //private int portsLeft= 3;    
 
     //how many resources are required for a spawning of new ship
     public float spawnThreshHold;
@@ -54,8 +48,6 @@ public class newShipSpawn : MonoBehaviour
         isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
         numShips = this.gameObject.GetComponent<island>().numShips;
         numberOfPorts = this.gameObject.GetComponent<island>().numberOfPorts;
-
-
     }
     private void Update()
     {
@@ -95,51 +87,56 @@ public class newShipSpawn : MonoBehaviour
     }
     private void AddResources(bool forPlayer)
     {
-        //will be true if for the player and false for the opp
-        if ((numberOfPorts - numShips) == 3)
-        {
-            //1 docked ship
-            if (!inCooldown)
-            {
-                gainedResources = gainedResources + gainedWith1Ship;
-                inCooldown = true;
-                collectedTime = Time.time;
-            }
-        }
-        else if ((numberOfPorts - numShips) == 2)
-        {
-            //2 docked ship
-            if (!inCooldown)
-            {
-                gainedResources = gainedResources + gainedWith2Ships;
-                inCooldown = true;
-                collectedTime = Time.time;
-            }
-        }
-        else if ((numberOfPorts - numShips) == 1)
-        {
-            //3 docked ships 
-            if (!inCooldown)
-            {
-                gainedResources = gainedResources + gainedWith3Ships;
-                inCooldown = true;
-                collectedTime = Time.time;
-            }
-        }
-        else if ((numberOfPorts - numShips) == 0)
-        {
-            //max docked ships of 4
-            if (!inCooldown)
-            {
-                gainedResources = gainedResources + gainedWith4Ships;
-                inCooldown = true;
-                collectedTime = Time.time;
-            }
+        // //will be true if for the player and false for the opp
+        // if ((numberOfPorts - numShips) == 3)
+        // {
+        //     //1 docked ship
+        //     if (!inCooldown)
+        //     {
+        //         gainedResources = gainedResources + gainedWith1Ship;
+        //         inCooldown = true;
+        //         collectedTime = Time.time;
+        //     }
+        // }
+        // else if ((numberOfPorts - numShips) == 2)
+        // {
+        //     //2 docked ship
+        //     if (!inCooldown)
+        //     {
+        //         gainedResources = gainedResources + gainedWith2Ships;
+        //         inCooldown = true;
+        //         collectedTime = Time.time;
+        //     }
+        // }
+        // else if ((numberOfPorts - numShips) == 1)
+        // {
+        //     //3 docked ships 
+        //     if (!inCooldown)
+        //     {
+        //         gainedResources = gainedResources + gainedWith3Ships;
+        //         inCooldown = true;
+        //         collectedTime = Time.time;
+        //     }
+        // }
+        // else if ((numberOfPorts - numShips) == 0)
+        // {
+        //     //max docked ships of 4
+        //     if (!inCooldown)
+        //     {
+        //         gainedResources = gainedResources + gainedWith4Ships;
+        //         inCooldown = true;
+        //         collectedTime = Time.time;
+        //     }
 
 
+        // }
+
+        if (!inCooldown)
+        {
+            gainedResources += numShips;
+            inCooldown = true;
+            collectedTime = Time.time;
         }
-
-
 
         //check if player now has enough to spawn a new ship
         if (gainedResources >= spawnThreshHold)
@@ -158,9 +155,7 @@ public class newShipSpawn : MonoBehaviour
                 SpawnShip(false);
                 gainedResources = 0;
             }
-
         }
-
     }
     private void SpawnShip(bool playerShip)
     {
