@@ -14,6 +14,7 @@ let insert_map = (game_id, index_location) => {
     return `INSERT INTO index_map (game_id, index_location) VALUES ("${game_id}", "${index_location}")`;
 }
 
+
 module.exports = {
     query,
     get_game,
