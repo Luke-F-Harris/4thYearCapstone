@@ -35,7 +35,7 @@ Transform:
   m_LocalPosition: {x: -28.38, y: -9.35, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
-  - {fileID: 5859914874487965184}
+  - {fileID: 4577814718150764962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -244,7 +244,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!1001 &7266224740712521850
+--- !u!1001 &721670349340495832
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -301,8 +301,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e18e79677a085bc4499809158e49fa56, type: 3}
---- !u!4 &5859914874487965184 stripped
+--- !u!4 &4577814718150764962 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3856287860482188922, guid: e18e79677a085bc4499809158e49fa56, type: 3}
-  m_PrefabInstance: {fileID: 7266224740712521850}
+  m_PrefabInstance: {fileID: 721670349340495832}
   m_PrefabAsset: {fileID: 0}

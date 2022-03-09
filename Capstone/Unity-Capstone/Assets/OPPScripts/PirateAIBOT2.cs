@@ -30,14 +30,12 @@ public class PirateAIBOT2 : MonoBehaviour
         // for each ship that i controll
         foreach (GameObject ship in my_ships)
         {
-
             // if ship is already docked, just skip this ship in the forloop
             if (game.isDocked(ship))
             {
                 continue;
             }
             var available_islands = from island in game.getAllIslands() where !game.isOwned(island) select island;
-
 
             // sorted list of closest entities to specified ship;
             var entities_by_distance = game.getEntitiesByDistance(ship);
@@ -57,7 +55,7 @@ public class PirateAIBOT2 : MonoBehaviour
                     if (game.canDock(ship, island) && !(planned_islands.Contains(island)))
                     {
                         game.navigateShipToDock(ship, island);
-                        planned_islands.Insert(0, island);
+                        planned_islands.Add(island);
                     }
                     else
                     {
@@ -66,7 +64,6 @@ public class PirateAIBOT2 : MonoBehaviour
                         {
                             continue;
                         }
-                        game.navigateShip(ship, island);
                     }
                     break;
 
@@ -90,9 +87,7 @@ public class PirateAIBOT2 : MonoBehaviour
             }
             else if (closest_enemy_ships.Count() > 0)
             {
-
                 GameObject target_ship = closest_enemy_ships.ToList()[0];
-
                 game.navigateShipAttack(ship, target_ship);
             }
         }
