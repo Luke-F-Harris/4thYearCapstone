@@ -6,7 +6,7 @@ public class newShipSpawn : MonoBehaviour
 {
 
     //boolean to store if is island is claimed by the player or Opp
-    
+
     private bool isClaimedByPlayer;
     private bool isClaimedByOpp;
     private int numShips;
@@ -18,29 +18,30 @@ public class newShipSpawn : MonoBehaviour
     public Transform islandLocation;
     public GameObject PlayerShipRef;
     public GameObject OppShipRef;
-    public GameObject GameManager;
-    
-
-
-
+    // public GameObject GameManager;
     //variables to store info about resources
-    
+
     //how many resources have been gained so far
     public float gainedResources;
-    
+
     //how many ports are left
     //private int portsLeft= 3;
 
     //increases with how many docked ships
     public float gainedWith1Ship = 1;
     public float gainedWith2Ships = 2;
-    public float gainedWith3Ships= 3;
-    public float gainedWith4Ships =4;
+    public float gainedWith3Ships = 3;
+    public float gainedWith4Ships = 4;
 
     //how many resources are required for a spawning of new ship
-    public float spawnThreshHold = 500;
+    public float spawnThreshHold;
     public float spawnVerticalOffset = 5;
     public float spawnHorizontalOffset = 0;
+    private float currentTime;
+    public float resourceCooldown = 1;
+    private bool inCooldown;
+    private float collectedTime;
+
     //private island islandRef;
 
 
@@ -53,10 +54,20 @@ public class newShipSpawn : MonoBehaviour
         isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
         numShips = this.gameObject.GetComponent<island>().numShips;
         numberOfPorts = this.gameObject.GetComponent<island>().numberOfPorts;
-        
+
 
     }
-    private void LateUpdate(){
+    private void Update()
+    {
+        currentTime = Time.time;
+        if ((currentTime - collectedTime) >= resourceCooldown)
+        {
+            //not in cooldown anymore
+            inCooldown = false;
+        }
+    }
+    private void LateUpdate()
+    {
         //update the variables
         isClaimedByPlayer = this.GetComponent<island>().ownedByPlayer;
         isClaimedByOpp = this.gameObject.GetComponent<island>().ownedByOpp;
@@ -64,76 +75,116 @@ public class newShipSpawn : MonoBehaviour
         numberOfPorts = this.gameObject.GetComponent<island>().numberOfPorts;
         //late update the resources of the player or opp
         //this is so if a player has destoyed the islands ships the gain wont happen until the end
-        if(isClaimedByPlayer){
+        if (isClaimedByPlayer)
+        {
             //island is claimed by player and can gain resources
             //check how many are docked to know how much to add
             AddResources(true);
 
 
-        }else if (isClaimedByOpp){
+        }
+        else if (isClaimedByOpp)
+        {
             //island is claimed by Opp and can gain resourses
             AddResources(false);
-
-
-        }else{
-            
+        }
+        else
+        {
             //island is not owned do nothing
-
         }
     }
-    private void AddResources(bool forPlayer){
+    private void AddResources(bool forPlayer)
+    {
         //will be true if for the player and false for the opp
-        if((numberOfPorts - numShips) == 3){
+        if ((numberOfPorts - numShips) == 3)
+        {
             //1 docked ship
-            gainedResources = gainedResources + gainedWith1Ship;
+            if (!inCooldown)
+            {
+                gainedResources = gainedResources + gainedWith1Ship;
+                inCooldown = true;
+                collectedTime = Time.time;
+            }
         }
-        else if((numberOfPorts - numShips) == 2){
-                //2 docked ship
+        else if ((numberOfPorts - numShips) == 2)
+        {
+            //2 docked ship
+            if (!inCooldown)
+            {
                 gainedResources = gainedResources + gainedWith2Ships;
-        }else if((numberOfPorts - numShips) == 1){
-                //3 docked ships
-                gainedResources = gainedResources + gainedWith3Ships;
-        }else if((numberOfPorts - numShips) == 0){
-                //max docked ships of 4
-                gainedResources = gainedResources + gainedWith4Ships;
-                
+                inCooldown = true;
+                collectedTime = Time.time;
+            }
         }
+        else if ((numberOfPorts - numShips) == 1)
+        {
+            //3 docked ships 
+            if (!inCooldown)
+            {
+                gainedResources = gainedResources + gainedWith3Ships;
+                inCooldown = true;
+                collectedTime = Time.time;
+            }
+        }
+        else if ((numberOfPorts - numShips) == 0)
+        {
+            //max docked ships of 4
+            if (!inCooldown)
+            {
+                gainedResources = gainedResources + gainedWith4Ships;
+                inCooldown = true;
+                collectedTime = Time.time;
+            }
+
+
+        }
+
+
+
         //check if player now has enough to spawn a new ship
-        if(gainedResources >= spawnThreshHold){
+        if (gainedResources >= spawnThreshHold)
+        {
             //has enough resources to spawn
             //check who owns island for what ship to spawn
-            if(isClaimedByPlayer == true){
+            if (isClaimedByPlayer == true)
+            {
                 //claimed by player so spawn player ship
                 SpawnShip(true);
                 gainedResources = 0;
-            }else{
+            }
+            else
+            {
                 //claimed by opp so spawn opp ship
                 SpawnShip(false);
                 gainedResources = 0;
             }
 
         }
-        
+
     }
-    private void SpawnShip(bool playerShip){
+    private void SpawnShip(bool playerShip)
+    {
         //bool keeps track of who is going to spawn, true is player ship and false is opp
         //Instantiate a player ship now that enough resources are gained
         //check where to spawn the ship by looking at the transform
         //units above the island
-        Vector2 newPos = new Vector2(spawnHorizontalOffset,spawnVerticalOffset);
+        Vector2 newPos = new Vector2(spawnHorizontalOffset, spawnVerticalOffset);
         //current location of the island
-        Vector2 oldPos = new Vector2(islandLocation.position.x,islandLocation.position.y);
+        Vector2 oldPos = new Vector2(islandLocation.position.x, islandLocation.position.y);
         newPos = newPos + oldPos;
         //make a potation for the 
-        Quaternion rot = new Quaternion(0,0,0,0);
-        if(isClaimedByPlayer){
+        Quaternion rot = new Quaternion(0, 0, 0, 0);
+        if (isClaimedByPlayer)
+        {
             //spawn player ship and add it to the list
-            PlayerShipRef = Instantiate(PlayerShip,newPos,rot);
-            GameManager.GetComponent<GameManager>().PlayerShipList.Add(PlayerShipRef);
-        }else{
+            PlayerShipRef = Instantiate(PlayerShip, newPos, rot);
+            // GameManager.GetComponent<GameManager>().PlayerShipList.Add(PlayerShipRef);
+        }
+        else
+        {
             //spawn opp ship and add it to the list
-            OppShipRef = Instantiate(OppShip,newPos,rot);
-             GameManager.GetComponent<GameManager>().OppShipList.Add(OppShipRef);
+            OppShipRef = Instantiate(OppShip, newPos, rot);
+            // GameManager.GetComponent<GameManager>().OppShipList.Add(OppShipRef);
         }
     }
 }
