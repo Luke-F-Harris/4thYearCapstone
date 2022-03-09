@@ -8,6 +8,7 @@ TagManager:
   - PlayerShip
   - OppShip
   - Weapon
+  - StartingPos_Player
   layers:
   - Default
   - TransparentFX

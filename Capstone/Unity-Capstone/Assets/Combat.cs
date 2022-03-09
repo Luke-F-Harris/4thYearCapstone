@@ -9,10 +9,13 @@ public class Combat : MonoBehaviour
     public bool inCooldown = false;
     private float timeOfWeapon;
     private float currentTime;
-
+    private bool isAttack=true;
 
     void Update()
-    {
+    {   
+        //set attack boolean
+        isAttack=this.transform.parent.gameObject.GetComponent<ShipDocking>().isAttack;
+
         currentTime = Time.time;
         if((currentTime - timeOfWeapon) >= coolDown){
             //not in cooldown anymore
@@ -24,8 +27,8 @@ public class Combat : MonoBehaviour
         //check if it is another player or opp to do damage
         if(( other.transform.parent != null && other.transform.parent.CompareTag("OppShip") )&& this.gameObject.transform.parent.tag == "PlayerShip" ){
 
-            //in the range
-            if(inCooldown){
+            //in the range or if isnt in attackmode
+            if(inCooldown || !isAttack){
 
                 //dont do more damage 
                 
@@ -40,7 +43,7 @@ public class Combat : MonoBehaviour
         }
         else if((other.transform.parent != null && other.transform.parent.CompareTag("PlayerShip") )&& this.gameObject.transform.parent.tag == "OppShip" ){
             //in the range
-            if(inCooldown){
+            if(inCooldown || !isAttack){
 
                 //dont do more damage 
                 

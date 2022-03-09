@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 7943936572996477420}
   - component: {fileID: 7943936572996477421}
   - component: {fileID: 7943936572996477411}
-  - component: {fileID: 3674658914745456135}
   - component: {fileID: 6368232803478501209}
   - component: {fileID: 7943936572301055010}
   - component: {fileID: 7943936572301055021}
   - component: {fileID: 9062529902913125382}
+  - component: {fileID: 2603373113153352600}
   m_Layer: 3
   m_Name: island
-  m_TagString: Untagged
+  m_TagString: island
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,32 +108,6 @@ MonoBehaviour:
   hasPortsAvailable: 1
   ownedByPlayer: 0
   ownedByOpp: 0
---- !u!61 &3674658914745456135
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943936572996477408}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.3837315}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2.56, y: 3.84}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.767463}
-  m_EdgeRadius: 0
 --- !u!114 &6368232803478501209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,20 +120,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6291f973a1e8644a4f03e0c1a91ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OppShip: {fileID: 1409972278108596767, guid: f4b791be4d06e3444886c0d7e7abee70, type: 3}
+  OppShip: {fileID: 5153187099099045212, guid: 67bcaaba5b371d94483fed921a55236f, type: 3}
   PlayerShip: {fileID: 6603072910980289893, guid: 18e3f07d750be0d44bb326e510f51dca, type: 3}
   islandLocation: {fileID: 7943936572996477420}
   PlayerShipRef: {fileID: 0}
   OppShipRef: {fileID: 0}
-  GameManager: {fileID: 3112787100108898044, guid: 7f2e583392f142d43972bb3e3b95c451, type: 3}
   gainedResources: 0
   gainedWith1Ship: 1
   gainedWith2Ships: 2
   gainedWith3Ships: 3
   gainedWith4Ships: 4
-  spawnThreshHold: 500
+  spawnThreshHold: 5
   spawnVerticalOffset: 5
   spawnHorizontalOffset: 0
+  resourceCooldown: 1
 --- !u!50 &7943936572301055010
 Rigidbody2D:
   serializedVersion: 4
@@ -198,7 +172,6 @@ MonoBehaviour:
   islandLocation: {fileID: 0}
   PlayerShipRef: {fileID: 0}
   OppShipRef: {fileID: 0}
-  GameManager: {fileID: 0}
   gainedResources: 0
   gainedWith1Ship: 1
   gainedWith2Ships: 2
@@ -207,6 +180,7 @@ MonoBehaviour:
   spawnThreshHold: 500
   spawnVerticalOffset: 5
   spawnHorizontalOffset: 0
+  resourceCooldown: 1
 --- !u!114 &9062529902913125382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +197,19 @@ MonoBehaviour:
   uniqueID: 7935131798956111660
   updateError: 1
   checkTime: 0.2
+--- !u!70 &2603373113153352600
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943936572996477408}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.019313395, y: 1.3827033}
+  m_Size: {x: 2.7788866, y: 2.9349222}
+  m_Direction: 0
