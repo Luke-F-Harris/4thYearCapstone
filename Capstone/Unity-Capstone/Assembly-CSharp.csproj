@@ -61,6 +61,8 @@
      <Compile Include="Assets\CodeGrabber.cs" />
      <Compile Include="Assets\OPPScripts\PirateAIBOT1.cs" />
      <Compile Include="Assets\island.cs" />
+     <Compile Include="Assets\OPPScripts\PirateAIBOT2.cs" />
+     <Compile Include="Assets\OPPScripts\PirateAIBOT3.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Uploads\code_1.cs" />
      <None Include="Assets\secret.txt" />

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3856287860482188922}
   - component: {fileID: 1732045827437306572}
-  - component: {fileID: 2601275113049546645}
+  - component: {fileID: -241060378238823009}
+  - component: {fileID: 4327427859609126285}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Weapon
@@ -47,8 +48,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
---- !u!114 &2601275113049546645
+  m_Radius: 0.7
+--- !u!114 &-241060378238823009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,3 +64,24 @@ MonoBehaviour:
   damagePer: 50
   coolDown: 1
   inCooldown: 0
+--- !u!50 &4327427859609126285
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8724175371523812434}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 3
