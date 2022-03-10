@@ -75,6 +75,7 @@ module.exports = function (app) {
                     }
                     else {
                         games.query(games.get_current_game_id(), (err, result_id) => {
+                        // games.query(games.get_last_game_id(), (err, result_id) => {
                             if (err) {
                                 logger.error(err);
                                 res.status(500);
@@ -91,92 +92,99 @@ module.exports = function (app) {
                                 let file_name = `c${code_id}_${curr_game_id}.cs`;
                                 let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
                                 // delete every file in unity/assets/uploads
-                                let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`
+                                let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`;
 
-                                fs.readdir(directory, async (err, files) => {
-                                    if (err) throw err;
+                                fs.readdir(directory, async (err1, files) => {
+                                    if (err) throw err1;
 
                                     for (const file of files) {
-                                    await fs.unlink(path.join(directory, file), err => {
-                                        if (err) throw err;
+                                    await fs.unlink(path.join(directory, file), err2 => {
+                                        if (err2) throw err;
                                     });
                                     }
                                 });
+                                let build_dir = `${__dirname}/../../Builds/GameBuilds`;
+                                
+                                if (fs.existsSync(build_dir)){
+                                    fs.rmSync(build_dir, { recursive: true, force: true });
+                                }
+                                var dir = build_dir;
 
-                                    fs.writeFile(file_path, code, async (err) => {
-                                    if (err) {
-                                        logger.error(err);
-                                        res.status(500);
-                                        res.json({
-                                            message: "Internal Server Error",
-                                        });
-                                    } else {
+                                if (!fs.existsSync(dir)){
+                                    fs.mkdirSync(dir);
+                                }       
 
-                                        //edit build path of unity to C:/Capstone/Builds/Game_id
-                                        //let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
-                                        let buildGamePath = `${__dirname.replace(/\\/g, '/')}/../../Builds/GameBuilds/c${code_id}_${curr_game_id}`;
-                                        console.log(buildGamePath);
-                                        const optionsForClassNameReplace = {
-                                            files: [file_path],
-                                            from: [/^(.*MonoBehaviour)/],
-                                            to: [`public Class c${code_id}_${curr_game_id} : MonoBehavior`]
-                                        };
+                                fs.writeFile(file_path, code, async (err) => {
+                                if (err) {
+                                    logger.error(err);
+                                    res.status(500);
+                                    res.json({
+                                        message: "Internal Server Error",
+                                    });
+                                } else {
 
-                                        await replace(optionsForClassNameReplace).then((results) => {
-                                            
-                                        });
+                                    //edit build path of unity to C:/Capstone/Builds/Game_id
+                                    //let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
+                                    let buildGamePath = `${__dirname.replace(/\\/g, '/')}/../../Builds/GameBuilds/c${code_id}_${curr_game_id}`;
+                                    console.log(buildGamePath);
+                                    const optionsForClassNameReplace = {
+                                        files: [file_path],
+                                        from: [/^(.*MonoBehaviour)/],
+                                        to: [`public Class c${code_id}_${curr_game_id} : MonoBehavior`]
+                                    };
 
-                                        var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
+                                    await replace(optionsForClassNameReplace).then((results) => {
                                         
-                                        const options = {
-                                            files: [file_path],
-                                            from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
-                                            to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
-                                        };
-                                     
+                                    });
 
+                                    var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
+                                    
+                                    const options = {
+                                        files: [file_path],
+                                        from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
+                                        to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
+                                    };
+                                    
+                                    //change game build path specific to the code id
+                                    replace(options)
+                                        .then(results => {
+                                            console.log(results)
+                                            exec(newBatchPath, (err, stdout, stderr) => {
+                                                if (err) {
+                                                    logger.error(err);
+                                                    res.status(500);
+                                                    res.json({
+                                                        message: "Batch file error",
+                                                    });
+                                                } else {
+                                                    const outcome = "pending";
+                                                    games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
+                                                        if (err) {
+                                                            logger.error(err);
+                                                            res.status(500);
+                                                            res.json({
+                                                                message: "Internal Server Error",
+                                                            });
+                                                        } else {
+                                                            res.status(200);
+                                                            res.json({
+                                                                message: "Success",
+                                                                outcome: outcome,
+                                                            });
+                                                        }
+                                                    });
 
-                                        //change game build path specific to the code id
-                                        replace(options)
-                                            .then(results => {
-                                                console.log(results)
-                                                exec(newBatchPath, (err, stdout, stderr) => {
-                                                    if (err) {
-                                                        logger.error(err);
-                                                        res.status(500);
-                                                        res.json({
-                                                            message: "Batch file error",
-                                                        });
-                                                    } else {
-                                                        const outcome = "pending";
-                                                        games.query(games.insert_game(creator_id, code_id, level, outcome), (err, result) => {
-                                                            if (err) {
-                                                                logger.error(err);
-                                                                res.status(500);
-                                                                res.json({
-                                                                    message: "Internal Server Error",
-                                                                });
-                                                            } else {
-                                                                res.status(200);
-                                                                res.json({
-                                                                    message: "Success",
-                                                                    outcome: outcome,
-                                                                });
-                                                            }
-                                                        });
-
-                                                        console.log(`stdout: ${stdout}`);
-                                                    }
-                                                });
-                                            })
-                                            .catch(error => {
-                                                logger.error('Error occurred:', error);
-                                                res.status(500);
-                                                res.json({
-                                                    message: "Error occurred",
-                                                });
+                                                    console.log(`stdout: ${stdout}`);
+                                                }
                                             });
-                                        
+                                        })
+                                        .catch(error => {
+                                            logger.error('Error occurred:', error);
+                                            res.status(500);
+                                            res.json({
+                                                message: "Error occurred",
+                                            });
+                                        });
                                     }
                                 });
                             }
@@ -260,13 +268,35 @@ module.exports = function (app) {
         // Send index file path here.
 
         const winner = req.body.w;
-
+        let game_outcome;
+        let curr_game_id;
+        console.log(typeof(winner));
         console.log(winner);
+        
+        if (winner == 2) {
+            game_outcome = "lose";
+        } else {
+            game_outcome = "win";
+        }
 
-        // Render game, then determine the outcome and the duration.
-        res.status(200);
-        res.json({
+        games.query(games.get_current_game_id(), (err, result_id) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                curr_game_id = result_id[0].AUTO_INCREMENT;
+            }
+        });
+        // sets the winner of the game that finished
+        games.query(games.set_game_outcome(curr_game_id, game_outcome ), (result) => {
+            // Render game, then determine the outcome and the duration.
+            res.status(200);
+            res.json({
             message: "Success",
+            });
         });
     });
     app.get("/api/games/get/:id", (req, res, next) => {
@@ -303,6 +333,7 @@ module.exports = function (app) {
                     });
                 }
                 else {
+                    console.log(result);
                     const game = result[0];
                     if (game.outcome === "pending") {
                         res.status(200);

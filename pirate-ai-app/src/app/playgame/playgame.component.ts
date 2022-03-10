@@ -139,24 +139,28 @@ export class PlaygameComponent implements OnInit {
     this.game_index = "pending";
     this.gameRendered = false;
 
-    this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`, { headers: new HttpHeaders().append("authorization", this.token) }).subscribe(data => {
+    this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`).subscribe(data => {
       const render = data as Render;
-      if (render.message == "game is pending") {
-        this.game_index = "pending";
-        this.gameRendered = false;
 
-      } else {
-        this.gameRendered = true;
-        this.game_index = render.index.index_location
-        console.log(this.game_index);
-        // Grab data from index.html
-        this.index_loc = this.game_index + "/index.html";
-        // Load html from file and render it
-        console.log(this.index_loc)
+      console.log(render);
 
 
+      // if (render.message == "game is pending") {
+      //   this.game_index = "pending";
+      //   this.gameRendered = false;
 
-      }
+      // } else {
+      //   this.gameRendered = true;
+      //   this.game_index = render.index.index_location
+      //   console.log(this.game_index);
+      //   // Grab data from index.html
+      //   this.index_loc = this.game_index + "/index.html";
+      //   // Load html from file and render it
+      //   console.log(this.index_loc)
+
+
+
+      // }
 
     });
   }

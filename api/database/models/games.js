@@ -24,8 +24,10 @@ let get_game = (game_id) => {
 let get_current_game_id = () => "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'capstone' AND TABLE_NAME = 'games'";
 
 
+let set_game_outcome = (game_id, outcome) => `UPDATE capstone.games SET outcome = "${outcome}" WHERE id = "${game_id}"`;
 module.exports = {
     query,
+    set_game_outcome,
     games,
     insert_game,
     get_user_games,
