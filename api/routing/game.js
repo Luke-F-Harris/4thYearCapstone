@@ -85,9 +85,10 @@ module.exports = function (app) {
                                 let curr_game_id = result_id[0].AUTO_INCREMENT;
 
                                 let code = result[0].code;
+                              
                                 code = Buffer.from(code, "base64").toString();
                                 // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
-                                let file_name = `code_1.cs`;
+                                let file_name = `c${code_id}_${curr_game_id}.cs`;
                                 let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
                                 // delete every file in unity/assets/uploads
                                 let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`
@@ -102,7 +103,7 @@ module.exports = function (app) {
                                     }
                                 });
 
-                                fs.writeFile(file_path, code,async (err) => {
+                                    fs.writeFile(file_path, code, async (err) => {
                                     if (err) {
                                         logger.error(err);
                                         res.status(500);
@@ -112,19 +113,31 @@ module.exports = function (app) {
                                     } else {
 
                                         //edit build path of unity to C:/Capstone/Builds/Game_id
-                                        // let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
-                                        let buildGamePath = `${__dirname}/../Builds/GameBuilds/${code_id}_${curr_game_id}`;
+                                        //let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
+                                        let buildGamePath = `${__dirname.replace(/\\/g, '/')}/../../Builds/GameBuilds/c${code_id}_${curr_game_id}`;
+                                        console.log(buildGamePath);
+                                        const optionsForClassNameReplace = {
+                                            files: [file_path],
+                                            from: [/^(.*MonoBehaviour)/],
+                                            to: [`public Class c${code_id}_${curr_game_id} : MonoBehavior`]
+                                        };
+
+                                        await replace(optionsForClassNameReplace).then((results) => {
+                                            
+                                        });
+
+                                        var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
+                                        
                                         const options = {
-                                            files: [buildScriptPath, buildBatchFilePath],
+                                            files: [file_path],
                                             from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
                                             to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
                                         };
-
-                                        var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
+                                     
 
 
                                         //change game build path specific to the code id
-                                        await replace(options)
+                                        replace(options)
                                             .then(results => {
                                                 console.log(results)
                                                 exec(newBatchPath, (err, stdout, stderr) => {
@@ -163,6 +176,7 @@ module.exports = function (app) {
                                                     message: "Error occurred",
                                                 });
                                             });
+                                        
                                     }
                                 });
                             }
@@ -176,13 +190,20 @@ module.exports = function (app) {
 
     app.post("/api/games/end", (req, res, next) => {
         // Send index file path here.
-        const index_file_path = req.body.index_file_path;
+        let index_file_path = req.body.index_file_path;
         const game_id_list = index_file_path.split("_");
         const code_id_list = game_id_list[0].split("/");
         const game_id = game_id_list[game_id_list.length - 1];
-        const code_id = code_id_list[code_id_list.length - 1];
+        console.log(code_id_list[code_id_list.length - 1]);
+        const code_id = code_id_list[code_id_list.length - 1].split("c")[0];
         console.log("End game");
+        
+        let p =index_file_path.split("/")
+        p[p.length-1]="c"+p[p.length-1]
 
+        index_file_path = p.join("/")
+
+        
         console.log(index_file_path);
         console.log(game_id);
         console.log(code_id);
@@ -201,17 +222,9 @@ module.exports = function (app) {
                 });
             }
         });
-
-        // Render game, then determine the outcome and the duration.
-
-
-        res.status(200);
-        res.json({
-            message: "Success",
-        });
     });
 
-
+    
 
     app.post("/api/games", userAuth, (req, res, next) => {
         // Starting game: upload code, instantiate unity game: this is the big boi

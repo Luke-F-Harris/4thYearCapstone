@@ -84,6 +84,7 @@ export class PlaygameComponent implements OnInit {
     console.log(this.selectedCode.id)
     return this.selectedCode.id;
   }
+
   startGame() {
     if (this.selectedCode) {
       let base_url = environment.wsBaseURL;
@@ -137,6 +138,7 @@ export class PlaygameComponent implements OnInit {
   startRender() {
     this.game_index = "pending";
     this.gameRendered = false;
+
     this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`, { headers: new HttpHeaders().append("authorization", this.token) }).subscribe(data => {
       const render = data as Render;
       if (render.message == "game is pending") {
