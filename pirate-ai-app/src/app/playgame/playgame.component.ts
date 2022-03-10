@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { RouteConfigLoadEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-playgame',
@@ -42,7 +43,7 @@ export class PlaygameComponent implements OnInit {
   file_selector_string = "";
   index_loc: string;
 
-  constructor(private http: HttpClient, private tokenS: TokenStorageService) {
+  constructor(private http: HttpClient, private tokenS: TokenStorageService, private router:Router) {
     const headers = new HttpHeaders()
     headers.append('Content-Type', 'application/json');
     headers.append("authorization", this.token);
@@ -139,34 +140,16 @@ export class PlaygameComponent implements OnInit {
     this.game_index = "pending";
     this.gameRendered = false;
 
-    this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`).subscribe((data:any)  => {
-      console.log(data[0].outcome);
-
-      // if (render.message == "game is pending") {
-      //   this.game_index = "pending";
-      //   this.gameRendered = false;
-
-      // } else {
-      //   this.gameRendered = true;
-      //   this.game_index = render.index.index_location
-      //   console.log(this.game_index);
-      //   // Grab data from index.html
-      //   this.index_loc = this.game_index + "/index.html";
-      //   // Load html from file and render it
-      //   console.log(this.index_loc)
-
-
-
-      // }
-
-    });
+   this.http.get(environment.wsBaseURL + "/api/games/send").subscribe((data:any) => {
+     let url:string = data.url;
+      window.open(`http://localhost:3000/static/${url}/index.html`);
+   });
   }
 
   getGame() {
     const headers = new HttpHeaders().append("authorization", this.token)
     this.http.get(environment.wsBaseURL + `/api/games/get/${this.user_data.id}`, { headers }).subscribe(data => {
       this.games = data as Game[];
-
     });
   }
 

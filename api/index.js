@@ -10,7 +10,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(cors());
 app.set("trust proxy", true);
-
+app.use("/static", express.static("../Builds/GameBuilds/"));
 // External routes
 require("./routing/cred")(app);
 require("./routing/user")(app);

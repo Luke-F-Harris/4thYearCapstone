@@ -267,6 +267,14 @@ module.exports = function (app) {
         );
     });
 
+    app.get("/api/games/send", (req, res, next)=> {
+
+        let index_dir = `${__dirname}/../../Builds/GameBuilds`;
+        let c_folder = fs.readdirSync(index_dir)[0];
+  
+  
+        res.json({url: `${c_folder}`});
+    })
     app.post("/api/games/finished", (req, res, next) => {
         // Send index file path here.
 
