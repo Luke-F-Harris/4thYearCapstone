@@ -32,4 +32,8 @@ module.exports = {
     get_current_game_id,
     get_game,
     get_user_games_and_codes
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> luke
