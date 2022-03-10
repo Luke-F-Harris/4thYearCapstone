@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f48fe11e3c5b943876fc80321f982c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEndingTime: 2
+  GameEndingTime: 75
 --- !u!1 &1819219413
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +414,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1174d39bf4489bd409794c50dfbf4147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
 --- !u!4 &2012162864
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +671,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6251272239450922040, guid: 81b1d0d7e5c44fd4a8ef8fa70a9026f6, type: 3}
+      propertyPath: playerBotController
+      value: 
+      objectReference: {fileID: 2012162862}
     - target: {fileID: 6251272239450922041, guid: 81b1d0d7e5c44fd4a8ef8fa70a9026f6, type: 3}
       propertyPath: m_RootOrder
       value: 2

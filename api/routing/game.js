@@ -194,9 +194,9 @@ module.exports = function (app) {
         const game_id_list = index_file_path.split("_");
         const code_id_list = game_id_list[0].split("/");
         const game_id = game_id_list[game_id_list.length - 1];
-        console.log(code_id_list[code_id_list.length - 1]);
+    
         const code_id = code_id_list[code_id_list.length - 1].split("c")[0];
-        console.log("End game");
+        
         
         let p =index_file_path.split("/")
         p[p.length-1]="c"+p[p.length-1]
@@ -204,9 +204,7 @@ module.exports = function (app) {
         index_file_path = p.join("/")
 
         
-        console.log(index_file_path);
-        console.log(game_id);
-        console.log(code_id);
+        
         // Insert into database here.
         index_map.query(index_map.insert_map(game_id, index_file_path), (err, result) => {
             if (err) {

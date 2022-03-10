@@ -6,15 +6,17 @@ using System.Globalization;
 using System.IO;
 public class CodeGrabber : MonoBehaviour
 {
-    public GameObject test;
+    public GameObject playerBotController;
 
     void Start()
     {
-        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/Uploads/");
-        FileInfo[] info = dir.GetFiles(".");
-        string name_of_file = info[0].Name;
-        Type type = Type.GetType(name_of_file);
-        test.AddComponent(type);
+
+
+
+        playerBotController.AddComponent<code_1>();
+        // playerBotController.AddComponent(t);
+
+
         //Needs to be class naming conventions to ensure Code Grabber picks it up, also code uploaded needs to be of format
         /*using System.Collections;
         using System.Collections.Generic;
