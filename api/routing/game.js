@@ -304,8 +304,4 @@ module.exports = function (app) {
         });
 
     });
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> luke
