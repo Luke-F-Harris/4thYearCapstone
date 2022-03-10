@@ -87,21 +87,10 @@ module.exports = function (app) {
                                 let code = result[0].code;
                                 code = Buffer.from(code, "base64").toString();
                                 // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
-                                let file_name = `code_1.cs`;
+                                let file_name = `code_${code_id}_${curr_game_id}.cs`;
                                 let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
-                                // delete every file in unity/assets/uploads
-                                let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`
 
-                                fs.readdir(directory, async (err, files) => {
-                                    if (err) throw err;
-                                
-                                    for (const file of files) {
-                                    await fs.unlink(path.join(directory, file), err => {
-                                        if (err) throw err;
-                                    });
-                                    }
-                                });
-                                fs.writeFile(file_path, code, async (err) => {
+                                fs.writeFile(file_path, code, (err) => {
                                     if (err) {
                                         logger.error(err);
                                         res.status(500);
@@ -109,7 +98,7 @@ module.exports = function (app) {
                                             message: "Internal Server Error",
                                         });
                                     } else {
-                                        
+
                                         //edit build path of unity to C:/Capstone/Builds/Game_id
                                         let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
 
@@ -119,11 +108,11 @@ module.exports = function (app) {
                                             to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
                                         };
 
-                                        var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
+                                        var newBatchPath = `${__dirname}//..//..//Capstone//Unity-Capstone//runWebGL.bat`
 
 
                                         //change game build path specific to the code id
-                                        await replace(options)
+                                        replace(options)
                                             .then(results => {
                                                 console.log(results)
                                                 exec(newBatchPath, (err, stdout, stderr) => {
@@ -195,7 +184,9 @@ module.exports = function (app) {
                 });
             } else {
                 res.status(200);
-                
+                res.json({
+                    message: "Success",
+                });
             }
         });
 
@@ -208,24 +199,10 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/games/finished", (req, res, next) => {
-        // Send index file path here.
-    
-        const winner = req.body.w;
 
-        console.log(winner);
-
-        // Render game, then determine the outcome and the duration.
-        res.status(200);
-        res.json({
-            message: "Success",
-        });
-    });
 
     app.post("/api/games", userAuth, (req, res, next) => {
         // Starting game: upload code, instantiate unity game: this is the big boi
-
-
         const creator_id = req.user.id;
         const code_id = req.body.code_id;
         const level = req.body.level;
@@ -254,5 +231,77 @@ module.exports = function (app) {
                 }
             }
         );
+    });
+
+
+    app.get("/api/games/get/:id", (req, res, next) => {
+        // Get all games
+        const id = req.params.id;
+        games.query(games.get_user_games_and_codes(id), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                res.status(200);
+                res.json(result);
+            }
+        });
+
+    });
+    app.get("/api/games/:id", (req, res, next) => {
+        const game_id = req.params.id;
+        games.query(games.get_game(game_id), (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500);
+                res.json({
+                    message: "Internal Server Error",
+                });
+            } else {
+                if (result.length === 0) {
+                    res.status(404);
+                    res.json({
+                        message: "Game not found",
+                    });
+                }
+                else {
+                    const game = result[0];
+                    if (game.outcome === "pending") {
+                        res.status(200);
+                        res.json({ message: "game is pending" });
+                    }
+                    else {
+                        index_map.query(index_map.get_game(game_id), (err, result2) => {
+
+                            if (err) {
+                                logger.error(err);
+                                res.status(500);
+                                res.json({
+                                    message: "Internal Server Error",
+                                });
+                            } else {
+                                if (result2.length === 0) {
+                                    res.status(404);
+                                    res.json({
+                                        message: "Game not found",
+                                    });
+                                }
+                                else {
+                                    res.status(200);
+                                    res.json({
+                                        message: "Success",
+                                        index: result2[0],
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
     });
 };
