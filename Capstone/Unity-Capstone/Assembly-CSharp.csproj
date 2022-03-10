@@ -57,10 +57,10 @@
      <Compile Include="Assets\PlayerStats.cs" />
      <Compile Include="Assets\Game.cs" />
      <Compile Include="Assets\OppMovement.cs" />
+     <Compile Include="Assets\Uploads\c1_1.cs" />
      <Compile Include="Assets\CodeGrabber.cs" />
      <Compile Include="Assets\OPPScripts\PirateAIBOT1.cs" />
      <Compile Include="Assets\island.cs" />
-     <Compile Include="Assets\Uploads\c1_1.cs" />
      <Compile Include="Assets\OPPScripts\PirateAIBOT2.cs" />
      <Compile Include="Assets\OPPScripts\PirateAIBOT3.cs" />
      <Compile Include="Assets\GameManager.cs" />

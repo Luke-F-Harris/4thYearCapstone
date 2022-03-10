@@ -94,6 +94,7 @@ module.exports = function (app) {
                                 // delete every file in unity/assets/uploads
                                 let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`;
 
+                            
                                 fs.readdir(directory, async (err1, files) => {
                                     if (err) throw err1;
 
@@ -103,6 +104,7 @@ module.exports = function (app) {
                                     });
                                     }
                                 });
+                                
                                 let build_dir = `${__dirname}/../../Builds/GameBuilds`;
                                 
                                 if (fs.existsSync(build_dir)){
@@ -126,7 +128,8 @@ module.exports = function (app) {
                                     //edit build path of unity to C:/Capstone/Builds/Game_id
                                     //let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
                                     let buildGamePath = `${__dirname.replace(/\\/g, '/')}/../../Builds/GameBuilds/c${code_id}_${curr_game_id}`;
-                                    console.log(buildGamePath);
+                                
+
                                     const optionsForClassNameReplace = {
                                         files: [file_path],
                                         from: [/^(.*MonoBehaviour)/],
@@ -136,15 +139,15 @@ module.exports = function (app) {
                                     await replace(optionsForClassNameReplace).then((results) => {
                                         
                                     });
-
                                     var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
-                                    
+                            
+                                    var buildScriptPath = "..\\Capstone\\Unity-Capstone\\Assets\\Editor\\GameBuilder.cs";
+                                    var buildBatchFilePath = "..\\Capstone\\Unity-Capstone\\runWebGL.bat";
                                     const options = {
-                                        files: [file_path],
+                                        files: [buildScriptPath, buildBatchFilePath],
                                         from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
                                         to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
                                     };
-                                    
                                     //change game build path specific to the code id
                                     replace(options)
                                         .then(results => {
@@ -270,15 +273,13 @@ module.exports = function (app) {
         const winner = req.body.w;
         let game_outcome;
         let curr_game_id;
-        console.log(typeof(winner));
-        console.log(winner);
-        
-        if (winner == 2) {
+       
+        if (winner == "2") {
             game_outcome = "lose";
         } else {
             game_outcome = "win";
         }
-
+      
         games.query(games.get_current_game_id(), (err, result_id) => {
             if (err) {
                 logger.error(err);
@@ -288,16 +289,17 @@ module.exports = function (app) {
                 });
             } else {
                 curr_game_id = result_id[0].AUTO_INCREMENT;
+                console.log(curr_game_id);
+                 // sets the winner of the game that finished
+                games.query(games.set_game_outcome(curr_game_id, game_outcome ), (result) => {
+                    // Render game, then determine the outcome and the duration.
+                    res.status(200);
+                    res.json({
+                    message: "Success",
+                    });
+                });
             }
-        });
-        // sets the winner of the game that finished
-        games.query(games.set_game_outcome(curr_game_id, game_outcome ), (result) => {
-            // Render game, then determine the outcome and the duration.
-            res.status(200);
-            res.json({
-            message: "Success",
-            });
-        });
+        });      
     });
     app.get("/api/games/get/:id", (req, res, next) => {
         // Get all games
@@ -360,6 +362,7 @@ module.exports = function (app) {
                                     res.json({
                                         message: "Success",
                                         index: result2[0],
+                                        game_result:result[0]
                                     });
                                 }
                             }

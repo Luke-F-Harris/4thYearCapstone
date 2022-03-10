@@ -75,10 +75,10 @@ public class GameEnding : MonoBehaviour
         WinningObject word = new WinningObject();
         word.w = winner;
         var jsonData = JsonUtility.ToJson(word);
-        Debug.Log(jsonData);
-        using (UnityWebRequest www = UnityWebRequest.Post("localhost:3000/api/games/finished", jsonData))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost:3000/api/games/finished", jsonData))
         {
             www.SetRequestHeader("content-type", "application/json");
+            // www.SetRequestHeader("Access-Control-Allow-Origin", "*");
             www.uploadHandler.contentType = "application/json";
             www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonData));
 

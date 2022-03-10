@@ -67,7 +67,7 @@ export class PlaygameComponent implements OnInit {
       const headers = new HttpHeaders().append("authorization", this.token)
 
       this.http.post(environment.wsBaseURL + `/api/codes/delete/${this.user_data.id}/${code_id}`, {}, { headers }).subscribe(data => {
-        console.log(data);
+
       })
 
       this.selectedCode = undefined
@@ -139,11 +139,8 @@ export class PlaygameComponent implements OnInit {
     this.game_index = "pending";
     this.gameRendered = false;
 
-    this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`).subscribe(data => {
-      const render = data as Render;
-
-      console.log(render);
-
+    this.http.get(environment.wsBaseURL + `/api/games/${this.selectedGame.id}`).subscribe((data:any)  => {
+      console.log(data[0].outcome);
 
       // if (render.message == "game is pending") {
       //   this.game_index = "pending";

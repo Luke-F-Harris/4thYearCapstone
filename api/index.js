@@ -8,11 +8,7 @@ const PORT = 3000;
 
 // App configuaration
 app.use(express.json());
-app.use(
-    cors({
-        origin: "http://localhost:4200",
-    })
-);
+app.use(cors());
 app.set("trust proxy", true);
 
 // External routes

@@ -58,6 +58,7 @@
 
       <div class="game-list">
         <div class="game-table-title">Previous Games</div>
+        <span *ngIf="profiles_games">
             <table>
                 <tr>
                     <th>
@@ -71,35 +72,38 @@
                         Date of Game
                     </th>
                 </tr>
-                <span *ngIf="profiles_games">
-                <tr *ngFor="let game of profiles_games.slice(0,20)">
-                  <div *ngIf="game.outcome!='pending'">
-                    <td>
-                        <div class="link-container">
-                          <p *ngIf="game.outcome === 'win'" style="color:green">
-                            Win
-                          </p>
-                          <p *ngIf="game.outcome === 'draw'">
-                            Draw
-                          </p>
-                          <p *ngIf="game.outcome === 'lose'" style="color:rgb(155, 3, 3)" >
-                            Loss
-                          </p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="link-container">
-                                  {{game.level}}
-                        </div>
-                    </td>
 
-                    <td>
-                        {{game.created_at}}
-                    </td>
-                  </div>
-                </tr>
-              </span>
+                  <tr *ngFor="let game of profiles_games.slice(0,20)">
+
+                      <td>
+                          <div class="link-container">
+                            <p *ngIf="game.outcome === 'win'" style="color:green">
+                              Win
+                            </p>
+                            <p *ngIf="game.outcome === 'draw'">
+                              Draw
+                            </p>
+                            <p *ngIf="game.outcome === 'lose'" style="color:rgb(155, 3, 3)" >
+                              Loss
+                            </p> <p *ngIf="game.outcome === 'pending'" style="color:white">
+                              Pending
+                            </p>
+                          </div>
+                      </td>
+                      <td>
+                          <div class="link-container">
+                                    {{game.level}}
+                          </div>
+                      </td>
+
+                      <td>
+                          {{game.created_at}}
+                      </td>
+
+                  </tr>
+
             </table>
+          </span>
         </div>
     </div>
 </div>
