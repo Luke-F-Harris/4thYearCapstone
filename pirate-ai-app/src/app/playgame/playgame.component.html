@@ -1,8 +1,12 @@
 <div class="main-container">
+    <div class="nothing" *ngIf="codes">
     <div class="reminder" *ngIf="codes.length ==0">
         <p>You have to upload code to play the game!</p>
     </div>
+    </div>
+    <div class="nothing" *ngIf="codes">
     <div *ngIf="codes.length !=0">
+
         <div class="game-container">
             <div id="GameStats">
 
@@ -10,7 +14,7 @@
 
                 <div>
                     <div>
-                        <div>
+                        <div >
                             <h2>Start a new game:</h2>
                         </div>
                         <div>
@@ -51,7 +55,7 @@
                     </div>
                 </div>
                 <div>
-                    <div>
+                    <div class="view_game_text">
                         <h2>View a game</h2>
                     </div>
                     <div>
@@ -59,7 +63,7 @@
                             <mat-form-field>
                                 <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedGame">
                                     <mat-option *ngFor="let game of games" [value]="game" (click)=selectGame(game)>
-                                        Name: {{game.name}}_{{game.id}} Difficulty: {{game_map[game.level]}}
+                                       {{toTitleCase(game.name)}} #{{game.id}} | Difficulty: {{toTitleCase(game_map[game.level])}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -104,4 +108,5 @@
                 </mat-tab-group>
 
             </div>
+        </div>
         </div>

@@ -101,6 +101,14 @@ export class PlaygameComponent implements OnInit {
       });
     }
   }
+  toTitleCase(str:any) {
+    return str.replace(
+      /\w\S*/g,
+      function(txt:any) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      }
+    );
+  }
   selectBot(bot: string) {
     this.selectedBot = bot;
   }
@@ -155,7 +163,7 @@ export class PlaygameComponent implements OnInit {
     const headers = new HttpHeaders().append("authorization", this.token)
     this.http.get(environment.wsBaseURL + `/api/games/get/${this.user_data.id}`, { headers }).subscribe(data => {
       this.games = data as Game[];
-      console.log(this.games);
+
     });
   }
 

@@ -87,10 +87,22 @@ module.exports = function (app) {
                                 let code = result[0].code;
                                 code = Buffer.from(code, "base64").toString();
                                 // let code_path = "../Capstone/Unity-Capstone/Assets/Scripts/Code.cs";
-                                let file_name = `code_${code_id}_${curr_game_id}.cs`;
+                                let file_name = `code_1.cs`;
                                 let file_path = path.join(__dirname, '../../Capstone/Unity-Capstone/Assets/Uploads/', file_name);
+                                // delete every file in unity/assets/uploads
+                                let directory = `${__dirname}/../../Capstone/Unity-Capstone/Assets/Uploads`
 
-                                fs.writeFile(file_path, code, (err) => {
+                                fs.readdir(directory, async (err, files) => {
+                                    if (err) throw err;
+
+                                    for (const file of files) {
+                                    await fs.unlink(path.join(directory, file), err => {
+                                        if (err) throw err;
+                                    });
+                                    }
+                                });
+
+                                fs.writeFile(file_path, code,async (err) => {
                                     if (err) {
                                         logger.error(err);
                                         res.status(500);
@@ -100,19 +112,19 @@ module.exports = function (app) {
                                     } else {
 
                                         //edit build path of unity to C:/Capstone/Builds/Game_id
-                                        let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
-
+                                        // let buildGamePath = `C:/Capstone/Builds/${code_id}_${curr_game_id}`
+                                        let buildGamePath = `${__dirname}/../Builds/GameBuilds/${code_id}_${curr_game_id}`;
                                         const options = {
                                             files: [buildScriptPath, buildBatchFilePath],
                                             from: [/buildPlayerOptions.locationPathName = .*/, /--data .+?(?=\s)/],
                                             to: [`buildPlayerOptions.locationPathName = \"${buildGamePath}\";`, `--data "{\\"index_file_path\\":\\"${buildGamePath}\\"}"`]
                                         };
 
-                                        var newBatchPath = `${__dirname}//..//..//Capstone//Unity-Capstone//runWebGL.bat`
+                                        var newBatchPath = `${__dirname}\\..\\..\\Capstone\\Unity-Capstone\\runWebGL.bat`
 
 
                                         //change game build path specific to the code id
-                                        replace(options)
+                                        await replace(options)
                                             .then(results => {
                                                 console.log(results)
                                                 exec(newBatchPath, (err, stdout, stderr) => {
@@ -233,7 +245,19 @@ module.exports = function (app) {
         );
     });
 
+    app.post("/api/games/finished", (req, res, next) => {
+        // Send index file path here.
 
+        const winner = req.body.w;
+
+        console.log(winner);
+
+        // Render game, then determine the outcome and the duration.
+        res.status(200);
+        res.json({
+            message: "Success",
+        });
+    });
     app.get("/api/games/get/:id", (req, res, next) => {
         // Get all games
         const id = req.params.id;
