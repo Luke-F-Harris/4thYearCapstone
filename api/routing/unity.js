@@ -6,6 +6,8 @@ const { logger } = require("../services/logging");
 const fs = require("fs");
 require("../services/logging").logger;
 
+
+
 module.exports = function (app) {
     app.post("/api/files/create", (req, res) => {
         let creator = req.body.creator;
@@ -84,8 +86,9 @@ module.exports = function (app) {
         let user = req.body.user;
         let code_id = req.body.code_id;
 
+        
 
-        let file_name = `code_${user}_${code_id}.cs`;
+        let file_name = `code_1.cs`;
 
         let file_body = req.body.code;
 
