@@ -142,7 +142,8 @@ export class PlaygameComponent implements OnInit {
 
    this.http.get(environment.wsBaseURL + "/api/games/send").subscribe((data:any) => {
      let url:string = data.url;
-      window.open(`http://localhost:3000/static/${url}/index.html`);
+     this.gameRendered =true;
+      this.index_loc = `http://localhost:3000/static/${url}/index.html`;
    });
   }
 

@@ -61,7 +61,9 @@
 #GameStats {
   text-align: center;
   float: left;
-  width: 500px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 200px;
 }
 
 #Opponent1 {
@@ -71,7 +73,10 @@
 #Opponent2 {
   float: right;
 }
-
+.game-view-pane {
+  height: 700px;
+  width: 1000px;
+}
 #testHover:hover {
   cursor: pointer;
   font-size: 41px;
@@ -178,10 +183,12 @@ hr {
 .view_game_text {
   padding-top: 1rem;
 }
+.controls {
+  width: 100px;
+}
 .views {
   padding: 1rem;
 }
-
 .reminder {
   margin-top: 3rem;
   text-align: center;

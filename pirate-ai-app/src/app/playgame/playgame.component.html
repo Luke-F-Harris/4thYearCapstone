@@ -1,108 +1,102 @@
 <div class="main-container">
     <div class="nothing" *ngIf="codes">
-    <div class="reminder" *ngIf="codes.length ==0">
-        <p>You have to upload code to play the game!</p>
-    </div>
+      <div class="reminder" *ngIf="codes.length ==0">
+          <p>You have to upload code to play the game!</p>
+      </div>
     </div>
     <div class="nothing" *ngIf="codes">
-    <div *ngIf="codes.length !=0">
+      <div *ngIf="codes.length !=0">
 
-        <div class="game-container">
-            <div id="GameStats">
-
-
-
+          <div class="game-container">
+              <div id="GameStats">
                 <div>
-                    <div>
-                        <div >
-                            <h2>Start a new game:</h2>
+                      <div>
+                          <div >
+                              <h2>Start a new game:</h2>
+                          </div>
+                          <div>
+
+                              <mat-form-field>
+                                  <!-- Drop down to select a bot-->
+                                  <mat-select placeholder="Select Opponent Level" [(ngModel)]="selectedBot">
+                                      <mat-option *ngFor="let bot of bots" [value]="bot.name"
+                                          (click)="selectBot(bot.name)">
+                                          {{bot.name}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                              <br>
+                              <div>
+                                  <mat-form-field>
+                                      <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedCodeName">
+                                          <mat-option *ngFor="let code of codes" [value]="code.name"
+                                              (click)="selectCode(code)">
+                                              {{code.name}}
+                                          </mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                  <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()"
+                                      *ngIf="this.selectedCode">
+                                      Start
+                                  </button>
+                              </div>
+                              <div>
+                                  <button mat-raised-button class="delete-btn" id=slightHover
+                                      *ngIf="selectedCode != undefined" (click)="deleteCode()">
+                                      {{confirmation_text}}
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="view_game_text">
+                          <h2>View a game</h2>
+                      </div>
+                      <div>
+                          <div>
+                              <mat-form-field>
+                                  <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedGame">
+                                      <mat-option *ngFor="let game of games" [value]="game" (click)=selectGame(game)>
+                                        {{toTitleCase(game.name)}} #{{game.id}} | Difficulty: {{toTitleCase(game_map[game.level])}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+                          <div>
+                              <button mat-raised-button class="upload-btn" id=slightHover (click)="startRender()"
+                                  *ngIf="this.selectedGame">
+                                  Render
+                              </button>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+
+              <div class="views">
+
+
+                  <mat-tab-group dynamicHeight="true">
+                      <mat-tab label="Code View">
+                          <div class="code-view-pane" *ngIf="selectedCode">
+                              <div class="code-scroll-container">
+                                  {{selectedCodeCode}}
+
+                              </div>
+                          </div>
+                      </mat-tab>
+                      <mat-tab label="Game View">
+                        <div class="game-view-pane">
+                        <!-- iframe sourcing index_loc bypass xss check -->
+                        <iframe src="http://localhost:3000/static/c1_1/index.html" width="100%" height="100%" frameborder="0"></iframe>
+
                         </div>
-                        <div>
+                      </mat-tab>
+                  </mat-tab-group>
 
-                            <mat-form-field>
-                                <!-- Drop down to select a bot-->
-                                <mat-select placeholder="Select Opponent Level" [(ngModel)]="selectedBot">
-                                    <mat-option *ngFor="let bot of bots" [value]="bot.name"
-                                        (click)="selectBot(bot.name)">
-                                        {{bot.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <br>
-                            <div>
-                                <mat-form-field>
-                                    <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedCodeName">
-                                        <mat-option *ngFor="let code of codes" [value]="code.name"
-                                            (click)="selectCode(code)">
-                                            {{code.name}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <button mat-raised-button class="upload-btn" id=slightHover (click)="startGame()"
-                                    *ngIf="this.selectedCode">
-                                    Start
-                                </button>
-                            </div>
-                            <div>
-                                <button mat-raised-button class="delete-btn" id=slightHover
-                                    *ngIf="selectedCode != undefined" (click)="deleteCode()">
-                                    {{confirmation_text}}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="view_game_text">
-                        <h2>View a game</h2>
-                    </div>
-                    <div>
-                        <div>
-                            <mat-form-field>
-                                <mat-select placeholder="Select Your Bot" [(ngModel)]="selectedGame">
-                                    <mat-option *ngFor="let game of games" [value]="game" (click)=selectGame(game)>
-                                       {{toTitleCase(game.name)}} #{{game.id}} | Difficulty: {{toTitleCase(game_map[game.level])}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <button mat-raised-button class="upload-btn" id=slightHover (click)="startRender()"
-                                *ngIf="this.selectedGame">
-                                Render
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="views">
-
-
-                <mat-tab-group dynamicHeight="true">
-                    <mat-tab label="Code View">
-                        <div class="code-view-pane" *ngIf="selectedCode">
-                            <div class="code-scroll-container">
-                                {{selectedCodeCode}}
-
-                            </div>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Game View">
-                        <div *ngIf="gameRendered">
-                            <!-- iframe sourcing index_loc bypass xss check -->
-                            <iframe src="{{index_loc}}" width="100%" height="100%" frameborder="0"></iframe>
-
-                        </div>
-                        <div *ngIf="!gameRendered">
-                            Your game is pending.
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
-
-            </div>
-        </div>
-        </div>
+              </div>
+          </div>
+</div>
