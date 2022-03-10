@@ -35,7 +35,7 @@ const games = {
         "code_id INTEGER references codes(id)",
         "created_at TIMESTAMP DEFAULT NOW()",
         "level INTEGER",
-        "outcome ENUM('win', 'lose', 'draw', 'pending')",
+        "outcome ENUM('win', 'lose', 'draw', 'pending', 'ready')",
     ].join(", "),
 };
 
